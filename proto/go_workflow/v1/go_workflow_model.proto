@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+
+
+package go_workflow.v1;
+option go_package = "github.com/star-table/interface/golang/go_workflow/v1;v1";
+
+message Node {
+  string name = 1[(validate.rules).string.min_len = 1];
+  string type = 2[(validate.rules).string = {in: ["start", "route", "condition","approver", "notifier"]}];
+  string nodeId = 3[(validate.rules).string.min_len = 1];
+  string prevId = 4;
+  Node childNode = 5;
+  repeated Node conditionNodes = 6;
+  NodeProperties properties = 7;
+}
+
+message NodeProperties {
+  string activateType = 1;
+  bool agreeAll = 2;
+  NodeConditions condition = 3;
+  ActionerRule actionerRule = 4;
+}
+
+message NodeConditions {
+  repeated NodeCondition list = 1;
+}
+
+message NodeCondition {
+  string type = 1;
+  string paramKey =2;
+  string paramLabel = 3;
+  string lowerBound = 4;
+  string lowerBoundEqual = 5;
+  string upperBoundEqual = 6;
+  string upperBound = 7;
+  string boundEqual = 8;
+  string unit = 9;
+  repeated string paramValues = 10;
+  repeated string oriValue = 11;
+}
+
+message ActionerRule {
+  string type = 1;
+  int32 memberCount = 2;
+  string actionType = 3;
+  repeated Participant participants = 4;
+}
+
+message Participant {
+  string key = 1; // 发起审批的时候需要替换的key，发起的瞬间替换哪些人来审批这个data
+  repeated int64 userIds = 2; // 定义的时候如果传了userIds，默认使用这里面的userIds作为审核人，如果没传，需要在发起审批的时候传入,key为对应的标识，极星应该是传入表头的columnId
+  repeated int64 departmentIds = 3;
+}
+
+message ProcessDefine {
+  int64 id = 1;
+  string name = 2;
+  int32 version = 3;
+  string resource = 4;
+  int64 userId = 5;
+  string userName = 6;
+  int64 create_at = 7;
+  int64 update_at = 8;
+}
+
+message ProcessInstance {
+  int64 id = 1;
+  string name = 2;
+  int64 processDefineId = 3;
+  int64 orgId = 6;
+  string nodeId = 7;
+  string candidate = 8;
+  int64 taskId = 9;
+  int64 startTime = 10;
+  int64 endTime = 11;
+  int64 startUserId = 12;
+  string startUserName = 13;
+  bool isFinished = 14;
+}

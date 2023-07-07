@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "go_workflow_model.proto";
+import "validate/validate.proto";
+
+package go_workflow.v1;
+option go_package = "github.com/star-table/interface/golang/go_workflow/v1;v1";
+
+service WorkFlowProcessDefine {
+  // SaveProcessDefine 保存或者创建流程
+  rpc SaveProcessDefine(SaveProcessDefineRequest) returns (SaveProcessDefineReply) {
+    option (google.api.http) = {
+      post: "/v1/goWorkflow/processDefine/create"
+      body: "*"
+    };
+  }
+
+  rpc QueryProcessDefines(QueryProcessDefinesRequest) returns (QueryProcessDefinesReply) {
+    option (google.api.http) = {
+      post: "/v1/goWorkflow/processDefine/query"
+      body: "*"
+    };
+  }
+
+  rpc DeleteProcessDefine(DeleteProcessDefineRequest) returns (DeleteProcessDefineReply) {
+    option (google.api.http) = {
+      post: "/v1/goWorkflow/processDefine/delete"
+      body: "*"
+    };
+  }
+}
+
+message SaveProcessDefineRequest {
+  int64 id = 1; // 不传代表新增
+  string name = 2[(validate.rules).string.min_len = 1];
+  int64 orgId = 3[(validate.rules).int64 = {gt: 0}];
+  int64 tableId = 4[(validate.rules).int64 = {gt: 0}];
+  int64 userId = 5[(validate.rules).int64 = {gt: 0}];
+  string userName = 6[(validate.rules).string.min_len = 1];
+  Node resource = 7;
+  repeated NodeConditions startConditions = 8; // 启动的条件，数组之间是or，list里面的是and
+}
+
+message SaveProcessDefineReply {
+  int64 id = 1;
+}
+
+message QueryProcessDefinesRequest {
+  int32 pageSize = 1;
+  int32 pageIndex = 2;
+  int64 orgId = 3;
+  int64 userId = 4;
+  string name = 5;
+  int64 id = 6;
+}
+
+message QueryProcessDefinesReply {
+  repeated  ProcessDefine list = 1;
+  int32 total = 2;
+}
+
+message DeleteProcessDefineRequest {
+  int64 id = 1;
+  int64 orgId = 2;
+}
+
+message DeleteProcessDefineReply {
+
+}

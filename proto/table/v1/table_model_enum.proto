@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package table.v1;
+option go_package = "github.com/star-table/interface/golang/table/v1;v1";
+
+enum StorageColumnType {
+    STRING = 0;
+    TEXT = 1;
+    LONG_TEXT = 2;
+    DATE = 3;
+    LONG = 4;
+    INT = 5;
+    FLOAT = 6;
+    DOUBLE = 7;
+    ARRAY = 8;
+    CUSTOM = 9;
+}
+
+enum ColumnType {
+    input = 0;          // 单行文本
+    textarea = 1;       // 多行文本
+    datepicker = 2;     // 日期
+    email = 3;          // 邮箱
+    mobile = 4;         // 手机
+    inputnumber = 5;    // 数字
+    member = 11;        // 成员
+    dept = 12;          // 部门
+    treeSelect = 13;    // 树形单选
+    select = 15;        // 单选
+    status = 18;        // 启用状态
+    amount = 20;        // 金额
+    document = 21;      // 附件
+    multiselect = 24;   // 多选下拉框
+    region = 25;        // 省市区
+    link = 26;          // 链接
+    richtext = 27;      // 富文本
+    image = 28;         // 图片
+    quoteTable = 30;    // 引用
+    operate = 31;       // 操作
+    recycleFlag = 32;   // 回收
+    relateTablePro = 33;// 高级关联
+    logTable = 34;      // 日志表格
+    rangeNumber = 35;   // 数字区间
+    customField = 36;   // 自定义字段
+    identityCard = 37;  // 身份证
+    role = 38;          // 角色
+    gps = 39;           // 定位坐标
+    groupSelect = 40;   // 分组单选
+    relating = 41;      // 关联
+    baRelating = 42;    // 前后置
+    workHour = 43;      // 工时
+    attachment = 44;    // 附件
+    singleRelating = 45; // 单向关联
+    conditionRef = 46; // 条件引用
+    formula = 47; // 公式
+    reference = 48; // 引用
+}
+
+enum TableType {
+    unowned = 0;
+    issueSummary = 1;
+    normal = 2;
+    crmSummary = 3;
+}
+
+enum ConditionType {
+   between  = 0;
+   equal = 1;
+   gt = 2;
+   gte = 3;
+   in = 4;
+   like = 5;
+   lt = 6;
+   lte = 7;
+   not_in = 8;
+   not_like = 9;
+   not_null = 10;
+   is_null = 11;
+   all_in = 12;
+   values_in = 13;
+   and = 14;
+   or = 15;
+   un_equal = 16;
+   raw_sql = 17;
+}
+
+enum ValueType {
+  string = 0;
+  int = 1;
+  float = 2;
+}
+
+enum DbType {
+  master = 0;
+  slave1 = 1;
+  slave2 = 2;
+  slave3 = 3;
+}

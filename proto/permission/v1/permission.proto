@@ -1,0 +1,242 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "permission_model.proto";
+
+package permission.v1;
+option go_package = "github.com/star-table/interface/golang/permission/v1;v1";
+
+
+// The greeting service definition.
+service Permission {
+
+  /**
+   * 创建应用权限组
+   **/
+  // rpc CreatePermissionGroup (CreatePermissionGroupRequest) returns (CreatePermissionGroupResponse) {
+  //   option (google.api.http) = {
+  //     post: "/permission/api/v1/app-permission/{appPackageId}/{appId}/auth-group/create",
+  //     body:"*"
+  //   };
+  // };
+
+  /**
+   * 修改应用权限组信息
+   **/
+  //  rpc updatePermissionGroupInfo (UpdatePermissionGroupInfoRequest) returns (UpdatePermissionGroupInfoResponse) {
+  //   option (google.api.http) = {
+  //     post: "/permission/api/v1/app-permission/{appPackageId}/{appId}/auth-group/update-info/{groupId}",
+  //     body:"*"
+  //   };
+  // };
+
+  /**
+   * 修改应用权限组成员列表
+   **/
+  //  rpc updatePermissionGroupMembers (UpdatePermissionGroupInfoRequest) returns (UpdatePermissionGroupInfoResponse) {
+  //   option (google.api.http) = {
+  //     post: "/permission/api/v1/app-permission/{appPackageId}/{appId}/auth-group/update-members/{groupId}",
+  //     body:"*"
+  //   };
+  // };
+
+  /**
+   * 成员切换权限组
+   **/
+  //  rpc memberSwitchGroup (UpdatePermissionGroupInfoRequest) returns (UpdatePermissionGroupInfoResponse) {
+  //   option (google.api.http) = {
+  //     post: "/permission/api/v1/app-permission/{appPackageId}/{appId}/auth-group/member-switch-group/{groupId}",
+  //     body:"*"
+  //   };
+  // };
+
+  /**
+   * 获取成员与权限组的映射关系
+   **/
+  //  rpc memberGroupMappings (UpdatePermissionGroupInfoRequest) returns (UpdatePermissionGroupInfoResponse) {
+  //   option (google.api.http) = {
+  //     get: "/permission/api/v1/app-permission/{appPackageId}/{appId}/auth-group/member-group-mappings"
+  //   };
+  // };
+
+  /**
+   * 删除应用权限组
+   **/
+  //  rpc deletePermissionGroup (UpdatePermissionGroupInfoRequest) returns (UpdatePermissionGroupInfoResponse) {
+  //   option (google.api.http) = {
+  //     delete: "/permission/api/v1/app-permission/{appPackageId}/{appId}/auth-group/{groupId}"
+  //   };
+  // };
+
+  /**
+   * 获取应用权限组列表
+   **/
+  //  rpc getPermissionGroupList (UpdatePermissionGroupInfoRequest) returns (UpdatePermissionGroupInfoResponse) {
+  //   option (google.api.http) = {
+  //     get: "/permission/api/v1/app-permission/{appPackageId}/{appId}/auth-group/list"
+  //   };
+  // };
+
+  /**
+   * 获取应用权限组列表
+   **/
+  //  rpc getPermissionGroupListResp (UpdatePermissionGroupInfoRequest) returns (UpdatePermissionGroupInfoResponse) {
+  //   option (google.api.http) = {
+  //     get: "/permission/api/v1/app-permission/{appPackageId}/{appId}/auth-group/list-info"
+  //   };
+  // };
+
+  /**
+   * 通过名称获取应用权限组列表
+   **/
+  //  rpc getPermissionGroupList2 (UpdatePermissionGroupInfoRequest) returns (UpdatePermissionGroupInfoResponse) {
+  //   option (google.api.http) = {
+  //     get: "/permission/api/v1/app-permission/{appPackageId}/{appId}/auth-group/list"
+  //   };
+  // };
+
+  /**
+   * 通过名称获取应用权限组列表
+   **/
+  //  rpc getPermissionGroupList2 (UpdatePermissionGroupInfoRequest) returns (UpdatePermissionGroupInfoResponse) {
+  //   option (google.api.http) = {
+  //     get: "/permission/api/v1/app-permission/{appPackageId}/{appId}/auth-group/list"
+  //   };
+  // };
+
+  /**
+   * 获取应用权限组详情
+   **/
+  //  rpc getPermissionGroupInfo (UpdatePermissionGroupInfoRequest) returns (UpdatePermissionGroupInfoResponse) {
+  //   option (google.api.http) = {
+  //     get: "/permission/api/v1/app-permission/{appPackageId}/{appId}/auth-group/info/{groupId}"
+  //   };
+  // };
+
+  /**
+   * 获取应用权限基础配置
+   **/
+  //  rpc getPermissionBaseConfig (UpdatePermissionGroupInfoRequest) returns (UpdatePermissionGroupInfoResponse) {
+  //   option (google.api.http) = {
+  //     get: "/permission/api/v1/app-permission/{appPackageId}/{appId}/auth-group/base-config"
+  //   };
+  // };
+
+  /**
+   * 获取应用权限信息
+   **/
+  //  rpc getAppAuthorityResp (UpdatePermissionGroupInfoRequest) returns (UpdatePermissionGroupInfoResponse) {
+  //   option (google.api.http) = {
+  //     get: "/permission/api/v1/app-permission/{appPackageId}/{appId}/getUserAppPermission"
+  //   };
+  // };
+
+  // rpc getAppViewIdList (UpdatePermissionGroupInfoRequest) returns (UpdatePermissionGroupInfoResponse) {
+  //   option (google.api.http) = {
+  //     get: "/app/inner/api/v1/apps/views"
+  //   };
+  // };
+
+  //   /**
+  //  * 获取应用权限信息
+  //  **/
+  //  rpc getAppAuthorityResp (UpdatePermissionGroupInfoRequest) returns (UpdatePermissionGroupInfoResponse) {
+  //   option (google.api.http) = {
+  //     get: "/permission/api/v1/app-permission/{appPackageId}/{appId}/getUserAppPermission"
+  //   };
+  // };
+
+  rpc getCollaboratorUserIdsAndDeptIds (GetCollaboratorUserIdsAndDeptIdsRequest) returns (GetCollaboratorUserIdsAndDeptIdsResponse) {
+    option (google.api.http) = {
+      post: "/permission/api/v1/collaboratorPermission/collaboratorUserIdsAndDeptIds",
+      body:"*"
+    };
+  };
+
+  rpc getCollaborators (GetCollaboratorsRequest) returns (GetCollaboratorsResponse) {
+    option (google.api.http) = {
+      post: "/permission/api/v1/collaboratorPermission/collaborators",
+      body:"*"
+    };
+  };
+
+  rpc getUserCollaboratorRoleIds (GetUserCollaboratorRoleIdsRequest) returns (GetUserCollaboratorRoleIdsResponse) {
+    option (google.api.http) = {
+      post: "/permission/api/v1/collaboratorPermission/getUserCollaboratorRoleIds",
+      body:"*"
+    };
+  };
+
+  rpc changeCollaboratorUser (CollaboratorUserRequest) returns (CollaboratorUserResponse) {
+    option (google.api.http) = {
+      post: "/permission/api/v1/collaboratorPermission/changeCollaboratorUser",
+      body:"*"
+    };
+  };
+
+  rpc addCollaboratorUser (CollaboratorUserRequest) returns (CollaboratorUserResponse) {
+    option (google.api.http) = {
+      post: "/permission/api/v1/collaboratorPermission/addCollaboratorUser",
+      body:"*"
+    };
+  };
+
+  rpc removeCollaboratorUser (CollaboratorUserRequest) returns (CollaboratorUsersResponse) {
+    option (google.api.http) = {
+      post: "/permission/api/v1/collaboratorPermission/removeCollaboratorUser",
+      body:"*"
+    };
+  };
+
+  rpc syncCollaboratorUsers (CollaboratorUsersRequest) returns (CollaboratorUsersResponse) {
+    option (google.api.http) = {
+      post: "/permission/api/v1/collaboratorPermission/syncCollaboratorUsers",
+      body:"*"
+    };
+  };
+
+  rpc batchRemoveCollaboratorUsers (CollaboratorUsersRequest) returns (CollaboratorUsersResponse) {
+    option (google.api.http) = {
+      post: "/permission/api/v1/collaboratorPermission/batchRemoveCollaboratorUsers",
+      body:"*"
+    };
+  };
+
+  rpc batchRemoveMemberFieldCollaborators (MemberFieldRequest) returns (MemberFieldResponse) {
+    option (google.api.http) = {
+      post: "/permission/api/v1/collaboratorPermission/batchRemoveMemberFieldCollaborators",
+      body:"*"
+    };
+  };
+
+   ///form/inner/api/v1/apps/%d/values/filter
+   rpc batchMigrateCollaboratorUsersToPermission (BatchMigrateRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/permission/api/v1/collaboratorPermission/batchMigrateCollaboratorUsersToPermission",
+      body:"*"
+    };
+  };
+
+  rpc copyCollaboratorsFromColumnToOther (CopyColumnRequest) returns (CopyColumnResponse) {
+    option (google.api.http) = {
+      post: "/permission/api/v1/collaboratorPermission/copyColumn",
+      body:"*"
+    };
+  };
+
+  rpc GetDataCollaborators (GetDataCollaboratorsRequest) returns (GetDataCollaboratorsResponse) {
+    option (google.api.http) = {
+      post: "/permission/api/v1/collaboratorPermission/getDataCollaborators",
+      body:"*"
+    };
+  };
+
+  rpc GetAppIdsByCollaborators (GetAppIdsByCollaboratorReq) returns (GetAppIdsByCollaboratorResp) {
+    option (google.api.http) = {
+      post: "/permission/api/v1/collaboratorPermission/getAppIdsByCollaborators",
+      body: "*"
+    };
+  }
+
+}

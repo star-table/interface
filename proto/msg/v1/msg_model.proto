@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+import "validate/validate.proto";
+import "google/protobuf/struct.proto";
+import "msg_enum.proto";
+
+package msg.v1;
+option go_package = "github.com/star-table/interface/golang/msg/v1;v1";
+
+message Event {
+  EventCategory category = 1;
+  EventType type = 2;
+  int64 timestamp = 3 [(validate.rules).int64 = {gt: 0}];
+  string trace_id = 4;
+  oneof payload_oneof {
+    DataEvent data_event = 10;
+  }
+}
+
+message DataEvent {
+  int64 org_id = 1 [(validate.rules).int64 = {gt: 0}];
+  int64 app_id = 2 [(validate.rules).int64 = {gte: 0}];
+  int64 project_id = 3 [(validate.rules).int64 = {gte: 0}];
+  int64 table_id = 4 [(validate.rules).int64 = {gte: 0}];
+  int64 data_id = 5 [(validate.rules).int64 = {gt: 0}];
+  int64 issue_id = 6 [(validate.rules).int64 = {gt: 0}];
+  string title = 7;                                             // 数据标题
+  int64 user_id = 8 [(validate.rules).int64 = {gt: 0}];         // 操作人ID
+  string user_name = 9;                                         // 操作人名字
+  google.protobuf.Struct new = 20;                              // 字段值-完整新值
+  google.protobuf.Struct old = 21;                              // 字段值-完整旧值
+  google.protobuf.Struct incremental = 22;                      // 字段值-增量添加值
+  google.protobuf.Struct decremental = 23;                      // 字段值-增量删除值
+}

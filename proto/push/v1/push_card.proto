@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+import "google/protobuf/struct.proto";
+
+package push.v1;
+option go_package = "github.com/star-table/interface/golang/push/v1;v1";
+
+enum CardElementLevel {
+  Default = 0;
+  Important = 1;
+  NotImportant = 2;
+}
+
+enum CardActionType {
+  ButtonJumpUrl = 0;
+  ButtonCallback = 1;
+  Select = 2;
+  Link = 3;
+  DatePicker = 4;
+}
+
+enum CardActionModuleType {
+  Action = 0;
+  Hr = 1;
+}
+
+message CardTitle {
+  CardElementLevel level = 1;
+  string title = 2;
+}
+
+message CardTextField {
+  CardElementLevel level = 1;
+  string key = 2;
+  string value = 3;
+}
+
+message CardTextDiv {
+  repeated CardTextField fields = 1;
+}
+
+message CardAction {
+  CardElementLevel level = 1;
+  CardActionType type = 2;
+  string text = 3;
+  string url = 4;
+  google.protobuf.Struct values = 5;    // for action type: button/select
+  repeated string options = 6;          // for action type: select
+}
+
+message CardActionModule {
+  CardActionModuleType type = 1;
+  repeated CardAction actions = 2;
+}
+
+message TemplateCard {
+  CardTitle title = 1;
+  repeated CardTextDiv divs = 2;
+  repeated CardActionModule action_modules = 3;
+}
+
+message MarkdownCard {
+  string title = 1;
+  string content = 2;
+}
+
+message StringArray {
+  repeated string elements = 1;
+}

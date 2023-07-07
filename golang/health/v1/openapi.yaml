@@ -1,0 +1,52 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: Health API
+    version: 0.0.1
+paths:
+    /v1/health/check:
+        get:
+            tags:
+                - Health
+            operationId: Health_Check
+            parameters:
+                - name: service
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/HealthCheckResponse'
+    /v1/health/watch:
+        get:
+            tags:
+                - Health
+            operationId: Health_Watch
+            parameters:
+                - name: service
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/HealthCheckResponse'
+components:
+    schemas:
+        HealthCheckResponse:
+            type: object
+            properties:
+                status:
+                    type: integer
+                    format: enum
+tags:
+    - name: Health

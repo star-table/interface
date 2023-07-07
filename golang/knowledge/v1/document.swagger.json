@@ -1,0 +1,557 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "document.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Document"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/document/copy": {
+      "post": {
+        "summary": "创建或者更新document",
+        "operationId": "Document_CopyDocument",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CopyDocumentReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CopyDocumentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Document"
+        ]
+      }
+    },
+    "/v1/document/delete": {
+      "post": {
+        "summary": "删除document",
+        "operationId": "Document_DeleteDocument",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteDocumentReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeleteDocumentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Document"
+        ]
+      }
+    },
+    "/v1/document/detail": {
+      "post": {
+        "summary": "获取文档详情",
+        "operationId": "Document_GetDocument",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetDocumentReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GetDocumentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Document"
+        ]
+      }
+    },
+    "/v1/document/list/child": {
+      "post": {
+        "summary": "获取子文档",
+        "operationId": "Document_ListChildDocument",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListChildDocumentReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ListChildDocumentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Document"
+        ]
+      }
+    },
+    "/v1/document/list/tree": {
+      "post": {
+        "summary": "获取文档列表树",
+        "operationId": "Document_ListTreeDocument",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListTreeDocumentReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ListTreeDocumentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Document"
+        ]
+      }
+    },
+    "/v1/document/move": {
+      "post": {
+        "summary": "移动document",
+        "operationId": "Document_MoveDocument",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1MoveDocumentReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1MoveDocumentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Document"
+        ]
+      }
+    },
+    "/v1/document/save": {
+      "post": {
+        "summary": "创建或者更新document",
+        "operationId": "Document_SaveDocument",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SaveDocumentReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SaveDocumentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Document"
+        ]
+      }
+    },
+    "/v1/document/search": {
+      "post": {
+        "summary": "搜索文档",
+        "operationId": "Document_SearchDocument",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SearchDocumentReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SearchDocumentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Document"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1CopyDocumentReply": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CopyDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "parentId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1DeleteDocumentReply": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1DeleteDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        },
+        "withChild": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1DocumentDetail": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "parentId": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "int64"
+        },
+        "creator": {
+          "$ref": "#/definitions/v1User"
+        },
+        "updater": {
+          "$ref": "#/definitions/v1User"
+        }
+      }
+    },
+    "v1DocumentSimple": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "parentId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GetDocumentReply": {
+      "type": "object",
+      "properties": {
+        "detail": {
+          "$ref": "#/definitions/v1DocumentDetail"
+        }
+      }
+    },
+    "v1GetDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ListChildDocumentReply": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1DocumentSimple"
+          }
+        }
+      }
+    },
+    "v1ListChildDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ListTreeDocumentReply": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1DocumentSimple"
+          }
+        },
+        "topList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1DocumentSimple"
+          }
+        }
+      }
+    },
+    "v1ListTreeDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "indexDocumentId": {
+          "type": "string"
+        },
+        "spaceId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1MoveDocumentReply": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1MoveDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        },
+        "parentId": {
+          "type": "string"
+        },
+        "beforeId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1SaveDocumentReply": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1SaveDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "parentId": {
+          "type": "string"
+        },
+        "spaceId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1SearchDocumentReply": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1DocumentSimple"
+          }
+        }
+      }
+    },
+    "v1SearchDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "spaceId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1User": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

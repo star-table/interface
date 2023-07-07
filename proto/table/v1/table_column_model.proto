@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+import "table_model.proto";
+
+package table.v1;
+option go_package = "github.com/star-table/interface/golang/table/v1;v1";
+
+message ColumnPropRelating {
+  repeated TableMin relateTables = 1;
+}

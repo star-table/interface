@@ -1,0 +1,137 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: Resource API
+    description: The greeting service definition.
+    version: 0.0.1
+paths:
+    /inner/v1/resource/attachment/create:
+        post:
+            tags:
+                - Resource
+            description: 创建附件
+            operationId: Resource_CreateAttachment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateAttachmentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateAttachmentResponse'
+    /inner/v1/resource/attachment/delete:
+        post:
+            tags:
+                - Resource
+            description: 移除附件
+            operationId: Resource_DeleteAttachment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteAttachmentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteAttachmentResponse'
+    /inner/v1/resource/attachment/list:
+        post:
+            tags:
+                - Resource
+            description: 附件列表
+            operationId: Resource_ListAttachments
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ListAttachmentsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListAttachmentsResponse'
+    /inner/v1/resource/file/list:
+        post:
+            tags:
+                - Resource
+            description: 文件列表
+            operationId: Resource_ListFiles
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ListFilesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListFilesResponse'
+    /inner/v1/resource/getPolicy:
+        post:
+            tags:
+                - Resource
+            operationId: Resource_GetPolicy
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetPolicyRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetPolicyResponse'
+components:
+    schemas:
+        CreateAttachmentRequest:
+            type: object
+            properties: {}
+        CreateAttachmentResponse:
+            type: object
+            properties: {}
+        DeleteAttachmentRequest:
+            type: object
+            properties: {}
+        DeleteAttachmentResponse:
+            type: object
+            properties: {}
+        GetPolicyRequest:
+            type: object
+            properties: {}
+        GetPolicyResponse:
+            type: object
+            properties: {}
+        ListAttachmentsRequest:
+            type: object
+            properties: {}
+        ListAttachmentsResponse:
+            type: object
+            properties: {}
+        ListFilesRequest:
+            type: object
+            properties: {}
+        ListFilesResponse:
+            type: object
+            properties: {}
+tags:
+    - name: Resource

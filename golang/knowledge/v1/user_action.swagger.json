@@ -1,0 +1,546 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "user_action.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "UserAction"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/action/comment/delete": {
+      "post": {
+        "summary": "删除",
+        "operationId": "UserAction_DeleteComment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteCommentReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeleteCommentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserAction"
+        ]
+      }
+    },
+    "/v1/action/document/comment": {
+      "post": {
+        "summary": "评论文章",
+        "operationId": "UserAction_CommentDocument",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CommentDocumentReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CommentDocumentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserAction"
+        ]
+      }
+    },
+    "/v1/action/document/comment/list": {
+      "post": {
+        "summary": "评论列表",
+        "operationId": "UserAction_ListDocumentComment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListDocumentCommentReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ListDocumentCommentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserAction"
+        ]
+      }
+    },
+    "/v1/action/document/comment/status/update": {
+      "post": {
+        "summary": "评论文章",
+        "operationId": "UserAction_UpdateCommentStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateCommentStatusReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UpdateCommentStatusRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserAction"
+        ]
+      }
+    },
+    "/v1/action/document/like": {
+      "post": {
+        "summary": "点赞或者取消点赞",
+        "operationId": "UserAction_LikeDocument",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1LikeDocumentReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1LikeDocumentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserAction"
+        ]
+      }
+    },
+    "/v1/action/document/like/user/list": {
+      "post": {
+        "summary": "点赞用户列表",
+        "operationId": "UserAction_ListDocumentLikeUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListDocumentLikeUserReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ListDocumentLikeUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserAction"
+        ]
+      }
+    },
+    "/v1/action/document/top": {
+      "post": {
+        "summary": "置顶文章",
+        "operationId": "UserAction_TopDocument",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1TopDocumentReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1TopDocumentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserAction"
+        ]
+      }
+    },
+    "/v1/action/space/star": {
+      "post": {
+        "summary": "收藏空间",
+        "operationId": "UserAction_StarSpace",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1StarSpaceReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1StarSpaceRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserAction"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1CommentDetail": {
+      "type": "object",
+      "properties": {
+        "commentId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "mentionUser": {
+          "$ref": "#/definitions/v1User"
+        },
+        "creator": {
+          "$ref": "#/definitions/v1User"
+        },
+        "CreateTime": {
+          "type": "string",
+          "format": "int64"
+        },
+        "UpdateTime": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1CommentDocumentReply": {
+      "type": "object",
+      "properties": {
+        "commentId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1CommentDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "spaceId": {
+          "type": "string"
+        },
+        "documentId": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "quote": {
+          "type": "string"
+        },
+        "renderId": {
+          "type": "string"
+        },
+        "mentionUserId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1DeleteCommentReply": {
+      "type": "object"
+    },
+    "v1DeleteCommentRequest": {
+      "type": "object",
+      "properties": {
+        "commentId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1LikeDocumentReply": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        },
+        "isLike": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1LikeDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        },
+        "isLike": {
+          "type": "boolean"
+        },
+        "spaceId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ListDocumentCommentReply": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1CommentDetail"
+          }
+        },
+        "quoteList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1CommentDetail"
+          }
+        }
+      }
+    },
+    "v1ListDocumentCommentRequest": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        },
+        "spaceId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ListDocumentLikeUserReply": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1User"
+          }
+        }
+      }
+    },
+    "v1ListDocumentLikeUserRequest": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        },
+        "spaceId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1StarSpaceReply": {
+      "type": "object",
+      "properties": {
+        "spaceId": {
+          "type": "string"
+        },
+        "isStar": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1StarSpaceRequest": {
+      "type": "object",
+      "properties": {
+        "spaceId": {
+          "type": "string"
+        },
+        "isStar": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1TopDocumentReply": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        },
+        "isTop": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1TopDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        },
+        "isTop": {
+          "type": "boolean"
+        },
+        "spaceId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1UpdateCommentStatusReply": {
+      "type": "object",
+      "properties": {
+        "quoteList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1CommentDetail"
+          }
+        }
+      }
+    },
+    "v1UpdateCommentStatusRequest": {
+      "type": "object",
+      "properties": {
+        "renderIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isHide": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1User": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

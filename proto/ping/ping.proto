@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+//import "protoc-gen-openapiv2/options/annotations.proto";
+
+package ping;
+option go_package = "github.com/star-table/interface/golang/ping;ping";
+
+service Ping {
+  rpc Ping (PingRequest) returns (PingReply)  {
+    option (google.api.http) = {
+      get: "/ping"
+    };
+  }
+}
+
+message PingRequest {
+
+}
+
+message PingReply {
+
+}

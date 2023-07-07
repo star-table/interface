@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+package officeapi.v1;
+
+import "google/protobuf/struct.proto";
+import "google/api/annotations.proto";
+
+option go_package = "officeapi/api/officeapi/v1;v1";
+
+// 表管理
+service OfficeApi {
+
+    rpc GetConfig(GetConfigRequest) returns (GetConfigResponse) {
+      option (google.api.http) = {
+        get: "/api/config"
+      };
+    };
+
+    rpc GetWopiFileInfoEditable(WOPIRequest) returns (WOPIEditableResp) {
+        option (google.api.http) = {
+          get: "/api/wopi/files/{file_name}"
+        };
+    };
+
+    // rpc GetWopiFileContents(WOPIRequest) returns (FormConfigResponse) {
+    //     option (google.api.http) = {
+    //       get: "/api/wopi/files/{file_name}/contents"
+    //     };
+    // };
+
+    // rpc SaveWopiFileContents(WOPIRequestFileContent) returns (FormConfigResponse) {
+    //     option (google.api.http) = {
+    //       post: "/api/wopi/files/{file_name}/contents",
+    //       body: "data"
+    //     };
+    // };
+
+    // rpc GetWopiFileInfoEditableWithEdit(WOPIRequest) returns (FormConfigResponse) {
+    //     option (google.api.http) = {
+    //       get: "/api/wopi/files/{file_name}/edit"
+    //     };
+    // };
+
+    // rpc GetWopiFileContentsWithEditByGet(WOPIRequest) returns (FormConfigResponse) {
+    //     option (google.api.http) = {
+    //       get: "/api/wopi/files/{file_name}/contents/edit"
+    //     };
+    // };
+
+    // rpc GetWopiFileContentsWithEditByPost(WOPIRequest) returns (FormConfigResponse) {
+    //     option (google.api.http) = {
+    //       post: "/api/wopi/files/{file_name}/contents/edit",
+    //       body: "data"
+    //     };
+    // };
+}
+
+message WOPIRequest {
+    string file_name = 1;
+    string access_token = 2;
+    string permission = 3;
+}
+
+message WOPIRequestFileContent {
+  string file_name            = 1;
+  string access_token         = 2;
+  string permission           = 3;
+  google.protobuf.Value data  = 4;
+}
+
+message FormConfigResponse {
+}
+
+
+	// 		BaseFileName:            "c3943c78c7264f1dbb44b46fc1eb39501642042557364",
+	// 		OwnerID:                 "1629",
+	// 		UserID:                  "11464",
+	// 		Size:                    14407,
+	// 		UserFriendlyName:        "1629",
+	// 		UserCanWrite:            true,
+	// 		UserCanNotWriteRelative: true,
+
+message WOPIEditableResp {
+  string BaseFileName             = 1;
+  string OwnerId                  = 2;
+  string UserId                   = 3;
+  int32  Size                     = 4;
+  string UserFriendlyName         = 5;
+  bool   UserCanWrite             = 6;
+  bool   UserCanNotWriteRelative  = 7;
+  string status                    = 8;
+  string LastModifiedTime          = 9;
+}
+
+message GetConfigRequest {
+}
+
+message GetConfigResponse {
+  string Type             = 1;   // 类型 type: collabora, microsoft
+  string UrlPrefix        = 2;   // OfficeUrl前缀
+  string FileExtensions   = 3;   // 文件后嘴
+}

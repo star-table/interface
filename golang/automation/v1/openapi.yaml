@@ -1,0 +1,332 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/apps/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: AutomationInner API
+    description: The Automation Inner service definition.
+    version: 0.0.1
+paths:
+    /inner/v1/batch/rebuildActive/{orgId}:
+        get:
+            tags:
+                - AutomationInner
+            description: 重建所有n8n workflow
+            operationId: AutomationInner_BatchRebuildActive
+            parameters:
+                - name: orgId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int64
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/BatchRebuildActiveReply'
+    /inner/v1/global/switch/off:
+        post:
+            tags:
+                - AutomationInner
+            description: 关闭整个组织工作流开关
+            operationId: AutomationInner_GlobalSwitchOff
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GlobalSwitchOffReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GlobalSwitchOffReply'
+    /inner/v1/todo:
+        put:
+            tags:
+                - AutomationInner
+            description: 更新待办
+            operationId: AutomationInner_UpdateTodo
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateTodoReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateTodoReply'
+        post:
+            tags:
+                - AutomationInner
+            description: 创建待办
+            operationId: AutomationInner_CreateTodo
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateTodoReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateTodoReply'
+    /inner/v1/workflows/applyTemplate:
+        post:
+            tags:
+                - AutomationInner
+            description: 应用模板（isCreate为true时，为保存模板）
+            operationId: AutomationInner_ApplyTemplate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ApplyTemplateReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ApplyTemplateReply'
+    /inner/v1/workflows/handleError:
+        post:
+            tags:
+                - AutomationInner
+            description: 执行失败回调
+            operationId: AutomationInner_HandleWorkflowError
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/HandleWorkflowErrorReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/HandleWorkflowErrorReply'
+    /inner/v1/workflows/handleExecute:
+        post:
+            tags:
+                - AutomationInner
+            description: 执行回调
+            operationId: AutomationInner_HandleWorkflowExecute
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/HandleWorkflowExecuteReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/HandleWorkflowExecuteReply'
+components:
+    schemas:
+        ApplyTemplateReply:
+            type: object
+            properties: {}
+        ApplyTemplateReq:
+            type: object
+            properties:
+                isCreate:
+                    type: boolean
+                orgIdMapping:
+                    $ref: '#/components/schemas/NumberMapping'
+                appIdMapping:
+                    $ref: '#/components/schemas/StringMapping'
+                tableIdMappings:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/StringMapping'
+                iterationIdMappings:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/StringMapping'
+            description: ApplyTemplate
+        BatchRebuildActiveReply:
+            type: object
+            properties: {}
+        CreateTodoReply:
+            type: object
+            properties: {}
+        CreateTodoReq:
+            type: object
+            properties:
+                triggerBy:
+                    $ref: '#/components/schemas/TriggerBy'
+                orgId:
+                    type: integer
+                    format: int64
+                appId:
+                    type: string
+                tableId:
+                    type: string
+                issueId:
+                    type: integer
+                    format: int64
+                triggerUserId:
+                    type: integer
+                    format: int64
+                allowWithdrawByTrigger:
+                    type: boolean
+                allowUrgeByTrigger:
+                    type: boolean
+                type:
+                    type: integer
+                    format: enum
+                operators:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/PeopleByIds'
+                auditFlowName:
+                    type: string
+                auditFlowId:
+                    type: string
+                issueTitle:
+                    type: string
+                todoAudit:
+                    $ref: '#/components/schemas/ParameterTodoAudit'
+                todoFillIn:
+                    $ref: '#/components/schemas/ParameterTodoFillIn'
+            description: CreateTodo
+        FormSetting:
+            type: object
+            properties:
+                columnId:
+                    type: string
+                canRead:
+                    type: boolean
+                canWrite:
+                    type: boolean
+                required:
+                    type: boolean
+        GlobalSwitchOffReply:
+            type: object
+            properties: {}
+        GlobalSwitchOffReq:
+            type: object
+            properties: {}
+            description: GlobalSwitchOff
+        HandleWorkflowErrorReply:
+            type: object
+            properties: {}
+        HandleWorkflowErrorReq:
+            type: object
+            properties:
+                workflowId:
+                    type: integer
+                    format: int64
+                executionId:
+                    type: integer
+                    format: int64
+            description: HandleWorkflowError
+        HandleWorkflowExecuteReply:
+            type: object
+            properties: {}
+        HandleWorkflowExecuteReq:
+            type: object
+            properties:
+                orgId:
+                    type: integer
+                    format: int64
+                workflowId:
+                    type: integer
+                    format: int64
+                executionId:
+                    type: integer
+                    format: int64
+                triggerResult:
+                    type: string
+            description: HandleWorkflowExecute
+        NumberMapping:
+            type: object
+            properties:
+                old:
+                    type: integer
+                    format: int64
+                new:
+                    type: integer
+                    format: int64
+        ParameterTodoAudit:
+            type: object
+            properties:
+                signMode:
+                    type: integer
+                    format: enum
+                formSettings:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/FormSetting'
+        ParameterTodoFillIn:
+            type: object
+            properties:
+                formSettings:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/FormSetting'
+        PeopleByIds:
+            type: object
+            properties:
+                type:
+                    type: integer
+                    format: enum
+                idsJson:
+                    type: string
+        StringMapping:
+            type: object
+            properties:
+                old:
+                    type: string
+                new:
+                    type: string
+        TriggerBy:
+            type: object
+            properties:
+                triggerBy:
+                    type: string
+                workflowId:
+                    type: string
+                workflowName:
+                    type: string
+                executionId:
+                    type: integer
+                    format: int64
+        UpdateTodoReply:
+            type: object
+            properties: {}
+        UpdateTodoReq:
+            type: object
+            properties:
+                id:
+                    type: string
+                op:
+                    type: integer
+                    format: enum
+                msg:
+                    type: string
+                status:
+                    type: integer
+                    format: enum
+            description: UpdateTodo
+tags:
+    - name: AutomationInner

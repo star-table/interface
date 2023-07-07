@@ -1,0 +1,627 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "push.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Push"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/inner/v1/generate/card": {
+      "post": {
+        "summary": "Generate Card",
+        "operationId": "Push_GenerateCard",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GenerateCardReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GenerateCardReq"
+            }
+          }
+        ],
+        "tags": [
+          "Push"
+        ]
+      }
+    },
+    "/inner/v1/generate/mqtt/key": {
+      "post": {
+        "summary": "Generate Mqtt Key",
+        "operationId": "Push_GenerateMqttKey",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GenerateMqttKeyReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GenerateMqttKeyReq"
+            }
+          }
+        ],
+        "tags": [
+          "Push"
+        ]
+      }
+    },
+    "/inner/v1/push/card": {
+      "post": {
+        "summary": "Push Card",
+        "operationId": "Push_PushCard",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1PushCardReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1PushCardReq"
+            }
+          }
+        ],
+        "tags": [
+          "Push"
+        ]
+      }
+    },
+    "/inner/v1/push/card/simple": {
+      "post": {
+        "summary": "Push Card Simple",
+        "operationId": "Push_PushCardSimple",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1PushCardSimpleReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1PushCardSimpleReq"
+            }
+          }
+        ],
+        "tags": [
+          "Push"
+        ]
+      }
+    },
+    "/inner/v1/push/mail": {
+      "post": {
+        "summary": "Push Mail",
+        "operationId": "Push_PushMail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1PushMailReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1PushMailReq"
+            }
+          }
+        ],
+        "tags": [
+          "Push"
+        ]
+      }
+    },
+    "/inner/v1/push/mqtt": {
+      "post": {
+        "summary": "Push Mqtt",
+        "operationId": "Push_PushMqtt",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1PushMqttReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1PushMqttReq"
+            }
+          }
+        ],
+        "tags": [
+          "Push"
+        ]
+      }
+    },
+    "/inner/v1/push/sms": {
+      "post": {
+        "summary": "Push Sms",
+        "operationId": "Push_PushSms",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1PushSmsReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1PushSmsReq"
+            }
+          }
+        ],
+        "tags": [
+          "Push"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "protobufNullValue": {
+      "type": "string",
+      "enum": [
+        "NULL_VALUE"
+      ],
+      "default": "NULL_VALUE",
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\n The JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1CardAction": {
+      "type": "object",
+      "properties": {
+        "level": {
+          "$ref": "#/definitions/v1CardElementLevel"
+        },
+        "type": {
+          "$ref": "#/definitions/v1CardActionType"
+        },
+        "text": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "values": {
+          "type": "object"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v1CardActionModule": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/v1CardActionModuleType"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1CardAction"
+          }
+        }
+      }
+    },
+    "v1CardActionModuleType": {
+      "type": "string",
+      "enum": [
+        "Action",
+        "Hr"
+      ],
+      "default": "Action"
+    },
+    "v1CardActionType": {
+      "type": "string",
+      "enum": [
+        "ButtonJumpUrl",
+        "ButtonCallback",
+        "Select",
+        "Link",
+        "DatePicker"
+      ],
+      "default": "ButtonJumpUrl"
+    },
+    "v1CardElementLevel": {
+      "type": "string",
+      "enum": [
+        "Default",
+        "Important",
+        "NotImportant"
+      ],
+      "default": "Default"
+    },
+    "v1CardTextDiv": {
+      "type": "object",
+      "properties": {
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1CardTextField"
+          }
+        }
+      }
+    },
+    "v1CardTextField": {
+      "type": "object",
+      "properties": {
+        "level": {
+          "$ref": "#/definitions/v1CardElementLevel"
+        },
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CardTitle": {
+      "type": "object",
+      "properties": {
+        "level": {
+          "$ref": "#/definitions/v1CardElementLevel"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GenerateCardReply": {
+      "type": "object",
+      "properties": {
+        "card": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GenerateCardReq": {
+      "type": "object",
+      "properties": {
+        "source_channel": {
+          "type": "string"
+        },
+        "card": {
+          "$ref": "#/definitions/v1TemplateCard"
+        }
+      },
+      "title": "GenerateCard"
+    },
+    "v1GenerateMqttKeyReply": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "channel": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GenerateMqttKeyReq": {
+      "type": "object",
+      "properties": {
+        "channel_type": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "org_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "project_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "GenerateMqttKey"
+    },
+    "v1MarkdownCard": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      }
+    },
+    "v1PushCardReply": {
+      "type": "object"
+    },
+    "v1PushCardReq": {
+      "type": "object",
+      "properties": {
+        "org_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "source_channel": {
+          "type": "string"
+        },
+        "out_org_id": {
+          "type": "string"
+        },
+        "card": {
+          "$ref": "#/definitions/v1TemplateCard"
+        },
+        "to_open_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "to_dept_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "to_chat_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "PushCard"
+    },
+    "v1PushCardSimpleReply": {
+      "type": "object"
+    },
+    "v1PushCardSimpleReq": {
+      "type": "object",
+      "properties": {
+        "org_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "lc_ids": {
+          "$ref": "#/definitions/v1StringArray"
+        },
+        "chat_ids": {
+          "$ref": "#/definitions/v1StringArray"
+        },
+        "markdown_card": {
+          "$ref": "#/definitions/v1MarkdownCard"
+        },
+        "source_channel": {
+          "type": "string"
+        }
+      },
+      "title": "PushCardSimpleReq"
+    },
+    "v1PushMailReply": {
+      "type": "object"
+    },
+    "v1PushMailReq": {
+      "type": "object",
+      "properties": {
+        "to_mails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subject": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      },
+      "title": "PushMail"
+    },
+    "v1PushMqttReply": {
+      "type": "object"
+    },
+    "v1PushMqttReq": {
+      "type": "object",
+      "properties": {
+        "channel": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string",
+          "format": "byte"
+        },
+        "org_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "project_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "PushMqtt"
+    },
+    "v1PushSmsReply": {
+      "type": "object"
+    },
+    "v1PushSmsReq": {
+      "type": "object",
+      "properties": {
+        "to_phones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sign_name": {
+          "type": "string"
+        },
+        "template_code": {
+          "type": "string"
+        },
+        "params": {
+          "type": "object"
+        }
+      },
+      "title": "PushSms"
+    },
+    "v1StringArray": {
+      "type": "object",
+      "properties": {
+        "elements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v1TemplateCard": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "$ref": "#/definitions/v1CardTitle"
+        },
+        "divs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1CardTextDiv"
+          }
+        },
+        "action_modules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1CardActionModule"
+          }
+        }
+      }
+    }
+  }
+}

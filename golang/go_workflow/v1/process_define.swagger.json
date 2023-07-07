@@ -1,0 +1,428 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "process_define.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "WorkFlowProcessDefine"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/goWorkflow/processDefine/create": {
+      "post": {
+        "summary": "SaveProcessDefine 保存或者创建流程",
+        "operationId": "WorkFlowProcessDefine_SaveProcessDefine",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SaveProcessDefineReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SaveProcessDefineRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkFlowProcessDefine"
+        ]
+      }
+    },
+    "/v1/goWorkflow/processDefine/delete": {
+      "post": {
+        "operationId": "WorkFlowProcessDefine_DeleteProcessDefine",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteProcessDefineReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeleteProcessDefineRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkFlowProcessDefine"
+        ]
+      }
+    },
+    "/v1/goWorkflow/processDefine/query": {
+      "post": {
+        "operationId": "WorkFlowProcessDefine_QueryProcessDefines",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1QueryProcessDefinesReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1QueryProcessDefinesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkFlowProcessDefine"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1ActionerRule": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "memberCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "actionType": {
+          "type": "string"
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Participant"
+          }
+        }
+      }
+    },
+    "v1DeleteProcessDefineReply": {
+      "type": "object"
+    },
+    "v1DeleteProcessDefineRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1Node": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "nodeId": {
+          "type": "string"
+        },
+        "prevId": {
+          "type": "string"
+        },
+        "childNode": {
+          "$ref": "#/definitions/v1Node"
+        },
+        "conditionNodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Node"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/v1NodeProperties"
+        }
+      }
+    },
+    "v1NodeCondition": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "paramKey": {
+          "type": "string"
+        },
+        "paramLabel": {
+          "type": "string"
+        },
+        "lowerBound": {
+          "type": "string"
+        },
+        "lowerBoundEqual": {
+          "type": "string"
+        },
+        "upperBoundEqual": {
+          "type": "string"
+        },
+        "upperBound": {
+          "type": "string"
+        },
+        "boundEqual": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "paramValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "oriValue": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v1NodeConditions": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1NodeCondition"
+          }
+        }
+      }
+    },
+    "v1NodeProperties": {
+      "type": "object",
+      "properties": {
+        "activateType": {
+          "type": "string"
+        },
+        "agreeAll": {
+          "type": "boolean"
+        },
+        "condition": {
+          "$ref": "#/definitions/v1NodeConditions"
+        },
+        "actionerRule": {
+          "$ref": "#/definitions/v1ActionerRule"
+        }
+      }
+    },
+    "v1Participant": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "userIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "departmentIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1ProcessDefine": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "create_at": {
+          "type": "string",
+          "format": "int64"
+        },
+        "update_at": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1QueryProcessDefinesReply": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ProcessDefine"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1QueryProcessDefinesRequest": {
+      "type": "object",
+      "properties": {
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageIndex": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "userId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1SaveProcessDefineReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1SaveProcessDefineRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "userId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "resource": {
+          "$ref": "#/definitions/v1Node"
+        },
+        "startConditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1NodeConditions"
+          }
+        }
+      }
+    }
+  }
+}

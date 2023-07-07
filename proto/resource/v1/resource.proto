@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+// import "google/protobuf/struct.proto";
+//import "validate/validate.proto";
+//import "protoc-gen-openapiv2/options/annotations.proto";
+
+package resource.v1;
+option go_package = "github.com/star-table/interface/golang/resource/v1;v1";
+
+// The greeting service definition.
+service Resource {
+
+    // 创建附件
+    rpc CreateAttachment (CreateAttachmentRequest) returns (CreateAttachmentResponse)  {
+      option (google.api.http) = {
+        post: "/inner/v1/resource/attachment/create"
+        body: "*"
+      };
+    }
+
+    // 移除附件
+    rpc DeleteAttachment (DeleteAttachmentRequest) returns (DeleteAttachmentResponse)  {
+      option (google.api.http) = {
+        post: "/inner/v1/resource/attachment/delete"
+        body: "*"
+      };
+    }
+
+    // 附件列表
+    rpc ListAttachments (ListAttachmentsRequest) returns (ListAttachmentsResponse)  {
+      option (google.api.http) = {
+        post: "/inner/v1/resource/attachment/list"
+        body: "*"
+      };
+    }
+    
+    // 文件列表
+    rpc ListFiles (ListFilesRequest) returns (ListFilesResponse)  {
+      option (google.api.http) = {
+        post: "/inner/v1/resource/file/list"
+        body: "*"
+      };
+    }
+
+    rpc GetPolicy (GetPolicyRequest) returns (GetPolicyResponse)  {
+      option (google.api.http) = {
+        post: "/inner/v1/resource/getPolicy"
+        body: "*"
+      };
+    } 
+}
+
+message CreateAttachmentRequest {
+}
+
+message CreateAttachmentResponse {
+}
+
+message DeleteAttachmentRequest {
+}
+
+message DeleteAttachmentResponse {
+}
+
+message ListAttachmentsRequest {
+}
+
+message ListAttachmentsResponse {
+}
+
+message ListFilesRequest {
+}
+
+message ListFilesResponse {
+}
+
+message GetPolicyRequest {
+}
+
+message GetPolicyResponse {
+}

@@ -1,0 +1,82 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: OfficeApi API
+    description: 表管理
+    version: 0.0.1
+paths:
+    /api/config:
+        get:
+            tags:
+                - OfficeApi
+            operationId: OfficeApi_GetConfig
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetConfigResponse'
+    /api/wopi/files/{file_name}:
+        get:
+            tags:
+                - OfficeApi
+            operationId: OfficeApi_GetWopiFileInfoEditable
+            parameters:
+                - name: file_name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: access_token
+                  in: query
+                  schema:
+                    type: string
+                - name: permission
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/WOPIEditableResp'
+components:
+    schemas:
+        GetConfigResponse:
+            type: object
+            properties:
+                Type:
+                    type: string
+                UrlPrefix:
+                    type: string
+                FileExtensions:
+                    type: string
+        WOPIEditableResp:
+            type: object
+            properties:
+                BaseFileName:
+                    type: string
+                OwnerId:
+                    type: string
+                UserId:
+                    type: string
+                Size:
+                    type: integer
+                    format: int32
+                UserFriendlyName:
+                    type: string
+                UserCanWrite:
+                    type: boolean
+                UserCanNotWriteRelative:
+                    type: boolean
+                status:
+                    type: string
+                LastModifiedTime:
+                    type: string
+tags:
+    - name: OfficeApi

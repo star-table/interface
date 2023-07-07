@@ -1,0 +1,156 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "document_model.proto";
+//import "protoc-gen-openapiv2/options/annotations.proto";
+
+package knowledge.v1;
+option go_package = "github.com/star-table/interface/golang/knowledge/v1;v1";
+
+// The greeting service definition.
+service Document {
+  // 获取文档详情
+  rpc GetDocument (GetDocumentRequest) returns (GetDocumentReply)  {
+    option (google.api.http) = {
+      post: "/v1/document/detail"
+      body: "*"
+    };
+  }
+
+  // 获取文档列表树
+  rpc ListTreeDocument (ListTreeDocumentRequest) returns (ListTreeDocumentReply)  {
+    option (google.api.http) = {
+      post: "/v1/document/list/tree"
+      body: "*"
+    };
+  }
+
+  // 获取子文档
+  rpc ListChildDocument (ListChildDocumentRequest) returns (ListChildDocumentReply)  {
+    option (google.api.http) = {
+      post: "/v1/document/list/child"
+      body: "*"
+    };
+  }
+
+
+  // 搜索文档
+  rpc SearchDocument (SearchDocumentRequest) returns (SearchDocumentReply)  {
+    option (google.api.http) = {
+      post: "/v1/document/search"
+      body: "*"
+    };
+  }
+
+  // 创建或者更新document
+  rpc SaveDocument (SaveDocumentRequest) returns (SaveDocumentReply)  {
+    option (google.api.http) = {
+      post: "/v1/document/save"
+      body: "*"
+    };
+  }
+
+  // 删除document
+  rpc DeleteDocument (DeleteDocumentRequest) returns (DeleteDocumentReply)  {
+    option (google.api.http) = {
+      post: "/v1/document/delete"
+      body: "*"
+    };
+  }
+
+  // 创建或者更新document
+  rpc CopyDocument (CopyDocumentRequest) returns (CopyDocumentReply)  {
+    option (google.api.http) = {
+      post: "/v1/document/copy"
+      body: "*"
+    };
+  }
+
+  // 移动document
+  rpc MoveDocument (MoveDocumentRequest) returns (MoveDocumentReply)  {
+    option (google.api.http) = {
+      post: "/v1/document/move"
+      body: "*"
+    };
+  }
+}
+
+
+message GetDocumentRequest {
+  string documentId = 1[(validate.rules).string.min_len = 1];
+}
+
+message GetDocumentReply {
+  DocumentDetail detail = 1;
+}
+
+message ListTreeDocumentRequest {
+  string indexDocumentId = 1; // 当前指定文章id
+  string spaceId = 2[(validate.rules).string.min_len = 1];
+}
+
+message ListTreeDocumentReply {
+  repeated DocumentSimple list = 1;
+  repeated DocumentSimple topList = 2;
+}
+
+message ListChildDocumentRequest {
+  string documentId = 1[(validate.rules).string.min_len = 1];
+}
+
+message ListChildDocumentReply {
+  repeated DocumentSimple list = 1;
+}
+
+message SearchDocumentRequest {
+  string content = 1 [(validate.rules).string.min_len = 1];
+  int32 page = 2 [(validate.rules).int32 = {gt: 0}];
+  int32 size = 3 [(validate.rules).int32 = {gt: 0}];
+  string spaceId = 4;
+}
+
+message SearchDocumentReply {
+  repeated DocumentSimple list = 1;
+}
+
+message SaveDocumentRequest {
+  string documentId = 1; // 如果为空则是创建
+  string content = 2;
+  string title = 3;
+  string parentId = 4; // 保存的时候会忽略，如果是换parent，请使用移动接口
+  string spaceId = 5 [(validate.rules).string.min_len = 1];
+}
+
+message SaveDocumentReply {
+  string documentId = 1;
+}
+
+message DeleteDocumentRequest {
+  string documentId = 1[(validate.rules).string.min_len = 1];
+  bool withChild = 2;
+}
+
+message DeleteDocumentReply {
+  string documentId = 1[(validate.rules).string.min_len = 1];
+}
+
+message CopyDocumentRequest {
+  string documentId = 1[(validate.rules).string.min_len = 1];
+  string title = 2[(validate.rules).string.min_len = 1];
+  string parentId = 3;
+}
+
+message CopyDocumentReply {
+  string documentId = 1; // 新的id
+}
+
+message MoveDocumentRequest {
+  string documentId = 1[(validate.rules).string.min_len = 1];
+  string parentId = 2;
+  string beforeId = 3; // 哪个文章之前，如果是最底部则传空即可
+}
+
+message MoveDocumentReply {
+  string documentId = 1;
+}

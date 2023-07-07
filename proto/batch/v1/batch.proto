@@ -1,0 +1,198 @@
+syntax = "proto3";
+
+package batch.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/star-table/interface/golang/batch/v1;v1";
+
+// The batch service definition.
+service Batch {
+
+  // 随机URL生成 http://tool.c7sky.com/password/ 密码长度16位
+
+  rpc Temp (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/zo4wrrNYBCx997AS/{orgId}"
+    };
+  }
+
+  rpc ExportPGData (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/T33Roh7eqyTgkH9E/{orgId}"
+    };
+  }
+
+  rpc SplitTableHeader (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/1r0fyA2tabUFkeXb/{orgId}"
+    };
+  }
+
+  rpc MigrateRelating (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/WYHN6nAEunvaS3iQ/{orgId}"
+    };
+  }
+
+  rpc MigrateWorkHour (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/O8IuISTBeAfMlWvX"
+    };
+  }
+
+  rpc MigrateCollaborator (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/mzg0EAe9oAOX3AUd/{orgId}"
+    };
+  }
+
+  rpc MigrateDropUnusedTables (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/ylRhNgOy9XDQkNhE/{orgId}"
+    };
+  }
+
+  rpc FixIssueStatusLostWhenMove (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/fP6gFZV3h6aYqHwZ/{orgId}"
+    };
+  }
+
+  rpc AddPGIndex (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/tgCE4dge24h5xeZO/{orgId}"
+    };
+  }
+
+  rpc MigrateGlobalUser (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/5sSPOJy1iipLJheP"
+    };
+  }
+
+  rpc FixPGOrgId (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/9DDarUt4W4gHAlcm/{orgId}"
+    };
+  }
+
+
+  rpc MigratePath (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/LGRhCYWbFgIiGFlh/{orgId}"
+    };
+  }
+
+  rpc MigrateGroupChatSetting (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/yo12qhJyT9H3wlja/{orgId}"
+    };
+  }
+
+  rpc FixIssueStatusName (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/aE4B6nt3Ul29v5LW/{orgId}"
+    };
+  }
+
+  rpc FixIssueForDelPro (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/mbo5CUj9eC5J5gKF/{orgId}"
+    };
+  }
+
+  // 增加已逾期视图的跑批
+  rpc AddHasOverdueView (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/wkxNrIGBkoGfrmYT/{orgId}"
+    };
+  }
+
+  // 增加pg统计数据表
+  rpc AddPgStatisticsTable (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/BiWSsSuExXGfWFsX/{orgId}"
+    };
+  }
+
+  // 给历史project增加仪表盘
+  rpc AddDashBord (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/jWY49FWFhOg6gY60/{orgId}"
+    };
+  }
+
+  // 域名切换
+  rpc ChangeDomain (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/ulUntNQbqNTNNjHU/{orgId}"
+    };
+  }
+
+  // pg数据迁移
+  rpc PgDataTransfer (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/PggZn5V2D8UngAEw/{orgId}"
+    };
+  }
+
+  // 清理同一个组织下的相同用户
+  rpc ClearSameUser (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/exdIFVTYf3D7Cba3/{orgId}"
+    };
+  }
+  // 审批确认状态 无码化
+  rpc MigrateAuditStatus (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/ltivMRSdtcgNfMeH/{orgId}"
+    };
+  }
+
+  // 数据库迁移版本管理
+  rpc DbMigrations (HelloRequest) returns (HelloReply) {
+    option (google.api.http) = {
+      get: "/31LMM8SI61KRmKau/{orgId}"
+    };
+  }
+
+  // 修复path异常数据
+  rpc Fix20221104TemplatePath (HelloRequest) returns (HelloReply) {
+    option (google.api.http) = {
+      get: "/2cl5bZ5gWaA5IE0N/{orgId}"
+    };
+  }
+
+  // 把App创建人添加为member，并指定为管理员角色
+  rpc Fix20221107AppCreatorAddMember (HelloRequest) returns (HelloReply) {
+    option (google.api.http) = {
+      get: "/65SjhvFSjtG7fchD/{orgId}"
+    };
+  }
+
+  // 重新构建已启用的自动化工作流
+  rpc AutomationRebuildActive (HelloRequest) returns (HelloReply) {
+    option (google.api.http) = {
+      get: "/3y0gVQVAu8hBzh1J/{orgId}"
+    };
+  }
+
+  // 将关联前后置数据里面的dataId改为issueId
+  rpc ExchangeRelatingDataId (HelloRequest) returns (HelloReply) {
+    option (google.api.http) = {
+      get: "/EfIwZ5oc0dBAGBP7/{orgId}"
+    };
+  }
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+  int64 orgId = 2;
+}
+
+// The response message containing the greetings
+message HelloReply {
+  string message = 1;
+}

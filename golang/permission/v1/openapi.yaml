@@ -1,0 +1,539 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/apps/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: Permission API
+    description: The greeting service definition.
+    version: 0.0.1
+paths:
+    /permission/api/v1/collaboratorPermission/addCollaboratorUser:
+        post:
+            tags:
+                - Permission
+            operationId: Permission_AddCollaboratorUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CollaboratorUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CollaboratorUserResponse'
+    /permission/api/v1/collaboratorPermission/batchMigrateCollaboratorUsersToPermission:
+        post:
+            tags:
+                - Permission
+            description: /form/inner/api/v1/apps/%d/values/filter
+            operationId: Permission_BatchMigrateCollaboratorUsersToPermission
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/BatchMigrateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+    /permission/api/v1/collaboratorPermission/batchRemoveCollaboratorUsers:
+        post:
+            tags:
+                - Permission
+            operationId: Permission_BatchRemoveCollaboratorUsers
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CollaboratorUsersRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CollaboratorUsersResponse'
+    /permission/api/v1/collaboratorPermission/batchRemoveMemberFieldCollaborators:
+        post:
+            tags:
+                - Permission
+            operationId: Permission_BatchRemoveMemberFieldCollaborators
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MemberFieldRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MemberFieldResponse'
+    /permission/api/v1/collaboratorPermission/changeCollaboratorUser:
+        post:
+            tags:
+                - Permission
+            operationId: Permission_ChangeCollaboratorUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CollaboratorUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CollaboratorUserResponse'
+    /permission/api/v1/collaboratorPermission/collaboratorUserIdsAndDeptIds:
+        post:
+            tags:
+                - Permission
+            operationId: Permission_GetCollaboratorUserIdsAndDeptIds
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetCollaboratorUserIdsAndDeptIdsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetCollaboratorUserIdsAndDeptIdsResponse'
+    /permission/api/v1/collaboratorPermission/collaborators:
+        post:
+            tags:
+                - Permission
+            operationId: Permission_GetCollaborators
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetCollaboratorsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetCollaboratorsResponse'
+    /permission/api/v1/collaboratorPermission/copyColumn:
+        post:
+            tags:
+                - Permission
+            operationId: Permission_CopyCollaboratorsFromColumnToOther
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CopyColumnRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CopyColumnResponse'
+    /permission/api/v1/collaboratorPermission/getAppIdsByCollaborators:
+        post:
+            tags:
+                - Permission
+            operationId: Permission_GetAppIdsByCollaborators
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetAppIdsByCollaboratorReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetAppIdsByCollaboratorResp'
+    /permission/api/v1/collaboratorPermission/getDataCollaborators:
+        post:
+            tags:
+                - Permission
+            operationId: Permission_GetDataCollaborators
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetDataCollaboratorsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetDataCollaboratorsResponse'
+    /permission/api/v1/collaboratorPermission/getUserCollaboratorRoleIds:
+        post:
+            tags:
+                - Permission
+            operationId: Permission_GetUserCollaboratorRoleIds
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetUserCollaboratorRoleIdsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetUserCollaboratorRoleIdsResponse'
+    /permission/api/v1/collaboratorPermission/removeCollaboratorUser:
+        post:
+            tags:
+                - Permission
+            operationId: Permission_RemoveCollaboratorUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CollaboratorUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CollaboratorUsersResponse'
+    /permission/api/v1/collaboratorPermission/syncCollaboratorUsers:
+        post:
+            tags:
+                - Permission
+            operationId: Permission_SyncCollaboratorUsers
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CollaboratorUsersRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CollaboratorUsersResponse'
+components:
+    schemas:
+        AppPerGroupListItem:
+            type: object
+            properties:
+                id:
+                    type: string
+                hasDelete:
+                    type: boolean
+                hasEdit:
+                    type: boolean
+                langCode:
+                    type: string
+                name:
+                    type: string
+                readOnly:
+                    type: integer
+                    format: int32
+                remake:
+                    type: string
+        BatchMigrateRequest:
+            type: object
+            properties:
+                orgIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+        Collaborator:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                avatar:
+                    type: string
+                type:
+                    type: string
+                status:
+                    type: integer
+                    format: int32
+                isDelete:
+                    type: integer
+                    format: int32
+                perGroups:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/AppPerGroupListItem'
+                isSysAdmin:
+                    type: boolean
+                isSubAdmin:
+                    type: boolean
+                isOwner:
+                    type: boolean
+        CollaboratorColumnUser:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                orgId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                fieldName:
+                    type: string
+                userId:
+                    type: integer
+                    format: int64
+                deptId:
+                    type: integer
+                    format: int64
+        CollaboratorUserRequest:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                fieldName:
+                    type: string
+                orgId:
+                    type: integer
+                    format: int64
+                userId:
+                    type: integer
+                    format: int64
+                deptId:
+                    type: integer
+                    format: int64
+        CollaboratorUserResponse:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+        CollaboratorUsersRequest:
+            type: object
+            properties:
+                users:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/CollaboratorColumnUser'
+        CollaboratorUsersResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
+                    description: repeated int64 ids = 1;  // collaboratorId
+        ColumnCollaborators:
+            type: object
+            properties:
+                columnId:
+                    type: string
+                userIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+                deptIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+        CopyColumnRequest:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                orgId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                sourceFieldName:
+                    type: string
+                targetFieldName:
+                    type: string
+        CopyColumnResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
+                sourceFieldName:
+                    type: string
+                targetFieldName:
+                    type: string
+        DataCollaborators:
+            type: object
+            properties:
+                issueId:
+                    type: integer
+                    format: int64
+                columnCollaborators:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ColumnCollaborators'
+        GetAppIdsByCollaboratorReq:
+            type: object
+            properties:
+                userIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+                deptIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+        GetAppIdsByCollaboratorResp:
+            type: object
+            properties:
+                appIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+        GetCollaboratorUserIdsAndDeptIdsRequest:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                orgId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                fieldName:
+                    type: string
+        GetCollaboratorUserIdsAndDeptIdsResponse:
+            type: object
+            properties:
+                userIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+                deptIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+        GetCollaboratorsRequest:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                orgId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                allUser:
+                    type: boolean
+                    description: string fieldName       = 4;
+        GetCollaboratorsResponse:
+            type: object
+            properties:
+                collaborators:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Collaborator'
+        GetDataCollaboratorsRequest:
+            type: object
+            properties:
+                issueIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+        GetDataCollaboratorsResponse:
+            type: object
+            properties:
+                dataCollaborators:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/DataCollaborators'
+        GetUserCollaboratorRoleIdsRequest:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                orgId:
+                    type: integer
+                    format: int64
+                userId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                deptIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+        GetUserCollaboratorRoleIdsResponse:
+            type: object
+            properties:
+                roleIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+        MemberFieldRequest:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                orgId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                fieldName:
+                    type: string
+        MemberFieldResponse:
+            type: object
+            properties:
+                ok:
+                    type: boolean
+tags:
+    - name: Permission

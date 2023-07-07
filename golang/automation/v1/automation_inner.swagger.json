@@ -1,0 +1,611 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "automation_inner.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "AutomationInner"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/inner/v1/batch/rebuildActive/{orgId}": {
+      "get": {
+        "summary": "重建所有n8n workflow",
+        "operationId": "AutomationInner_BatchRebuildActive",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1BatchRebuildActiveReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "AutomationInner"
+        ]
+      }
+    },
+    "/inner/v1/global/switch/off": {
+      "post": {
+        "summary": "关闭整个组织工作流开关",
+        "operationId": "AutomationInner_GlobalSwitchOff",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GlobalSwitchOffReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GlobalSwitchOffReq"
+            }
+          }
+        ],
+        "tags": [
+          "AutomationInner"
+        ]
+      }
+    },
+    "/inner/v1/todo": {
+      "post": {
+        "summary": "创建待办",
+        "operationId": "AutomationInner_CreateTodo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateTodoReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateTodoReq"
+            }
+          }
+        ],
+        "tags": [
+          "AutomationInner"
+        ]
+      },
+      "put": {
+        "summary": "更新待办",
+        "operationId": "AutomationInner_UpdateTodo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateTodoReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UpdateTodoReq"
+            }
+          }
+        ],
+        "tags": [
+          "AutomationInner"
+        ]
+      }
+    },
+    "/inner/v1/workflows/applyTemplate": {
+      "post": {
+        "summary": "应用模板（isCreate为true时，为保存模板）",
+        "operationId": "AutomationInner_ApplyTemplate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ApplyTemplateReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ApplyTemplateReq"
+            }
+          }
+        ],
+        "tags": [
+          "AutomationInner"
+        ]
+      }
+    },
+    "/inner/v1/workflows/handleError": {
+      "post": {
+        "summary": "执行失败回调",
+        "operationId": "AutomationInner_HandleWorkflowError",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1HandleWorkflowErrorReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1HandleWorkflowErrorReq"
+            }
+          }
+        ],
+        "tags": [
+          "AutomationInner"
+        ]
+      }
+    },
+    "/inner/v1/workflows/handleExecute": {
+      "post": {
+        "summary": "执行回调",
+        "operationId": "AutomationInner_HandleWorkflowExecute",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1HandleWorkflowExecuteReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1HandleWorkflowExecuteReq"
+            }
+          }
+        ],
+        "tags": [
+          "AutomationInner"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1ApplyTemplateReply": {
+      "type": "object"
+    },
+    "v1ApplyTemplateReq": {
+      "type": "object",
+      "properties": {
+        "isCreate": {
+          "type": "boolean"
+        },
+        "orgIdMapping": {
+          "$ref": "#/definitions/v1NumberMapping"
+        },
+        "appIdMapping": {
+          "$ref": "#/definitions/v1StringMapping"
+        },
+        "tableIdMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1StringMapping"
+          }
+        },
+        "iterationIdMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1StringMapping"
+          }
+        }
+      },
+      "title": "ApplyTemplate"
+    },
+    "v1BatchRebuildActiveReply": {
+      "type": "object"
+    },
+    "v1CreateTodoReply": {
+      "type": "object"
+    },
+    "v1CreateTodoReq": {
+      "type": "object",
+      "properties": {
+        "triggerBy": {
+          "$ref": "#/definitions/v1TriggerBy"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "appId": {
+          "type": "string"
+        },
+        "tableId": {
+          "type": "string"
+        },
+        "issueId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "triggerUserId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "allowWithdrawByTrigger": {
+          "type": "boolean"
+        },
+        "allowUrgeByTrigger": {
+          "type": "boolean"
+        },
+        "type": {
+          "$ref": "#/definitions/v1TodoType"
+        },
+        "operators": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1PeopleByIds"
+          }
+        },
+        "auditFlowName": {
+          "type": "string"
+        },
+        "auditFlowId": {
+          "type": "string"
+        },
+        "issueTitle": {
+          "type": "string"
+        },
+        "todoAudit": {
+          "$ref": "#/definitions/v1ParameterTodoAudit"
+        },
+        "todoFillIn": {
+          "$ref": "#/definitions/v1ParameterTodoFillIn"
+        }
+      },
+      "title": "CreateTodo"
+    },
+    "v1FormSetting": {
+      "type": "object",
+      "properties": {
+        "columnId": {
+          "type": "string"
+        },
+        "canRead": {
+          "type": "boolean"
+        },
+        "canWrite": {
+          "type": "boolean"
+        },
+        "required": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "columnId",
+        "canRead",
+        "canWrite",
+        "required"
+      ]
+    },
+    "v1GlobalSwitchOffReply": {
+      "type": "object"
+    },
+    "v1GlobalSwitchOffReq": {
+      "type": "object",
+      "title": "GlobalSwitchOff"
+    },
+    "v1HandleWorkflowErrorReply": {
+      "type": "object"
+    },
+    "v1HandleWorkflowErrorReq": {
+      "type": "object",
+      "properties": {
+        "workflowId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "executionId": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "HandleWorkflowError"
+    },
+    "v1HandleWorkflowExecuteReply": {
+      "type": "object"
+    },
+    "v1HandleWorkflowExecuteReq": {
+      "type": "object",
+      "properties": {
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "workflowId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "executionId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "triggerResult": {
+          "type": "string"
+        }
+      },
+      "title": "HandleWorkflowExecute"
+    },
+    "v1NumberMapping": {
+      "type": "object",
+      "properties": {
+        "old": {
+          "type": "string",
+          "format": "int64"
+        },
+        "new": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "required": [
+        "old",
+        "new"
+      ]
+    },
+    "v1ParameterTodoAudit": {
+      "type": "object",
+      "properties": {
+        "signMode": {
+          "$ref": "#/definitions/v1SignMode"
+        },
+        "formSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1FormSetting"
+          }
+        }
+      },
+      "required": [
+        "signMode",
+        "formSettings"
+      ]
+    },
+    "v1ParameterTodoFillIn": {
+      "type": "object",
+      "properties": {
+        "formSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1FormSetting"
+          }
+        }
+      },
+      "required": [
+        "formSettings"
+      ]
+    },
+    "v1PeopleByIds": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/v1PeopleType"
+        },
+        "idsJson": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "idsJson"
+      ]
+    },
+    "v1PeopleType": {
+      "type": "string",
+      "enum": [
+        "User",
+        "Dept"
+      ],
+      "default": "User"
+    },
+    "v1SignMode": {
+      "type": "string",
+      "enum": [
+        "Or",
+        "AndAllPass",
+        "AndOnePass"
+      ],
+      "default": "Or"
+    },
+    "v1StringMapping": {
+      "type": "object",
+      "properties": {
+        "old": {
+          "type": "string"
+        },
+        "new": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "old",
+        "new"
+      ]
+    },
+    "v1TodoOp": {
+      "type": "string",
+      "enum": [
+        "OpInit",
+        "OpPass",
+        "OpReject",
+        "OpWithdraw"
+      ],
+      "default": "OpInit"
+    },
+    "v1TodoStatus": {
+      "type": "string",
+      "enum": [
+        "SUnFinished",
+        "SFinishedPassed",
+        "SFinishedRejected",
+        "SWithdrew",
+        "STimeout"
+      ],
+      "default": "SUnFinished"
+    },
+    "v1TodoType": {
+      "type": "string",
+      "enum": [
+        "Audit",
+        "FillIn"
+      ],
+      "default": "Audit"
+    },
+    "v1TriggerBy": {
+      "type": "object",
+      "properties": {
+        "triggerBy": {
+          "type": "string"
+        },
+        "workflowId": {
+          "type": "string"
+        },
+        "workflowName": {
+          "type": "string"
+        },
+        "executionId": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "required": [
+        "triggerBy",
+        "workflowId",
+        "workflowName",
+        "executionId"
+      ]
+    },
+    "v1UpdateTodoReply": {
+      "type": "object"
+    },
+    "v1UpdateTodoReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "op": {
+          "$ref": "#/definitions/v1TodoOp"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/v1TodoStatus"
+        }
+      },
+      "title": "UpdateTodo"
+    }
+  }
+}

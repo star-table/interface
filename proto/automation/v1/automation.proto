@@ -1,0 +1,341 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+import "validate/validate.proto";
+import "integration_model.proto";
+import "automation_model.proto";
+
+package automation.v1;
+option go_package = "github.com/star-table/interface/golang/automation/v1;v1";
+
+// The Automation service definition.
+service Automation {
+  // 查询工作流列表（APP）
+  rpc GetWorkflowsByApp (GetWorkflowsByAppReq) returns (GetWorkflowsByAppReply) {
+    option (google.api.http) = {
+      get: "/v1/workflows"
+    };
+  }
+
+  // 查询单个工作流
+  rpc GetWorkflow (GetWorkflowReq) returns (GetWorkflowReply) {
+    option (google.api.http) = {
+      get: "/v1/workflows/{id}"
+    };
+  }
+
+  // 保存工作流概要信息
+  rpc SaveWorkflowMeta (SaveWorkflowMetaReq) returns (SaveWorkflowMetaReply) {
+    option (google.api.http) = {
+      post: "/v1/workflows/meta"
+      body: "*"
+    };
+  }
+
+  // 保存工作流
+  rpc SaveWorkflow (SaveWorkflowReq) returns (SaveWorkflowReply) {
+    option (google.api.http) = {
+      post: "/v1/workflows"
+      body: "*"
+    };
+  }
+
+  // 删除工作流
+  rpc DeleteWorkflow (DeleteWorkflowReq) returns (DeleteWorkflowReply) {
+    option (google.api.http) = {
+      delete: "/v1/workflows/{id}"
+    };
+  }
+
+  // 激活工作流（启用）
+  rpc ActivateWorkflow (ActivateWorkflowReq) returns (ActivateWorkflowReply) {
+    option (google.api.http) = {
+      post: "/v1/workflows/{id}/activate"
+    };
+  }
+
+  // 去激活工作流（关闭）
+  rpc DeactivateWorkflow (DeactivateWorkflowReq) returns (DeactivateWorkflowReply) {
+    option (google.api.http) = {
+      post: "/v1/workflows/{id}/deactivate"
+    };
+  }
+
+  // 获取执行结果
+  rpc GetExecutions (GetExecutionsReq) returns (GetExecutionsReply) {
+    option (google.api.http) = {
+      get: "/v1/executions"
+    };
+  }
+
+  // 获取执行结果
+  rpc GetExecution (GetExecutionReq) returns (GetExecutionReply) {
+    option (google.api.http) = {
+      get: "/v1/executions/{id}"
+    };
+  }
+
+  // Webhook调用
+  rpc CallWebhook (CallWebhookReq) returns (CallWebhookReply) {
+    option (google.api.http) = {
+      post: "/v1/webhook/{webhookId}"
+      body: "*"
+    };
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  // 创建/更新集成
+  rpc SaveIntegration (SaveIntegrationReq) returns (SaveIntegrationReply) {
+    option (google.api.http) = {
+      post: "/v1/integrations"
+      body: "*"
+    }; 
+  }
+
+  // 查询集成列表
+  rpc GetIntegrations (GetIntegrationsReq) returns (GetIntegrationsReply) {
+    option (google.api.http) = {
+      get: "/v1/integrations"
+    };
+  }
+
+  // 查询集成列表（限制类型）
+  rpc GetIntegrationsByType (GetIntegrationsByTypeReq) returns (GetIntegrationsByTypeReply) {
+    option (google.api.http) = {
+      get: "/v1/integrations/filter"
+    };
+  }
+
+  // 查询单个集成
+  rpc GetIntegration (GetIntegrationReq) returns (GetIntegrationReply) {
+    option (google.api.http) = {
+      get: "/v1/integrations/{id}"
+    };
+  }
+
+  // 删除集成
+  rpc DeleteIntegration (DeleteIntegrationReq) returns (DeleteIntegrationReply) {
+    option (google.api.http) = {
+      delete: "/v1/integrations/{id}"
+    }; 
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  // 获取任务流程待办列表
+  rpc GetTodosByExecution (GetTodosByExecutionReq) returns (GetTodosByExecutionReply) {
+    option (google.api.http) = {
+      get: "/v1/todo/byExecution"
+    };
+  }
+
+  // 待办列表统计
+  rpc TodoStat (TodoStatReq) returns (TodoStatReply) {
+    option (google.api.http) = {
+      get: "/v1/todo/stat"
+    };
+  }
+
+  // 筛选待办列表
+  rpc TodoFilter (TodoFilterReq) returns (TodoFilterReply) {
+    option (google.api.http) = {
+      get: "/v1/todo/filter"
+    };
+  }
+
+  // 获取单条待办信息
+  rpc GetTodo (GetTodoReq) returns (GetTodoReply) {
+    option (google.api.http) = {
+      get: "/v1/todo/{id}"
+    };
+  }
+
+}
+
+// GetWorkflowsByApp
+message GetWorkflowsByAppReq {
+  string appId = 1 [(validate.rules).string = {min_len: 1, max_len: 20}];
+}
+
+message GetWorkflowsByAppReply {
+  repeated Workflow workflows = 1;
+}
+
+// GetWorkflow
+message GetWorkflowReq {
+  string id = 1 [(validate.rules).string = {min_len: 1, max_len: 20}];
+}
+
+message GetWorkflowReply {
+  Workflow workflow = 1;
+}
+
+// SaveWorkflowMeta
+message SaveWorkflowMetaReq {
+  string id = 1 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  string name = 2 [(validate.rules).string = {min_len: 0, max_len: 128}];
+  string desc = 3 [(validate.rules).string = {min_len: 0, max_len: 1024}];
+}
+
+message SaveWorkflowMetaReply {
+  WorkflowMeta workflow = 1;
+}
+
+// SaveWorkflow
+message SaveWorkflowReq {
+  string appId = 1 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  string id = 2 [(validate.rules).string = {min_len: 0, max_len: 20}];
+  WorkflowInput input = 3;
+  bool activate = 4; // 保存的同时进行激活（启用）
+}
+
+message SaveWorkflowReply {
+  Workflow workflow = 1;
+  repeated ActivateError activate_errors = 2;
+}
+
+// DeleteWorkflow
+message DeleteWorkflowReq {
+  string id = 1 [(validate.rules).string = {min_len: 1, max_len: 20}];
+}
+
+message DeleteWorkflowReply {
+}
+
+// ActivateWorkflow
+message ActivateWorkflowReq {
+  string id = 1 [(validate.rules).string = {min_len: 1, max_len: 20}];
+}
+
+message ActivateWorkflowReply {
+  repeated ActivateError activate_errors = 1;
+}
+
+// DeactivateWorkflow
+message DeactivateWorkflowReq {
+  string id = 1 [(validate.rules).string = {min_len: 1, max_len: 20}];
+}
+
+message DeactivateWorkflowReply {
+}
+
+// GetExecutions
+message GetExecutionsReq {
+  string workflowId = 1 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  int64 limit = 2 [(validate.rules).int64 = {gt: 0}];
+  string cursor = 3;
+}
+
+message GetExecutionsReply {
+  repeated ExecutionMeta executions = 1;
+  string nextCursor = 2;
+}
+
+// GetExecution
+message GetExecutionReq {
+  string workflowId = 1 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  string id = 2 [(validate.rules).string = {min_len: 1, max_len: 20}];
+}
+
+message GetExecutionReply {
+  Execution execution = 1;
+}
+
+// CallWebhook 
+message CallWebhookReq {
+  string webhookId = 1 [(validate.rules).string = {min_len: 1, max_len: 40}];
+  google.protobuf.Struct data = 2;
+}
+
+message CallWebhookReply {
+}
+
+// SaveIntegration
+message SaveIntegrationReq {
+  string id = 1 [(validate.rules).string = {min_len: 0, max_len: 20}];
+  IntegrationInput input = 2;
+}
+
+message SaveIntegrationReply {
+  IntegrationMeta integration = 1;
+}
+
+// GetIntegrations
+message GetIntegrationsReq {
+}
+
+message GetIntegrationsReply {
+  repeated IntegrationMeta integrations = 1;
+}
+
+// GetIntegrationsByType
+message GetIntegrationsByTypeReq {
+  IntegrationType type = 1;
+}
+
+message GetIntegrationsByTypeReply {
+  repeated IntegrationMeta integrations = 1;
+}
+
+// GetIntegration
+message GetIntegrationReq {
+  string id = 1 [(validate.rules).string = {min_len: 1, max_len: 20}];
+}
+
+message GetIntegrationReply {
+  Integration integration = 1;
+}
+
+// DeleteIntegration
+message DeleteIntegrationReq {
+  string id = 1 [(validate.rules).string = {min_len: 1, max_len: 20}];
+}
+
+message DeleteIntegrationReply {
+
+}
+
+// GetTodo
+message GetTodoReq {
+  string id = 1 [(validate.rules).string = {min_len: 1, max_len: 20}];
+}
+
+message GetTodoReply {
+  Todo todo = 1;
+}
+
+// GetTodosByExecution
+message GetTodosByExecutionReq {
+  int64 issueId = 1 [(validate.rules).int64 = {gt: 0}];
+  int64 executionId = 2 [(validate.rules).int64 = {gt: 0}];
+  string auditFlowId = 3 [(validate.rules).string = {min_len: 1, max_len: 128}];
+}
+
+message GetTodosByExecutionReply {
+  repeated Todo todos = 1;
+}
+
+// TodoStat
+message TodoStatReq {
+}
+
+message TodoStatReply {
+  repeated TodoStat stats = 1;
+}
+
+// TodoFilter
+message TodoFilterReq {
+  TodoFilterType type = 1;
+  int32 page = 2;
+  int32 size = 3;
+  string workflowName = 4;
+  repeated int64 triggerUserIds = 5;
+}
+
+message TodoFilterReply {
+  repeated Todo todos = 1;
+  int32 total = 2;
+}
+

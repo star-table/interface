@@ -1,0 +1,947 @@
+syntax = "proto3";
+
+import "google/protobuf/struct.proto";
+import "validate/validate.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+package automation.v1;
+option go_package = "github.com/star-table/interface/golang/automation/v1;v1";
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+enum TodoType {
+  Audit = 0;                    // 审批
+  FillIn = 1;                   // 填写
+}
+
+enum TodoOp {
+  OpInit = 0;                     // 初始状态
+  OpPass = 1;                     // 通过
+  OpReject = 2;                   // 否决
+  OpWithdraw = 3;                 // 撤回
+}
+
+enum TodoStatus {
+  SUnFinished = 0;               // 未完成
+  SFinishedPassed = 1;           // 已完成 - 通过
+  SFinishedRejected = 2;         // 已完成 - 否决
+  SWithdrew = 3;                 // 已撤回
+  STimeout = 4;                  // 已超时
+}
+
+enum TodoFilterType {
+  FtWaitingAudit = 0;             // 待审批
+  FtWaitingFillIn = 1;            // 待填写
+  FtTriggeredByMe = 2;            // 我发起的
+  FtFinished = 3;                 // 已完成
+}
+
+enum SignMode {
+  Or = 0;                       // 或签（一票通过+一票否决）
+  AndAllPass = 1;               // 会签（全部通过+一票否决）
+  AndOnePass = 2;               // 会签（一票通过+全部否决）
+}
+
+enum WorkflowFilterType {
+  All = 0;                      // 所有流程
+  Active = 1;                   // 已启用流程
+  Inactive = 2;                 // 未启用流程
+}
+
+enum NodeType {
+  TriggerCron = 0;              // 触发器：定时
+  TriggerDataEvent = 1;         // 触发器：数据事件
+  TriggerWebhook = 2;           // 触发器：Webhook
+  TriggerOrgEvent = 3;          // 触发器：组织事件
+  TriggerDateColumnCron = 4;    // 触发器：日期字段定时
+  TriggerUserEvent = 5;         // 触发器：用户事件
+
+  ActionCreateData = 10;        // 动作：创建数据
+  ActionUpdateData = 11;        // 动作：修改数据
+  ActionListData = 12;          // 动作：查询多条数据
+  ActionFork = 13;              // 动作：分支
+  ActionNoOperation = 14;       // 动作：无动作
+  ActionMerge = 15;             // 动作：合并
+  ActionAudit = 16;             // 动作：审批
+  ActionFillIn = 17;            // 动作：填写
+  ActionCode = 18;              // 动作：指定代码段
+  ActionFindData = 19;          // 动作：查询单条数据
+  ActionMysql = 20;             // 动作：MYSQL
+  ActionPostgres = 21;          // 动作：POSTGRES
+  ActionCopyData = 22;          // 动作：复制数据
+  ActionSendEmail = 23;         // 动作：发送Email
+  ActionSendCardFeishu = 24;    // 动作：发送卡片(飞书)
+  ActionSendCardDingTalk = 25;  // 动作：发送卡片(钉钉)
+  ActionSendCardWeCom = 26;     // 动作：发送卡片(企微)
+  
+  ActionGroupAuditFlow = 1000;  // 动作组：发起审批
+  ActionGroupLoop = 1001;       // 动作组：循环
+}
+
+enum DataEventType {
+  DataCreatedOrUpdated = 0;
+  DataCreated = 1;
+  DataUpdated = 2;
+  DataDeleted = 3;
+}
+
+enum OrgEventType {
+  OrgInited = 0;
+}
+
+enum UserEventType {
+  UserBindMobile = 0;
+}
+
+enum PeopleType {
+  User = 0;                     // 用户
+  Dept = 1;                     // 部门
+}
+
+enum ForkType {
+  Comprehensive = 0;            // 包容分支
+  Exclusive = 1;                // 唯一分支
+}
+
+enum CronType {
+  Days = 0;
+  Weeks = 1;
+  Months = 2;
+}
+
+enum CronStartType {
+  At = 0;                       // 在此日期日
+  Before = 1;                   // 在此日期之前
+  After = 2;                    // 在此日期之后
+}
+
+enum TimeUnit {
+  Minute = 0;
+  Hour = 1;
+  Day = 2;
+}
+
+enum ActivateErrorType {
+  // Node相关
+  NodeParamRequired = 0;        // 节点参数缺失
+  NodeParamInvalid = 1;         // 节点参数非法
+}
+
+enum DbOperation {
+  Query = 0;
+  Insert = 1;
+  Update = 2;
+}
+
+enum EmailFormat {
+  Text = 0;
+  Html = 1;
+}
+
+enum Platform {
+  Feishu = 0;
+  DingTalk = 1;
+  WeCom = 2;
+}
+
+enum SystemValue {
+  Now = 0;                      // 当前时间
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+message ActivateErrors {
+  repeated ActivateError errors = 1;
+}
+
+message ActivateError {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["type","node","desc"]
+    }
+  };
+  ActivateErrorType type = 1;
+  string node = 2 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  string desc = 3 [(validate.rules).string = {min_len: 1, max_len: 1024}];
+}
+
+message DataFromNode {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["node"]
+    }
+  };
+  string node = 1 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  int32 index = 2 [(validate.rules).int32 = {gte: 0}];
+}
+
+message DynamicValueFromNode {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["node","keyPath"]
+    }
+  };
+  string node = 1 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  int32 index = 2 [(validate.rules).int32 = {gte: 0}];
+  string keyPath = 3 [(validate.rules).string = {min_len: 0, max_len: 128}];
+}
+
+message DynamicValueElement {
+  oneof data {
+    string text = 1 [(validate.rules).string = {min_len: 1, max_len: 10240}];
+    DynamicValueFromNode value = 2;
+  }
+}
+
+message DynamicValue {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["element"]
+    }
+  };
+  repeated DynamicValueElement element = 1 [(validate.rules).repeated.min_items = 1];
+}
+
+message Value {
+  string displayJson = 1 [(validate.rules).string = {min_len: 0, max_len: 1024}];
+  oneof value {
+    string json = 2 [(validate.rules).string = {min_len: 1, max_len: 10240}];        // 裸json
+    DynamicValue dynamic = 3;                                                        // 动态值
+    string expression = 4 [(validate.rules).string = {min_len: 1, max_len: 10240}];  // 表达式
+    SystemValue system = 5;                                                          // 系统内置
+  }
+}
+
+message StringValue {
+  oneof value {
+    DynamicValue dynamic = 1;                                                       // 动态值
+    string expression = 2 [(validate.rules).string = {min_len: 1, max_len: 10240}]; // 表达式
+    string text = 3 [(validate.rules).string = {min_len: 1, max_len: 10240}];       // 字符串
+    string json = 4 [(validate.rules).string = {min_len: 1, max_len: 10240}];       // 裸json
+  }
+}
+
+message KeyValue {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["key","value"]
+    }
+  };
+  string key = 1 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  Value value = 2;
+}
+
+message People {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["type","value"]
+    }
+  };
+  PeopleType type = 1;
+  Value value = 2;
+}
+
+message PeopleByIds {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["type","idsJson"]
+    }
+  };
+  PeopleType type = 1;
+  string idsJson = 2;
+}
+
+message TodoOperatorResultsById {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["results"]
+    }
+  };
+  map<int64, TodoResult> results = 1;
+}
+
+message FormSetting {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["columnId","canRead","canWrite","required"]
+    }
+  };
+  string columnId = 1 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  bool canRead = 2;
+  bool canWrite = 3;
+  bool required = 4;
+}
+
+message FilterCondition {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["type"]
+    }
+  };
+  DataFromNode source = 1; // 数据源
+  string columnId = 2 [(validate.rules).string = {min_len: 0, max_len: 128}];
+  string fieldType = 3 [(validate.rules).string = {min_len: 0, max_len: 32}];
+  string type = 4 [(validate.rules).string = {min_len: 1, max_len: 32}];
+  google.protobuf.Struct props = 5;
+  Value value = 6;
+  repeated FilterCondition conds = 7;
+}
+
+message Filter {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["name"]
+    }
+  };
+  string name = 1 [(validate.rules).string = {min_len: 0, max_len: 128}];
+  FilterCondition condition = 2; // 筛选条件
+}
+
+message Order {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["columnId","asc"]
+    }
+  };
+  string columnId = 1 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  bool asc = 2;
+}
+
+message StringMapping {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["old","new"]
+    }
+  };
+  string old = 1;
+  string new = 2;
+}
+
+message NumberMapping {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["old","new"]
+    }
+  };
+  int64 old = 1;
+  int64 new = 2;
+}
+
+message TriggerBy {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["triggerBy","workflowId","workflowName","executionId"]
+    }
+  };
+  string triggerBy = 1 [(validate.rules).string = {min_len: 1}];
+  string workflowId = 2 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  string workflowName = 3 [(validate.rules).string = {min_len: 0, max_len: 128}];
+  int64 executionId = 4 [(validate.rules).int64 = {gt: 0}];
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+message Node {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["id","name","type"]
+    }
+  };
+  string id = 1 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  string name = 2 [(validate.rules).string = {min_len: 0, max_len: 128}];
+  NodeType type = 3;
+  oneof parameters {
+    ParameterActionAudit actionAudit = 4;
+    ParameterActionCreateData actionCreateData = 5;
+    ParameterActionFillIn actionFillIn = 6;
+    ParameterActionFork actionFork = 7;
+    ParameterActionGroupAuditFlow actionGroupAuditFlow = 8;
+    ParameterActionListData actionListData = 9;
+    ParameterActionMerge actionMerge = 10;
+    ParameterActionUpdateData actionUpdateData = 11;
+    ParameterActionCode actionCode = 12;
+    ParameterTriggerCron triggerCron = 13;
+    ParameterTriggerDataEvent triggerDataEvent = 14;
+    ParameterTriggerOrgEvent triggerOrgEvent = 15;
+    ParameterTriggerWebhook triggerWebhook = 16;
+    ParameterActionFindData actionFindData = 17;
+    ParameterTriggerDateColumnCron triggerDateColumnCron = 18;
+    ParameterTriggerUserEvent triggerUserEvent = 19;
+    ParameterActionMysql actionMysql = 20;
+    ParameterActionPostgres actionPostgres = 21;
+    ParameterActionCopyData actionCopyData = 22;
+    ParameterActionSendEmail actionSendEmail = 23;
+    ParameterActionSendCardFeishu actionSendCardFeishu = 24;
+    ParameterActionSendCardDingTalk actionSendCardDingTalk = 25;
+    ParameterActionSendCardWeCom actionSendCardWeCom = 26;
+    ParameterActionGroupLoop actionGroupLoop = 27;
+  }
+}
+
+message Nodes {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["nodes"]
+    }
+  };
+  repeated Node nodes = 1 [(validate.rules).repeated.min_items = 1];
+}
+
+message Connection {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["fromId","toId"]
+    }
+  };
+  string fromId = 1 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  int32 fromIndex = 2 [(validate.rules).int32 = {gte: 0}];
+  string toId = 3 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  int32 toIndex = 4 [(validate.rules).int32 = {gte: 0}];
+}
+
+message Connections {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["connections"]
+    }
+  };
+  repeated Connection connections = 1;
+}
+
+message WorkflowMeta {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["id","orgId","appId","name","desc","active","activeVersionId","versionId","triggerType","failedTimes","creator","updater","createdAt","updatedAt","creatorName","updaterName"]
+    }
+  };
+  string id = 1 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  int64 orgId = 2 [(validate.rules).int64 = {gt: 0}];
+  string appId = 3 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  string name = 4 [(validate.rules).string = {min_len: 0, max_len: 128}];
+  string desc = 5 [(validate.rules).string = {min_len: 0, max_len: 1024}];
+  bool active = 6;
+  string activeVersionId = 7 [(validate.rules).string = {min_len: 0, max_len: 20}];
+  string versionId = 8 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  NodeType triggerType = 9;
+  int64 failedTimes = 10;
+  int64 creator = 11 [(validate.rules).int64 = {gte: 0}];
+  int64 updater = 12 [(validate.rules).int64 = {gte: 0}];
+  int64 createdAt = 13 [(validate.rules).int64 = {gte: 0}];
+  int64 updatedAt = 14 [(validate.rules).int64 = {gte: 0}];
+  string creatorName = 15;
+  string updaterName = 16;
+}
+
+message Workflow {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["id","orgId","appId","name","desc","active","activeVersionId","versionId","triggerType","failedTimes","creator","updater","createdAt","updatedAt","creatorName","updaterName","nodes","connections"]
+    }
+  };
+  string id = 1 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  int64 orgId = 2 [(validate.rules).int64 = {gt: 0}];
+  string appId = 3 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  string name = 4 [(validate.rules).string = {min_len: 0, max_len: 128}];
+  string desc = 5 [(validate.rules).string = {min_len: 0, max_len: 1024}];
+  bool active = 6;
+  string activeVersionId = 7 [(validate.rules).string = {min_len: 0, max_len: 20}];
+  string versionId = 8 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  NodeType triggerType = 9;
+  int64 failedTimes = 10;
+  int64 creator = 11 [(validate.rules).int64 = {gte: 0}];
+  int64 updater = 12 [(validate.rules).int64 = {gte: 0}];
+  int64 createdAt = 13 [(validate.rules).int64 = {gte: 0}];
+  int64 updatedAt = 14 [(validate.rules).int64 = {gte: 0}];
+  string creatorName = 15;
+  string updaterName = 16;
+  repeated Node nodes = 17 [(validate.rules).repeated.min_items = 1];
+  repeated Connection connections = 18;
+}
+
+message WorkflowInput {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["name","desc","nodes","connections"]
+    }
+  };
+  string name = 1 [(validate.rules).string = {min_len: 0, max_len: 128}];
+  string desc = 2 [(validate.rules).string = {min_len: 0, max_len: 1024}];
+  repeated Node nodes = 3 [(validate.rules).repeated.min_items = 1];
+  repeated Connection connections = 4;
+}
+
+message ExecutionMeta {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["id","workflowId","succeed","startedAt","stoppedAt","finished","status"]
+    }
+  };
+  string id = 1 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  string workflowId = 2 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  bool succeed = 3;
+  int64 startedAt = 4;
+  int64 stoppedAt = 5;
+  bool finished = 6;
+  string status = 7;
+}
+
+message Execution {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["id","workflowId","succeed","startedAt","stoppedAt","nodes","workflowNodes","finished","status"]
+    }
+  };
+  string id = 1 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  string workflowId = 2 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  bool succeed = 3;
+  int64 startedAt = 4;
+  int64 stoppedAt = 5;
+  repeated NodeExecution nodes = 6;
+  repeated Node workflowNodes = 7 [(validate.rules).repeated.min_items = 1];
+  bool finished = 8;
+  string status = 9;
+}
+
+message NodeExecution {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["id","succeed","executionTime","data","previousId","previousRunIdx","startTime","runIdx","finished","waiting"]
+    }
+  };
+  string id = 1 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  bool succeed = 2;
+  int64 executionTime = 3;
+  google.protobuf.Struct data = 4;
+  string previousId = 5;
+  int32 previousRunIdx = 6;
+  int64 startTime = 7;
+  int32 runIdx = 8;
+  bool finished = 9;
+  bool waiting = 10;
+}
+
+message Todo {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["id","orgId","appId","tableId","issueId","workflowId","workflowName",
+      "executionId","triggerUserId","allowWithdrawByTrigger","allowUrgeByTrigger","type",
+      "status","operators","creator","updater","createdAt","updatedAt","auditFlowId","issueTitle"]
+    }
+  };
+  string id = 1 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  int64 orgId = 2 [(validate.rules).int64 = {gt: 0}];
+  string appId = 3 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  string tableId = 4 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  int64 issueId = 5 [(validate.rules).int64 = {gt: 0}];
+  string workflowId = 6 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  string workflowName = 7 [(validate.rules).string = {min_len: 0, max_len: 128}];
+  string auditFlowName = 8 [(validate.rules).string = {min_len: 0, max_len: 128}];
+  int64 executionId = 9 [(validate.rules).int64 = {gt: 0}];
+  int64 triggerUserId = 10 [(validate.rules).int64 = {gt: 0}];
+  bool allowWithdrawByTrigger = 11;
+  bool allowUrgeByTrigger = 12;
+  TodoType type = 13;
+  TodoStatus status = 14;
+  oneof parameters {
+    ParameterTodoAudit todoAudit = 15;
+    ParameterTodoFillIn todoFillIn = 16;
+  }
+  map<int64, TodoResult> operators = 17;
+  int64 creator = 18 [(validate.rules).int64 = {gte: 0}];
+  int64 updater = 19 [(validate.rules).int64 = {gte: 0}];
+  int64 createdAt = 20 [(validate.rules).int64 = {gte: 0}];
+  int64 updatedAt = 21 [(validate.rules).int64 = {gte: 0}];
+  string auditFlowId = 22 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  string issueTitle = 23;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+message TodoStat {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["type","total"]
+    }
+  };
+  TodoFilterType type = 1;
+  int64 total = 2 [(validate.rules).int64 = {gte: 0}];
+}
+
+message TodoResult {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["op","msg"]
+    }
+  };
+  TodoOp op = 1;
+  string msg = 2 [(validate.rules).string = {min_len: 0, max_len: 1024}];
+  int64 opAt = 3 [(validate.rules).int64 = {gte: 0}];
+}
+
+message ParameterTodoAudit {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["signMode","formSettings"]
+    }
+  };
+  SignMode signMode = 1;
+  repeated FormSetting formSettings = 2;
+}
+
+message ParameterTodoFillIn {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["formSettings"]
+    }
+  };
+  repeated FormSetting formSettings = 1;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+message ParameterActionCreateData {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["appId","tableId","keyValues"]
+    }
+  };
+  string appId = 1;
+  string tableId = 2;
+  repeated KeyValue keyValues = 3;
+}
+
+message ParameterActionCopyData {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["appId","tableId","source","keyValues","staticCopy"]
+    }
+  };
+  string appId = 1;
+  string tableId = 2;
+  DataFromNode source = 3;
+  repeated KeyValue keyValues = 4;
+  bool staticCopy = 5;
+}
+
+message ParameterActionUpdateData {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["source","keyValues"]
+    }
+  };
+  DataFromNode source = 1;
+  repeated KeyValue keyValues = 2;
+}
+
+message ParameterActionListData {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["appId","tableId","condition","columnIds","orders","limit"]
+    }
+  };
+  string appId = 1;
+  string tableId = 2;
+  FilterCondition condition = 3;
+  repeated string columnIds = 4;
+  repeated Order orders = 5;
+  bool includeChildren = 6;
+  int32 limit = 7 [(validate.rules).int32 = {gt: 0}];
+}
+
+message ParameterActionFindData {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["appId","tableId","condition","columnIds","orders"]
+    }
+  };
+  string appId = 1;
+  string tableId = 2;
+  FilterCondition condition = 3;
+  repeated string columnIds = 4;
+  repeated Order orders = 5;
+}
+
+message ParameterActionAudit {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["operators","signMode","formSettings"]
+    }
+  };
+  repeated People operators = 1;
+  SignMode signMode = 2;
+  repeated FormSetting formSettings = 3;
+}
+
+message ParameterActionFillIn {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["operators","formSettings"]
+    }
+  };
+  repeated People operators = 1;
+  repeated FormSetting formSettings = 2;
+}
+
+message ParameterActionFork {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["type","filters"]
+    }
+  };
+  ForkType type = 1;
+  repeated Filter filters = 2;
+}
+
+message ParameterActionGroupAuditFlow {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["nodes","connections","setting"]
+    }
+  };
+  repeated Node nodes = 1 [(validate.rules).repeated.min_items = 0];
+  repeated Connection connections = 2;
+  ParameterActionGroupSettingAuditFlow setting = 3;
+}
+
+message ParameterActionGroupSettingAuditFlow {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["source","trigger","allowWithdrawByTrigger","allowUrgeByTrigger"]
+    }
+  };
+  DataFromNode source = 1;
+  Value trigger = 2;
+  bool allowWithdrawByTrigger = 4;
+  bool allowUrgeByTrigger = 5;
+}
+
+message ParameterActionGroupLoop {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["nodes","connections","source"]
+    }
+  };
+  repeated Node nodes = 1 [(validate.rules).repeated.min_items = 0];
+  repeated Connection connections = 2;
+  DataFromNode source = 3; // 数据源
+}
+
+message ParameterActionMerge {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["forkNode"]
+    }
+  };
+  string forkNode = 1 [(validate.rules).string = {min_len: 1, max_len: 128}];
+}
+
+message ParameterActionCode {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["code"]
+    }
+  };
+  StringValue code = 1;
+}
+
+message ParameterTriggerCron {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["type"]
+    }
+  };
+  CronType type = 1;
+  oneof parameters {
+    ParameterTriggerCronMinutes minutes = 2;
+    ParameterTriggerCronHours hours = 3;
+    ParameterTriggerCronDays days = 4;
+    ParameterTriggerCronWeeks weeks = 5;
+    ParameterTriggerCronMonths months = 6;
+    ParameterTriggerCronNoRepeat noRepeat = 7;
+  }
+}
+
+message ParameterTriggerCronMinutes {
+}
+
+message ParameterTriggerCronHours {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["minute"]
+    }
+  };
+  int32 minute = 1 [(validate.rules).int32 = {gte: 0, lte: 59}];
+}
+
+message ParameterTriggerCronDays {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["hour","minute"]
+    }
+  };
+  int32 hour = 1 [(validate.rules).int32 = {gte: 0, lte: 23}];
+  int32 minute = 2 [(validate.rules).int32 = {gte: 0, lte: 59}];
+}
+
+message ParameterTriggerCronWeeks {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["weekday","hour","minute"]
+    }
+  };
+  repeated int32 weekday = 1 [(validate.rules).repeated.items.int32.gte = 0, (validate.rules).repeated.items.int32.lte = 6, (validate.rules).repeated.min_items = 0];
+  int32 hour = 2 [(validate.rules).int32 = {gte: 0, lte: 23}];
+  int32 minute = 3 [(validate.rules).int32 = {gte: 0, lte: 59}];
+}
+
+message ParameterTriggerCronMonths {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["dayOfMonth","hour","minute"]
+    }
+  };
+  repeated int32 dayOfMonth = 1 [(validate.rules).repeated.items.int32.gte = -1, (validate.rules).repeated.items.int32.lte = 31, (validate.rules).repeated.min_items = 0];
+  int32 hour = 2 [(validate.rules).int32 = {gte: 0, lte: 23}];
+  int32 minute = 3 [(validate.rules).int32 = {gte: 0, lte: 59}];
+}
+
+message ParameterTriggerCronNoRepeat {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["year","month","day","hour","minute"]
+    }
+  };
+  int32 year = 1 [(validate.rules).int32 = {gte: 2022}];
+  int32 month = 2 [(validate.rules).int32 = {gte: 1, lte: 12}];
+  int32 day = 3 [(validate.rules).int32 = {gte: 1, lte: 31}];
+  int32 hour = 4 [(validate.rules).int32 = {gte: 0, lte: 23}];
+  int32 minute = 5 [(validate.rules).int32 = {gte: 0, lte: 59}];
+}
+
+message ParameterTriggerDataEvent {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["appId","tableId","type"]
+    }
+  };
+  string appId = 1;
+  string tableId = 2;
+  DataEventType type = 3;
+  repeated string updatedColumnIds = 4 [(validate.rules).repeated.items.string.max_len = 20];
+  FilterCondition filterCondition = 5;
+}
+
+message ParameterTriggerDateColumnCron {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["appId","tableId","columnId","startType","deltaTime","deltaTimeUnit"]
+    }
+  };
+  string appId = 1;
+  string tableId = 2;
+  string columnId = 3;
+  CronStartType startType = 4;
+  int32 deltaTime = 5;
+  TimeUnit deltaTimeUnit = 6;
+  FilterCondition filterCondition = 7;
+}
+
+message ParameterTriggerOrgEvent {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["type"]
+    }
+  };
+  OrgEventType type = 1;
+}
+
+message ParameterTriggerUserEvent {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["type"]
+    }
+  };
+  UserEventType type = 1;
+}
+
+message ParameterTriggerWebhook {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["path"]
+    }
+  };
+  string path = 1 [(validate.rules).string = {min_len: 36, max_len: 36}];
+}
+
+message ParameterActionMysql {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["integrationId","operation","querySql"]
+    }
+  };
+  string integrationId = 1 [(validate.rules).string = {min_len: 0, max_len: 20}];
+  DbOperation operation = 2;
+  StringValue sql = 3;
+}
+
+message ParameterActionPostgres {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["integrationId","operation","querySql"]
+    }
+  };
+  string integrationId = 1 [(validate.rules).string = {min_len: 0, max_len: 20}];
+  DbOperation operation = 2;
+  StringValue sql = 3;
+}
+
+message ParameterActionSendEmail {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["integrationId","fromName","fromEmail","toEmail","ccEmail","replyToEmail","subject","emailFormat","content"]
+    }
+  };
+  string integrationId = 1;
+  StringValue fromName = 2;
+  StringValue fromEmail = 3;
+  StringValue toEmail = 4;
+  StringValue ccEmail = 5;
+  StringValue replyToEmail = 6;
+  StringValue subject = 7;
+  EmailFormat emailFormat = 8;
+  StringValue content = 9;
+}
+
+message ParameterActionSendCardFeishu {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["ids","title","content"]
+    }
+  };
+  Value ids = 1;
+  StringValue title = 2;
+  StringValue content = 3;
+}
+
+message ParameterActionSendCardDingTalk {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["ids","title","content"]
+    }
+  };
+  Value ids = 1;
+  StringValue title = 2;
+  StringValue content = 3;
+}
+
+message ParameterActionSendCardWeCom {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["ids","title","content"]
+    }
+  };
+  Value ids = 1;
+  StringValue title = 2;
+  StringValue content = 3;
+}
+

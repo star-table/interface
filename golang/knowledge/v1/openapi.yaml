@@ -1,0 +1,317 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/apps/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: UserAction API
+    version: 0.0.1
+paths:
+    /v1/action/comment/delete:
+        post:
+            tags:
+                - UserAction
+            description: 删除
+            operationId: UserAction_DeleteComment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteCommentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteCommentReply'
+    /v1/action/document/comment:
+        post:
+            tags:
+                - UserAction
+            description: 评论文章
+            operationId: UserAction_CommentDocument
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CommentDocumentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommentDocumentReply'
+    /v1/action/document/comment/list:
+        post:
+            tags:
+                - UserAction
+            description: 评论列表
+            operationId: UserAction_ListDocumentComment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ListDocumentCommentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListDocumentCommentReply'
+    /v1/action/document/comment/status/update:
+        post:
+            tags:
+                - UserAction
+            description: 评论文章
+            operationId: UserAction_UpdateCommentStatus
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateCommentStatusRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateCommentStatusReply'
+    /v1/action/document/like:
+        post:
+            tags:
+                - UserAction
+            description: 点赞或者取消点赞
+            operationId: UserAction_LikeDocument
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/LikeDocumentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/LikeDocumentReply'
+    /v1/action/document/like/user/list:
+        post:
+            tags:
+                - UserAction
+            description: 点赞用户列表
+            operationId: UserAction_ListDocumentLikeUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ListDocumentLikeUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListDocumentLikeUserReply'
+    /v1/action/document/top:
+        post:
+            tags:
+                - UserAction
+            description: 置顶文章
+            operationId: UserAction_TopDocument
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/TopDocumentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/TopDocumentReply'
+    /v1/action/space/star:
+        post:
+            tags:
+                - UserAction
+            description: 收藏空间
+            operationId: UserAction_StarSpace
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/StarSpaceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/StarSpaceReply'
+components:
+    schemas:
+        CommentDetail:
+            type: object
+            properties:
+                commentId:
+                    type: integer
+                    format: int64
+                comment:
+                    type: string
+                mentionUser:
+                    $ref: '#/components/schemas/User'
+                creator:
+                    $ref: '#/components/schemas/User'
+                CreateTime:
+                    type: integer
+                    format: int64
+                UpdateTime:
+                    type: integer
+                    format: int64
+        CommentDocumentReply:
+            type: object
+            properties:
+                commentId:
+                    type: integer
+                    format: int64
+        CommentDocumentRequest:
+            type: object
+            properties:
+                spaceId:
+                    type: string
+                documentId:
+                    type: string
+                comment:
+                    type: string
+                quote:
+                    type: string
+                renderId:
+                    type: string
+                mentionUserId:
+                    type: integer
+                    format: int64
+        DeleteCommentReply:
+            type: object
+            properties: {}
+        DeleteCommentRequest:
+            type: object
+            properties:
+                commentId:
+                    type: integer
+                    format: int64
+        LikeDocumentReply:
+            type: object
+            properties:
+                documentId:
+                    type: string
+                isLike:
+                    type: boolean
+        LikeDocumentRequest:
+            type: object
+            properties:
+                documentId:
+                    type: string
+                isLike:
+                    type: boolean
+                spaceId:
+                    type: string
+        ListDocumentCommentReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/CommentDetail'
+                quoteList:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/CommentDetail'
+        ListDocumentCommentRequest:
+            type: object
+            properties:
+                documentId:
+                    type: string
+                spaceId:
+                    type: string
+        ListDocumentLikeUserReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/User'
+        ListDocumentLikeUserRequest:
+            type: object
+            properties:
+                documentId:
+                    type: string
+                spaceId:
+                    type: string
+        StarSpaceReply:
+            type: object
+            properties:
+                spaceId:
+                    type: string
+                isStar:
+                    type: boolean
+        StarSpaceRequest:
+            type: object
+            properties:
+                spaceId:
+                    type: string
+                isStar:
+                    type: boolean
+        TopDocumentReply:
+            type: object
+            properties:
+                documentId:
+                    type: string
+                isTop:
+                    type: boolean
+        TopDocumentRequest:
+            type: object
+            properties:
+                documentId:
+                    type: string
+                isTop:
+                    type: boolean
+                spaceId:
+                    type: string
+        UpdateCommentStatusReply:
+            type: object
+            properties:
+                quoteList:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/CommentDetail'
+        UpdateCommentStatusRequest:
+            type: object
+            properties:
+                renderIds:
+                    type: array
+                    items:
+                        type: string
+                isHide:
+                    type: boolean
+        User:
+            type: object
+            properties:
+                userId:
+                    type: integer
+                    format: int64
+                name:
+                    type: string
+                avatar:
+                    type: string
+tags:
+    - name: UserAction

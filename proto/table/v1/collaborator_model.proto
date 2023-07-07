@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package table.v1;
+option go_package = "github.com/star-table/interface/golang/table/v1;v1";
+
+// CheckIsAppCollaborator
+message CheckIsAppCollaboratorRequest {
+  int64 appId = 1;
+  int64 userId = 2;
+}
+
+message CheckIsAppCollaboratorReply {
+  bool result = 1;
+}
+
+// GetUserAppCollaboratorRoles
+message GetUserAppCollaboratorRolesRequest {
+  int64 appId = 1;
+  int64 userId = 2;
+}
+
+message GetUserAppCollaboratorRolesReply {
+  repeated string roleIds = 1;
+}
+
+// GetAppCollaboratorRoles
+message GetAppCollaboratorRolesRequest {
+  int64 appId = 1;
+}
+
+message CollaboratorRole {
+  string id = 1;
+  repeated string roleIds = 2;
+}
+
+message GetAppCollaboratorRolesReply {
+  repeated CollaboratorRole collaboratorRoles = 1;
+}
+
+// GetDataCollaborators
+message GetDataCollaboratorsRequest {
+  repeated int64 dataIds = 1;
+}
+
+message DataCollaborators {
+  int64 dataId = 1;
+  repeated string ids = 2;
+}
+
+message GetDataCollaboratorsReply {
+  repeated DataCollaborators collaborators = 1;
+}
+

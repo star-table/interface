@@ -1,0 +1,2342 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "table.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Table"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/inner/v1/column/copy": {
+      "post": {
+        "summary": "拷贝列",
+        "operationId": "Table_CopyColumn",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CopyColumnReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CopyColumnRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/column/create": {
+      "post": {
+        "summary": "创建列",
+        "operationId": "Table_CreateColumn",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateColumnReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateColumnRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/column/delete": {
+      "post": {
+        "summary": "删除列",
+        "operationId": "Table_DeleteColumn",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteColumnReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeleteColumnRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/column/description/update": {
+      "post": {
+        "summary": "更新列描述",
+        "operationId": "Table_UpdateColumnDescription",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateColumnDescriptionReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UpdateColumnDescriptionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/column/update": {
+      "post": {
+        "summary": "更新列属性",
+        "operationId": "Table_UpdateColumn",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateColumnReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UpdateColumnRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/org/column/create": {
+      "post": {
+        "summary": "创建组织字段",
+        "operationId": "Table_CreateOrgColumn",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateOrgColumnReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateOrgColumnRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/org/column/delete": {
+      "post": {
+        "summary": "删除组织字段",
+        "operationId": "Table_DeleteOrgColumn",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteOrgColumnReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeleteOrgColumnRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/org/columns/init": {
+      "post": {
+        "summary": "初始化团队字段",
+        "operationId": "Table_InitOrgColumns",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1InitOrgColumnsReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1InitOrgColumnsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/read/org/columns": {
+      "post": {
+        "summary": "读取组织字段列表",
+        "operationId": "Table_ReadOrgColumns",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ReadOrgColumnsReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ReadOrgColumnsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/read/org/tables": {
+      "post": {
+        "operationId": "Table_ReadOrgTables",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ReadOrgTablesReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ReadOrgTablesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/read/orgTableSchemas": {
+      "post": {
+        "summary": "读取组织下面的所有表的某些列",
+        "operationId": "Table_ReadOrgTableSchemas",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ReadOrgTableSchemasReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ReadOrgTableSchemasRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/read/summeryTableId": {
+      "post": {
+        "summary": "读取汇总表的tableId",
+        "operationId": "Table_ReadSummeryTableId",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ReadSummeryTableIdReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ReadSummeryTableIdRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/read/table": {
+      "post": {
+        "summary": "获取一个表",
+        "operationId": "Table_ReadTable",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ReadTableReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ReadTableRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/read/tableSchemas": {
+      "post": {
+        "summary": "获取表头信息",
+        "operationId": "Table_ReadTableSchemas",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ReadTableSchemasReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ReadTableSchemasRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/read/tableSchemasByAppId": {
+      "post": {
+        "summary": "根据appId获取表头信息",
+        "operationId": "Table_ReadTableSchemasByAppId",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ReadTableSchemasByAppIdReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ReadTableSchemasByAppIdRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/read/tables": {
+      "post": {
+        "summary": "获取一个app的表列表",
+        "operationId": "Table_ReadTables",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ReadTablesReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ReadTablesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/read/tablesByApps": {
+      "post": {
+        "summary": "获取多个app的表",
+        "operationId": "Table_ReadTablesByApps",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ReadTablesByAppsReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ReadTablesByAppsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/row/copy": {
+      "post": {
+        "summary": "拷贝表数据",
+        "operationId": "Table_CopyRow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CopyRowReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CopyRowRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/row/create": {
+      "post": {
+        "summary": "创建表数据",
+        "operationId": "Table_CreateRows",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateRowsReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateRowsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/row/delete": {
+      "post": {
+        "summary": "删除表数据",
+        "operationId": "Table_DeleteRow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteRowReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeleteRowRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/row/move": {
+      "post": {
+        "summary": "移动表数据",
+        "operationId": "Table_MoveRow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1MoveRowReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1MoveRowRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/row/relation/updateRowBeforeAfter": {
+      "post": {
+        "summary": "更新任务前后置",
+        "operationId": "Table_UpdateRowBeforeAfter",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateRowBeforeAfterReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UpdateRowBeforeAfterReq"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/row/relation/updateRowRelate": {
+      "post": {
+        "summary": "更新任务关联",
+        "operationId": "Table_UpdateRowRelate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateRowRelateReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UpdateRowRelateReq"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/row/{rowId}/beforeAfter": {
+      "get": {
+        "summary": "获取任务前后置列表",
+        "operationId": "Table_GetBeforeAfterRowList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetBeforeAfterRowListReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "rowId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "tableId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/row/{rowId}/relation": {
+      "get": {
+        "summary": "获取任务关联列表",
+        "operationId": "Table_GetRowRelationList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetRelationListReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "rowId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "tableId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/table/copy": {
+      "post": {
+        "summary": "拷贝表",
+        "operationId": "Table_CopyTables",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CopyTablesReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CopyTablesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/table/create": {
+      "post": {
+        "summary": "创建表",
+        "operationId": "Table_CreateTable",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateTableReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateTableRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/table/createMultiSummery": {
+      "post": {
+        "summary": "创建多个汇总表",
+        "operationId": "Table_CreateMultiSummeryTable",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateMultiSummeryTableReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateMultiSummeryTableRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/table/createSummery": {
+      "post": {
+        "summary": "创建汇总表",
+        "operationId": "Table_CreateSummeryTable",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateSummeryTableReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateSummeryTableRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/table/delete": {
+      "post": {
+        "summary": "删除表",
+        "operationId": "Table_DeleteTable",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteTableReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeleteTableRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/table/rename": {
+      "post": {
+        "summary": "表重命名",
+        "operationId": "Table_RenameTable",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1RenameTableReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1RenameTableRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    },
+    "/inner/v1/table/setAutoSchedule": {
+      "post": {
+        "summary": "设置自动排期开关",
+        "operationId": "Table_SetAutoSchedule",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SetAutoScheduleReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SetAutoScheduleRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Table"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "protobufNullValue": {
+      "type": "string",
+      "enum": [
+        "NULL_VALUE"
+      ],
+      "default": "NULL_VALUE",
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\n The JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1AppTables": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1TableMeta"
+          }
+        }
+      }
+    },
+    "v1BeforeAndAfterType": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN_BEFORE_AND_AFTER",
+        "BEFORE",
+        "AFTER"
+      ],
+      "default": "UNKNOWN_BEFORE_AND_AFTER"
+    },
+    "v1Column": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "aliasTitle": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "isSys": {
+          "type": "boolean"
+        },
+        "isOrg": {
+          "type": "boolean"
+        },
+        "writable": {
+          "type": "boolean"
+        },
+        "editable": {
+          "type": "boolean"
+        },
+        "unique": {
+          "type": "boolean"
+        },
+        "uniquePreHandler": {
+          "type": "string"
+        },
+        "sensitiveStrategy": {
+          "type": "string"
+        },
+        "sensitiveFlag": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "field": {
+          "$ref": "#/definitions/v1ColumnOption"
+        },
+        "isSysHiden": {
+          "type": "boolean"
+        },
+        "summaryFlag": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1ColumnOption": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/v1ColumnType"
+        },
+        "customType": {
+          "type": "string"
+        },
+        "dataType": {
+          "$ref": "#/definitions/v1StorageColumnType"
+        },
+        "props": {
+          "type": "object"
+        }
+      }
+    },
+    "v1ColumnType": {
+      "type": "string",
+      "enum": [
+        "input",
+        "textarea",
+        "datepicker",
+        "email",
+        "mobile",
+        "inputnumber",
+        "member",
+        "dept",
+        "treeSelect",
+        "select",
+        "status",
+        "amount",
+        "document",
+        "multiselect",
+        "region",
+        "link",
+        "richtext",
+        "image",
+        "quoteTable",
+        "operate",
+        "recycleFlag",
+        "relateTablePro",
+        "logTable",
+        "rangeNumber",
+        "customField",
+        "identityCard",
+        "role",
+        "gps",
+        "groupSelect",
+        "relating",
+        "baRelating",
+        "workHour",
+        "attachment",
+        "singleRelating",
+        "conditionRef",
+        "formula",
+        "reference"
+      ],
+      "default": "input"
+    },
+    "v1CopyColumnReply": {
+      "type": "object",
+      "properties": {
+        "createColumnId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CopyColumnRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "srcColumnId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CopyRowReply": {
+      "type": "object",
+      "properties": {
+        "srcTableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "srcRowId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "dstTableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "dstRowId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1CopyRowRequest": {
+      "type": "object",
+      "properties": {
+        "srcTableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "srcRowId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "dstTableId": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "CopyRow"
+    },
+    "v1CopyTablesReply": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1TableSchema"
+          }
+        },
+        "oldToNewTableId": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1CopyTablesRequest": {
+      "type": "object",
+      "properties": {
+        "srcAppId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "srcTableIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "dstAppId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "oldToNewPermission": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      },
+      "title": "CopyTables"
+    },
+    "v1CreateColumnReply": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "column": {
+          "$ref": "#/definitions/v1Column"
+        }
+      }
+    },
+    "v1CreateColumnRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "column": {
+          "$ref": "#/definitions/v1Column"
+        },
+        "activeViewId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sourceOrgColumnId": {
+          "type": "string"
+        }
+      },
+      "title": "CreateColumn"
+    },
+    "v1CreateMultiSummeryTableData": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1CreateMultiSummeryTableReply": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1CreateMultiSummeryTableData"
+          }
+        }
+      }
+    },
+    "v1CreateMultiSummeryTableRequest": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1SummeryTableRequest"
+          }
+        }
+      }
+    },
+    "v1CreateOrgColumnReply": {
+      "type": "object"
+    },
+    "v1CreateOrgColumnRequest": {
+      "type": "object",
+      "properties": {
+        "column": {
+          "$ref": "#/definitions/v1Column"
+        }
+      }
+    },
+    "v1CreateRowsReply": {
+      "type": "object",
+      "properties": {
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "v1CreateRowsRequest": {
+      "type": "object",
+      "properties": {
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "afterRowId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "beforeRowId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "isAsc": {
+          "type": "boolean"
+        },
+        "isImport": {
+          "type": "boolean"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "title": "CreateRows"
+    },
+    "v1CreateSummeryTableReply": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1CreateSummeryTableRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Column"
+          }
+        }
+      }
+    },
+    "v1CreateTableReply": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "table": {
+          "$ref": "#/definitions/v1TableSchema"
+        }
+      }
+    },
+    "v1CreateTableRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "appType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "basicColumns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isNeedStoreTable": {
+          "type": "boolean"
+        },
+        "isNeedColumn": {
+          "type": "boolean"
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Column"
+          }
+        },
+        "notNeedSummeryColumnIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bindSummeryAppId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "summaryFlag": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "CreateTable"
+    },
+    "v1DeleteColumnReply": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "columnId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1DeleteColumnRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "columnId": {
+          "type": "string"
+        }
+      },
+      "title": "DeleteColumn"
+    },
+    "v1DeleteOrgColumnReply": {
+      "type": "object"
+    },
+    "v1DeleteOrgColumnRequest": {
+      "type": "object",
+      "properties": {
+        "columnId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1DeleteRowReply": {
+      "type": "object",
+      "properties": {
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "rowId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1DeleteRowRequest": {
+      "type": "object",
+      "properties": {
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "rowId": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "DeleteRow"
+    },
+    "v1DeleteTableReply": {
+      "type": "object",
+      "properties": {
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1DeleteTableRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "DeleteTable"
+    },
+    "v1GetBeforeAfterRowListReply": {
+      "type": "object",
+      "properties": {
+        "beforeNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "afterNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "beforeList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1RelationRowMeta"
+          }
+        },
+        "afterList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1RelationRowMeta"
+          }
+        }
+      }
+    },
+    "v1GetRelationListReply": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "relateList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1RelationRowMeta"
+          },
+          "title": "关联列表"
+        },
+        "beRelatedList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1RelationRowMeta"
+          },
+          "title": "被关联列表"
+        }
+      }
+    },
+    "v1InitOrgColumnsReply": {
+      "type": "object"
+    },
+    "v1InitOrgColumnsRequest": {
+      "type": "object",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Column"
+          }
+        }
+      },
+      "title": "OrgColumns"
+    },
+    "v1MoveRowReply": {
+      "type": "object",
+      "properties": {
+        "srcTableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "srcRowId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "dstTableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "dstParentRowId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "dstBeforeRowId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "dstAfterRowId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1MoveRowRequest": {
+      "type": "object",
+      "properties": {
+        "srcTableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "srcRowId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "dstTableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "dstParentRowId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "dstBeforeRowId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "dstAfterRowId": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "MoveRow"
+    },
+    "v1Owner": {
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string"
+        },
+        "ownerName": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ReadOrgColumnsReply": {
+      "type": "object",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Column"
+          }
+        }
+      }
+    },
+    "v1ReadOrgColumnsRequest": {
+      "type": "object"
+    },
+    "v1ReadOrgTableSchemasReply": {
+      "type": "object",
+      "properties": {
+        "tables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1TableSchema"
+          }
+        }
+      }
+    },
+    "v1ReadOrgTableSchemasRequest": {
+      "type": "object",
+      "properties": {
+        "columnIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v1ReadOrgTablesReply": {
+      "type": "object",
+      "properties": {
+        "tables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1TableMeta"
+          }
+        }
+      }
+    },
+    "v1ReadOrgTablesRequest": {
+      "type": "object"
+    },
+    "v1ReadSummeryTableIdReply": {
+      "type": "object",
+      "properties": {
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1ReadSummeryTableIdRequest": {
+      "type": "object"
+    },
+    "v1ReadTableReply": {
+      "type": "object",
+      "properties": {
+        "table": {
+          "$ref": "#/definitions/v1TableMeta"
+        }
+      }
+    },
+    "v1ReadTableRequest": {
+      "type": "object",
+      "properties": {
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1ReadTableSchemasByAppIdReply": {
+      "type": "object",
+      "properties": {
+        "tables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1TableSchema"
+          }
+        }
+      }
+    },
+    "v1ReadTableSchemasByAppIdRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "columnIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isNeedCommonColumn": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1ReadTableSchemasReply": {
+      "type": "object",
+      "properties": {
+        "tables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1TableSchema"
+          }
+        }
+      }
+    },
+    "v1ReadTableSchemasRequest": {
+      "type": "object",
+      "properties": {
+        "tableIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "columnIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isNeedDescription": {
+          "type": "boolean"
+        },
+        "isNeedCommonColumn": {
+          "type": "boolean"
+        }
+      },
+      "title": "ReadTableSchemas"
+    },
+    "v1ReadTablesByAppsReply": {
+      "type": "object",
+      "properties": {
+        "appsTables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1AppTables"
+          }
+        }
+      }
+    },
+    "v1ReadTablesByAppsRequest": {
+      "type": "object",
+      "properties": {
+        "appIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1ReadTablesReply": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1TableMeta"
+          }
+        }
+      }
+    },
+    "v1ReadTablesRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "ReadTables"
+    },
+    "v1RelationRowMeta": {
+      "type": "object",
+      "properties": {
+        "rowId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "owner": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Owner"
+          }
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableName": {
+          "type": "string"
+        },
+        "statusId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "statusName": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "v1RenameTableReply": {
+      "type": "object",
+      "properties": {
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "v1RenameTableRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "title": "RenameTable"
+    },
+    "v1SetAutoScheduleReply": {
+      "type": "object",
+      "properties": {
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "autoScheduleFlag": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1SetAutoScheduleRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "autoScheduleFlag": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "SetAutoSchedule"
+    },
+    "v1StorageColumnType": {
+      "type": "string",
+      "enum": [
+        "STRING",
+        "TEXT",
+        "LONG_TEXT",
+        "DATE",
+        "LONG",
+        "INT",
+        "FLOAT",
+        "DOUBLE",
+        "ARRAY",
+        "CUSTOM"
+      ],
+      "default": "STRING"
+    },
+    "v1SummeryTableRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableType": {
+          "$ref": "#/definitions/v1TableType"
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Column"
+          }
+        }
+      }
+    },
+    "v1TableMeta": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "autoScheduleFlag": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "summaryFlag": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1TableSchema": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Column"
+          }
+        },
+        "autoScheduleFlag": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1TableType": {
+      "type": "string",
+      "enum": [
+        "unowned",
+        "issueSummary",
+        "normal",
+        "crmSummary"
+      ],
+      "default": "unowned"
+    },
+    "v1UpdateColumnDescriptionReply": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1UpdateColumnDescriptionRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "columnId": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "v1UpdateColumnReply": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "column": {
+          "$ref": "#/definitions/v1Column"
+        }
+      }
+    },
+    "v1UpdateColumnRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "column": {
+          "$ref": "#/definitions/v1Column"
+        }
+      },
+      "title": "UpdateColumn"
+    },
+    "v1UpdateRowBeforeAfterReply": {
+      "type": "object",
+      "properties": {
+        "rowId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1UpdateRowBeforeAfterReq": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/v1BeforeAndAfterType"
+        },
+        "rowId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "addRelationIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "delRelationIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1UpdateRowRelateReply": {
+      "type": "object",
+      "properties": {
+        "rowId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1UpdateRowRelateReq": {
+      "type": "object",
+      "properties": {
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "rowId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "addRelationIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "delRelationIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    }
+  }
+}

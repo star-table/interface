@@ -1,0 +1,160 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "officeapi.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "OfficeApi"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/config": {
+      "get": {
+        "operationId": "OfficeApi_GetConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetConfigResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "OfficeApi"
+        ]
+      }
+    },
+    "/api/wopi/files/{file_name}": {
+      "get": {
+        "operationId": "OfficeApi_GetWopiFileInfoEditable",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1WOPIEditableResp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "file_name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_token",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "permission",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "OfficeApi"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1GetConfigResponse": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "string"
+        },
+        "UrlPrefix": {
+          "type": "string"
+        },
+        "FileExtensions": {
+          "type": "string"
+        }
+      }
+    },
+    "v1WOPIEditableResp": {
+      "type": "object",
+      "properties": {
+        "BaseFileName": {
+          "type": "string"
+        },
+        "OwnerId": {
+          "type": "string"
+        },
+        "UserId": {
+          "type": "string"
+        },
+        "Size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "UserFriendlyName": {
+          "type": "string"
+        },
+        "UserCanWrite": {
+          "type": "boolean"
+        },
+        "UserCanNotWriteRelative": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string"
+        },
+        "LastModifiedTime": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

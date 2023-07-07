@@ -1,0 +1,206 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "table_model_enum.proto";
+import "collaborator_model.proto";
+//import "protoc-gen-openapiv2/options/annotations.proto";
+
+package table.v1;
+option go_package = "github.com/star-table/interface/golang/table/v1;v1";
+
+// The greeting service definition.
+service Rows {
+  // 附件放入回收站
+  rpc RecycleAttachment (RecycleAttachmentRequest) returns (RecycleAttachmentReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/rows/attachment/recycle"
+      body: "*"
+    };
+  }
+
+  // 附件还原
+  rpc RecoverAttachment (RecoverAttachmentRequest) returns (RecoverAttachmentReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/rows/attachment/recover"
+      body: "*"
+    };
+  }
+
+  // 删除某些keyPath的值
+  rpc DeleteValues (DeleteValuesRequest) returns (DeleteValuesReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/rows/values/delete"
+      body: "*"
+    };
+  }
+
+  rpc List (ListRequest) returns (ListReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/rows/list"
+      body: "*"
+    };
+  }
+
+  rpc ListRaw (ListRawRequest) returns (ListRawReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/rows/raw/list"
+      body: "*"
+    };
+  }
+
+  rpc Delete (DeleteRequest) returns (DeleteReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/rows/delete"
+      body: "*"
+    };
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////
+
+  // 是否是app的协作人
+  rpc CheckIsAppCollaborator (CheckIsAppCollaboratorRequest) returns (CheckIsAppCollaboratorReply) {
+    option (google.api.http) = {
+      post: "/inner/v1/rows/isAppCollaborator"
+      body: "*"
+    };
+  }
+
+  // 获取用户在App中的协作人角色列表
+  rpc GetUserAppCollaboratorRoles (GetUserAppCollaboratorRolesRequest) returns (GetUserAppCollaboratorRolesReply) {
+    option (google.api.http) = {
+      post: "/inner/v1/rows/userAppCollaboratorRoles"
+      body: "*"
+    };
+  }
+
+  // 获取App的协作人角色列表
+  rpc GetAppCollaboratorRoles (GetAppCollaboratorRolesRequest) returns (GetAppCollaboratorRolesReply) {
+    option (google.api.http) = {
+      post: "/inner/v1/rows/appCollaboratorRoles"
+      body: "*"
+    };
+  }
+
+  // 获取任务的协作人列表
+  rpc GetDataCollaborators (GetDataCollaboratorsRequest) returns (GetDataCollaboratorsReply) {
+    option (google.api.http) = {
+      post: "/inner/v1/rows/dataCollaborators"
+      body: "*"
+    };
+  }
+
+  // 有些汇总表的条件需要转换查询数据
+  rpc ExchangeSummaryCondition (ExchangeSummaryConditionRequest) returns (ExchangeSummaryConditionReply) {
+    option (google.api.http) = {
+      post: "/inner/v1/rows/exchangeCondition"
+      body: "*"
+    };
+  }
+}
+
+message ExchangeSummaryConditionRequest {
+  int64 tableId = 1;
+  string condition = 2;
+}
+
+message ExchangeSummaryConditionReply {
+  int64 tableId = 1;
+  string condition = 2;
+}
+
+message RecycleAttachmentRequest {
+  int64 appId = 1[(validate.rules).int64 = {gt: 0}];
+  repeated int64 issueIds = 2[(validate.rules).repeated.min_items = 1];
+  repeated int64 resourceIds = 3[(validate.rules).repeated.min_items = 1];
+}
+
+message RecycleAttachmentReply {
+
+}
+
+message RecoverAttachmentRequest {
+  int64 appId = 1[(validate.rules).int64 = {gt: 0}];
+  repeated int64 issueIds = 2[(validate.rules).repeated.min_items = 1];
+  repeated int64 resourceIds = 3[(validate.rules).repeated.min_items = 1];
+}
+
+message RecoverAttachmentReply {
+
+}
+
+message DeleteValuesRequest {
+  repeated int64 issueIds = 1[(validate.rules).repeated.min_items = 1];
+  repeated string keyPaths = 2[(validate.rules).repeated.min_items = 1]; // 要删除key列表
+}
+
+message DeleteValuesReply {
+
+}
+
+message ListRequest {
+  string query = 1;
+  DbType dbType = 2;
+  int64 tableId = 3;
+  string appAuthData = 4;
+  bool needChangeId = 5; // 需要转换id，id变成issueId，id变成dataId
+  bool needTotal = 6;
+
+//  repeated string filterColumns = 1;
+//  Condition condition = 2;
+//  repeated Order orders = 3;
+//  repeated string groups = 4;
+//  int32 page = 5;
+//  int32 size = 6;
+//  bool aggNoLimit = 7;
+//  int64 tableId = 8;
+}
+
+// 一个非常特别的返回，为了性能牺牲一切可读性，需要调用端写死解析逻辑开的口罩
+message ListSpecialReply {
+  bytes specialData = 1;
+}
+
+message ListReply {
+  bytes data = 1;
+  repeated int64 userIds = 2;
+  repeated int64 deptIds = 3;
+  string lastUpdateTime = 4;
+  int32 count = 5;
+  bytes relateData = 6;
+}
+
+message ListRawRequest {
+    DbType dbType = 1;
+    repeated string filterColumns = 2;
+    Condition condition = 3;
+    repeated Order orders = 4;
+    repeated string groups = 5;
+    int32 page = 6;
+    int32 size = 7;
+    int64 tableId = 8;
+}
+
+message ListRawReply {
+  bytes data = 1;
+}
+
+message Condition {
+  ConditionType type = 1;
+  string value = 2;
+  string column = 3;
+  repeated Condition conditions = 4;
+}
+
+message Order {
+  string column = 1;
+  bool asc = 2;
+}
+
+message DeleteRequest {
+  Condition condition = 1;
+}
+
+message DeleteReply {
+  int64 count = 1;
+}

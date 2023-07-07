@@ -1,0 +1,167 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+// import "validate/validate.proto";
+import "push_card.proto";
+// import "push_model.proto";
+
+package push.v1;
+option go_package = "github.com/star-table/interface/golang/push/v1;v1";
+
+// The msg service definition.
+service Push {
+
+  // Push Mqtt
+  rpc PushMqtt (PushMqttReq) returns (PushMqttReply) {
+    option (google.api.http) = {
+      post: "/inner/v1/push/mqtt"
+      body: "*"
+    };
+  }
+
+  // Generate Mqtt Key
+  rpc GenerateMqttKey (GenerateMqttKeyReq) returns (GenerateMqttKeyReply) {
+    option (google.api.http) = {
+      post: "/inner/v1/generate/mqtt/key"
+      body: "*"
+    };
+  }
+
+  // Push Mail
+  rpc PushMail (PushMailReq) returns (PushMailReply) {
+    option (google.api.http) = {
+      post: "/inner/v1/push/mail"
+      body: "*"
+    };
+  }
+
+  // Push Sms
+  rpc PushSms (PushSmsReq) returns (PushSmsReply) {
+    option (google.api.http) = {
+      post: "/inner/v1/push/sms"
+      body: "*"
+    };
+  }
+
+  // Push Card
+  rpc PushCard (PushCardReq) returns (PushCardReply) {
+    option (google.api.http) = {
+      post: "/inner/v1/push/card"
+      body: "*"
+    };
+  }
+
+  // Push Card Simple
+  rpc PushCardSimple (PushCardSimpleReq) returns (PushCardSimpleReply) {
+    option (google.api.http) = {
+      post: "/inner/v1/push/card/simple"
+      body: "*"
+    };
+  }
+
+  // Generate Card
+  rpc GenerateCard (GenerateCardReq) returns (GenerateCardReply) {
+    option (google.api.http) = {
+      post: "/inner/v1/generate/card"
+      body: "*"
+    };
+  }
+
+}
+
+// SayHello
+message HelloReq {
+  string name = 1;
+}
+
+message HelloReply {
+  string msg = 1;
+}
+
+// PushMqtt
+message PushMqttReq {
+  string channel = 1;
+  bytes body = 2;           // 未经gzip压缩过后的数据
+  int64 org_id = 3;         // 若未提供channel，可选提供org_id
+  int64 project_id = 4;     // 若未提供channel，可选提供project_id
+}
+
+message PushMqttReply {
+}
+
+// GenerateMqttKey
+message GenerateMqttKeyReq {
+  int32 channel_type = 1;
+  int64 org_id = 2;
+  int64 project_id = 3;
+}
+
+message GenerateMqttKeyReply {
+  string key = 1;
+  string host = 2;
+  int32 port = 3;
+  string channel = 4;
+  string address = 5;
+}
+
+// PushSms
+message PushSmsReq {
+  repeated string to_phones = 1;
+  string sign_name = 2;
+  string template_code = 3;
+  google.protobuf.Struct params = 4;
+}
+
+message PushSmsReply {
+}
+
+// PushMail
+message PushMailReq {
+  repeated string to_mails = 1;
+  string subject = 2;
+  string content = 3;
+}
+
+message PushMailReply {
+}
+
+// PushCard
+message PushCardReq {
+  int64 org_id = 1; // for debug
+  string source_channel = 2;
+  string out_org_id = 3;
+  TemplateCard card = 4;
+  repeated string to_open_ids = 5;
+  repeated string to_dept_ids = 6; 
+  repeated string to_chat_ids = 7; // only for feishu
+}
+
+message PushCardReply {
+}
+
+// PushCardSimpleReq
+message PushCardSimpleReq {
+  int64 org_id = 1;
+  oneof to {
+    StringArray lc_ids = 2;
+    StringArray chat_ids = 3;
+  }
+  oneof card {
+    MarkdownCard markdown_card = 4;
+  }
+  string source_channel = 5;
+}
+
+message PushCardSimpleReply {
+}
+
+// GenerateCard
+message GenerateCardReq {
+  string source_channel = 1;
+  TemplateCard card = 2;
+}
+
+message GenerateCardReply {
+  string card = 1;
+}

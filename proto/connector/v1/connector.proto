@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+//import "google/protobuf/struct.proto";
+//import "validate/validate.proto";
+
+package connector.v1;
+option go_package = "github.com/star-table/interface/golang/connector/v1;v1";
+
+// The Connector service definition.
+service Connector {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply)  {
+    option (google.api.http) = {
+      get: "/v1/hello/{name}"
+    };
+  }
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings
+message HelloReply {
+  string msg = 1;
+}
+
+

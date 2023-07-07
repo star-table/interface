@@ -1,0 +1,193 @@
+syntax = "proto3";
+
+// import "google/protobuf/struct.proto";
+
+package permission.v1;
+option go_package = "github.com/star-table/interface/golang/permission/v1;v1";
+
+message CreatePermissionGroupRequest {
+  int32 appId = 1;
+  string appPackageId = 2;
+}
+
+message CreatePermissionGroupResponse {
+
+}
+
+message UpdatePermissionGroupInfoRequest {
+  int64 appId = 1;
+  int64 appPackageId = 2;
+  int64 groupId = 3;
+}
+
+message UpdatePermissionGroupInfoResponse {
+
+}
+
+message CollaboratorColumnUser {
+  int64 appId = 1;
+  int64 orgId = 2;
+  int64 tableId = 3;
+  string fieldName = 4;
+  int64 userId = 5;
+  int64 deptId = 6;
+}
+
+message CollaboratorUsersRequest {
+  repeated CollaboratorColumnUser  users = 1;
+}
+
+message CollaboratorUsersResponse {
+  //repeated int64 ids = 1;  // collaboratorId
+  bool ok = 1;
+}
+
+message CollaboratorUserRequest {
+  int64 appId = 1;
+  int64 tableId = 2; // 指任务,缺陷等编号
+  string fieldName = 3;
+  int64 orgId = 4;
+  int64 userId = 5;
+  int64 deptId = 6;
+}
+
+message CollaboratorUserResponse {
+  int64 id = 1;
+}
+
+message GetUserCollaboratorRoleIdsRequest {
+  int64 appId = 1;
+  int64 orgId = 2;
+  int64 userId = 3;
+  int64 tableId = 4;
+  repeated int64 deptIds = 5;
+}
+
+message GetUserCollaboratorRoleIdsResponse {
+  repeated int64 roleIds = 1;
+}
+
+
+message MemberFieldRequest {
+  int64 appId = 1;
+  int64 orgId = 2;
+  int64 tableId = 3;
+  string fieldName = 4;
+}
+
+message MemberFieldResponse {
+  bool ok = 1;
+}
+
+message BatchMigrateRequest {
+  repeated int64 orgIds = 1;
+}
+
+message BatchMigrateResponse {
+  bool ok = 1;
+}
+
+message GetCollaboratorsRequest {
+  int64 appId = 1;
+  int64 orgId = 2;
+  int64 tableId = 3;
+  // string fieldName       = 4;
+  bool allUser = 4;
+}
+
+/**
+	Id        string            `json:"id"`
+	HasDelete bool              `json:"hasDelete"`
+	HasEdit   bool              `json:"hasEdit"`
+	LangCode  string            `json:"langCode"`
+	Name      string            `json:"name"`
+	ReadOnly  int               `json:"readOnly"`
+	Remake    string            `json:"remake"`
+	Members   AppRoleInfoMember `json:"members"`
+ **/
+
+message AppPerGroupListItem {
+  string  id = 1;
+  bool  hasDelete = 2;
+  bool  hasEdit = 3;
+  string  langCode = 4;
+  string  name = 5;
+  int32  readOnly = 6;
+  string remake = 7;
+}
+
+message Collaborator {
+  string   id = 1;
+  string  name = 2;
+  string  avatar = 3;
+  string   type = 4;
+  int32   status = 5;
+  int32   isDelete = 6;
+
+  repeated  AppPerGroupListItem perGroups = 7;
+
+  bool    isSysAdmin = 8;
+  bool    isSubAdmin = 9;
+  bool    isOwner = 10;
+
+}
+
+message GetCollaboratorsResponse {
+  repeated Collaborator collaborators = 1;
+}
+
+message GetCollaboratorUserIdsAndDeptIdsRequest {
+  int64 appId = 1;
+  int64 orgId = 2;
+  int64 tableId = 3;
+  string fieldName = 4;
+}
+
+message GetCollaboratorUserIdsAndDeptIdsResponse {
+  repeated int64 userIds = 1;
+  repeated int64 deptIds = 2;
+}
+
+message CopyColumnRequest {
+  int64 appId = 1;
+  int64 orgId = 2;
+  int64 tableId = 4;
+
+  string sourceFieldName = 5;
+  string targetFieldName = 6;
+}
+
+message CopyColumnResponse {
+  bool ok = 1;
+  string sourceFieldName = 2;
+  string targetFieldName = 3;
+}
+
+message GetDataCollaboratorsRequest {
+  repeated int64 issueIds = 1;
+}
+
+message GetDataCollaboratorsResponse {
+  repeated DataCollaborators dataCollaborators = 1;
+}
+
+message DataCollaborators {
+  int64 issueId = 1;
+  repeated ColumnCollaborators columnCollaborators = 2;
+}
+
+message ColumnCollaborators {
+  string columnId = 1; // 列key
+  repeated int64 userIds = 2; // 用户id列表
+  repeated int64 deptIds = 3; // 部门id列表，预留字段，目前用不到
+}
+
+
+message GetAppIdsByCollaboratorReq {
+  repeated int64 userIds = 1;
+  repeated int64 deptIds = 2;
+}
+
+message GetAppIdsByCollaboratorResp {
+  repeated int64 appIds = 1;
+}

@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+// import "google/protobuf/struct.proto";
+// import "validate/validate.proto";
+import "push_card.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+// import "push_model.proto";
+
+package push.v1;
+option go_package = "github.com/star-table/interface/golang/push/v1;v1";
+
+// The PushApi service definition.
+service PushApi {
+
+  // Send Card
+  rpc SendCard (SendCardReq) returns (SendCardReply) {
+    option (google.api.http) = {
+      post: "/v1/send/card"
+      body: "*"
+    };
+  }
+}
+
+// SendCardReq
+message SendCardReq {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["source_channel"]
+    }
+  };
+  oneof to {
+    StringArray lc_ids = 1;
+    StringArray chat_ids = 2;
+  }
+  oneof card {
+    MarkdownCard markdown_card = 3;
+  }
+  string source_channel = 4;
+}
+
+message SendCardReply {
+}

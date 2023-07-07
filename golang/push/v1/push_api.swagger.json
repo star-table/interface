@@ -1,0 +1,128 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "push_api.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "PushApi"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/send/card": {
+      "post": {
+        "summary": "Send Card",
+        "operationId": "PushApi_SendCard",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SendCardReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SendCardReq"
+            }
+          }
+        ],
+        "tags": [
+          "PushApi"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1MarkdownCard": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      }
+    },
+    "v1SendCardReply": {
+      "type": "object"
+    },
+    "v1SendCardReq": {
+      "type": "object",
+      "properties": {
+        "lc_ids": {
+          "$ref": "#/definitions/v1StringArray"
+        },
+        "chat_ids": {
+          "$ref": "#/definitions/v1StringArray"
+        },
+        "markdown_card": {
+          "$ref": "#/definitions/v1MarkdownCard"
+        },
+        "source_channel": {
+          "type": "string"
+        }
+      },
+      "title": "SendCardReq",
+      "required": [
+        "source_channel"
+      ]
+    },
+    "v1StringArray": {
+      "type": "object",
+      "properties": {
+        "elements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

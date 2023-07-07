@@ -1,0 +1,99 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/apps/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: WorkFlowTask API
+    version: 0.0.1
+paths:
+    /v1/goWorkflow/task/complete:
+        post:
+            tags:
+                - WorkFlowTask
+            description: Complete 审批
+            operationId: WorkFlowTask_Complete
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CompleteRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CompleteReply'
+    /v1/goWorkflow/task/withdraw:
+        post:
+            tags:
+                - WorkFlowTask
+            operationId: WorkFlowTask_Withdraw
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/WithdrawRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/WithdrawReply'
+components:
+    schemas:
+        CompleteReply:
+            type: object
+            properties: {}
+        CompleteRequest:
+            type: object
+            properties:
+                taskId:
+                    type: integer
+                    format: int64
+                userId:
+                    type: integer
+                    format: int64
+                userName:
+                    type: string
+                pass:
+                    type: boolean
+                orgId:
+                    type: integer
+                    format: int64
+                processInstanceId:
+                    type: integer
+                    format: int64
+                comment:
+                    type: string
+                candidate:
+                    type: string
+        WithdrawReply:
+            type: object
+            properties: {}
+        WithdrawRequest:
+            type: object
+            properties:
+                taskId:
+                    type: integer
+                    format: int64
+                userId:
+                    type: integer
+                    format: int64
+                userName:
+                    type: string
+                orgId:
+                    type: integer
+                    format: int64
+                processInstanceId:
+                    type: integer
+                    format: int64
+                comment:
+                    type: string
+                candidate:
+                    type: string
+tags:
+    - name: WorkFlowTask

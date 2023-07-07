@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+import "google/protobuf/struct.proto";
+import "table_model_enum.proto";
+
+package table.v1;
+option go_package = "github.com/star-table/interface/golang/table/v1;v1";
+
+message TableMin {
+    int64 appId = 1;
+    int64 tableId = 2;
+}
+
+message TableMeta {
+    int64 appId = 1;
+    int64 tableId = 2;
+    string name = 3;
+    int32 autoScheduleFlag = 4;
+    int32 summaryFlag = 5;
+}
+
+message Column {
+    string name = 1; // 其实就内部列的唯一id
+    string label = 2; // 标题
+    string aliasTitle = 3; // 别名
+    string description = 4; // 描述
+    bool isSys = 5;
+    bool isOrg = 6;
+    bool writable = 7;
+    bool editable = 8;
+    bool unique = 9; // 该类型是否是唯一的列
+    string uniquePreHandler = 10; // 唯一预处理函数，"urlDomainParse": url域名解析，保留一位
+    string sensitiveStrategy = 11; // 脱敏策略
+    int32 sensitiveFlag = 12; // 是否脱敏
+    ColumnOption field = 13; // 列相关属性
+    bool isSysHiden = 14; // 是否被系统隐藏，例如前后置默认添加，但初始状态是隐藏的
+    int32 summaryFlag = 15; // 是否是汇总表列标识,1:全部任务汇总表  3:项目汇总表
+}
+
+message ColumnOption {
+    ColumnType type = 1; // 列类型
+    string customType = 2; // 自定义类型
+    StorageColumnType dataType = 3; // 数据类型
+    google.protobuf.Struct props = 4; // 列类型下特有的数据
+}
+
+message ConditionRefSetting {
+    int64 tableId = 1;
+    string columnId = 2;
+    google.protobuf.Struct condition = 3;
+    string aggFunc = 4;
+    int32 numberType = 5;
+}
+
+// 这个主要用于解析老的form数据
+message Columns {
+   repeated Column fields = 1;
+   repeated string baseFields = 2;
+   map<string, google.protobuf.ListValue> customConfig = 3;
+}
+
+message TableColumnSchema {
+    int64 tableId = 1;
+    Column column = 2;
+}
+
+message TableSchema {
+    int64 appId = 1;
+    int64 tableId = 2;
+    string name = 3;
+    repeated Column columns = 4;
+    int32 autoScheduleFlag = 5;
+}
+
+message RelationRowMeta {
+    int64 rowId = 1;
+    repeated Owner owner = 3;
+    int64 tableId = 4;
+    string tableName = 5;
+    int64 statusId = 6;
+    string statusName = 7;
+    string title = 8;
+}
+
+message Owner {
+    string ownerId = 1;
+    string ownerName = 2;
+}
+
+message AppTables {
+    int64 appId = 1;
+    repeated TableMeta tables = 2;
+}
+
+enum BeforeAndAfterType {
+    UNKNOWN_BEFORE_AND_AFTER = 0;
+    BEFORE = 1;
+    AFTER = 2;
+}

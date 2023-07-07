@@ -1,0 +1,281 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/apps/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: Greeter API
+    description: The greeting service definition.
+    version: 0.0.1
+paths:
+    /helloworld/TransIn:
+        post:
+            tags:
+                - Greeter
+            description: 正向操作
+            operationId: Greeter_TransIn
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/TransInRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/TransInReply'
+    /helloworld/TransInCompensate:
+        post:
+            tags:
+                - Greeter
+            description: 补偿操作
+            operationId: Greeter_TransInCompensate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/TransInRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/TransInReply'
+    /helloworld/TransOut:
+        post:
+            tags:
+                - Greeter
+            description: 正向操作
+            operationId: Greeter_TransOut
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/TransOutRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/TransOutReply'
+    /helloworld/TransOutCompensate:
+        post:
+            tags:
+                - Greeter
+            description: 补偿操作
+            operationId: Greeter_TransOutCompensate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/TransOutRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/TransOutReply'
+    /helloworld/{name}:
+        get:
+            tags:
+                - Greeter
+            description: Sends a greeting
+            operationId: Greeter_SayHello
+            parameters:
+                - name: name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: my_value.null_value
+                  in: query
+                  description: Represents a null value.
+                  schema:
+                    type: integer
+                    format: enum
+                - name: my_value.number_value
+                  in: query
+                  description: Represents a double value.
+                  schema:
+                    type: number
+                    format: double
+                - name: my_value.string_value
+                  in: query
+                  description: Represents a string value.
+                  schema:
+                    type: string
+                - name: my_value.bool_value
+                  in: query
+                  description: Represents a boolean value.
+                  schema:
+                    type: boolean
+                - name: fieldType
+                  in: query
+                  schema:
+                    type: integer
+                    format: enum
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: int64
+                - name: ids
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/HelloReply'
+    /helloworld_again/{name}:
+        get:
+            tags:
+                - Greeter
+            description: Sends a greeting
+            operationId: Greeter_SayHelloAgain
+            parameters:
+                - name: name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: my_value.null_value
+                  in: query
+                  description: Represents a null value.
+                  schema:
+                    type: integer
+                    format: enum
+                - name: my_value.number_value
+                  in: query
+                  description: Represents a double value.
+                  schema:
+                    type: number
+                    format: double
+                - name: my_value.string_value
+                  in: query
+                  description: Represents a string value.
+                  schema:
+                    type: string
+                - name: my_value.bool_value
+                  in: query
+                  description: Represents a boolean value.
+                  schema:
+                    type: boolean
+                - name: fieldType
+                  in: query
+                  schema:
+                    type: integer
+                    format: enum
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: int64
+                - name: ids
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/HelloReply'
+    /helloworld_again_again/{name}:
+        get:
+            tags:
+                - Greeter
+            description: Sends a greeting
+            operationId: Greeter_SayHelloAgainAgain
+            parameters:
+                - name: name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: my_value.null_value
+                  in: query
+                  description: Represents a null value.
+                  schema:
+                    type: integer
+                    format: enum
+                - name: my_value.number_value
+                  in: query
+                  description: Represents a double value.
+                  schema:
+                    type: number
+                    format: double
+                - name: my_value.string_value
+                  in: query
+                  description: Represents a string value.
+                  schema:
+                    type: string
+                - name: my_value.bool_value
+                  in: query
+                  description: Represents a boolean value.
+                  schema:
+                    type: boolean
+                - name: fieldType
+                  in: query
+                  schema:
+                    type: integer
+                    format: enum
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: int64
+                - name: ids
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/HelloReply'
+components:
+    schemas:
+        HelloReply:
+            type: object
+            properties:
+                message_msg:
+                    type: string
+            description: The response message containing the greetings
+        TransInReply:
+            type: object
+            properties: {}
+        TransInRequest:
+            type: object
+            properties: {}
+        TransOutReply:
+            type: object
+            properties: {}
+        TransOutRequest:
+            type: object
+            properties: {}
+tags:
+    - name: Greeter

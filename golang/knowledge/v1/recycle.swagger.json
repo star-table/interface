@@ -1,0 +1,247 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "recycle.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Recycle"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/document/recycle": {
+      "post": {
+        "summary": "将文档放回回收站",
+        "operationId": "Recycle_RecycleDocument",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1RecycleDocumentReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1RecycleDocumentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Recycle"
+        ]
+      }
+    },
+    "/v1/recycle/list": {
+      "post": {
+        "summary": "回收站列表",
+        "operationId": "Recycle_ListRecycle",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListRecycleReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ListRecycleRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Recycle"
+        ]
+      }
+    },
+    "/v1/recycle/recover": {
+      "post": {
+        "summary": "将文档放回回收站",
+        "operationId": "Recycle_Recover",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1RecoverReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1RecoverRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Recycle"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1ListRecycleReply": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1RecycleDetail"
+          }
+        }
+      }
+    },
+    "v1ListRecycleRequest": {
+      "type": "object",
+      "properties": {
+        "spaceId": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1RecoverReply": {
+      "type": "object",
+      "properties": {
+        "recycleId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1RecoverRequest": {
+      "type": "object",
+      "properties": {
+        "recycleId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1RecycleDetail": {
+      "type": "object",
+      "properties": {
+        "recycleId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "title": {
+          "type": "string"
+        },
+        "creator": {
+          "$ref": "#/definitions/v1User"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "int64"
+        },
+        "leftDay": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1RecycleDocumentReply": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1RecycleDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1User": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

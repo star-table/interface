@@ -1,0 +1,817 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "row.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Rows"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/inner/v1/rows/appCollaboratorRoles": {
+      "post": {
+        "summary": "获取App的协作人角色列表",
+        "operationId": "Rows_GetAppCollaboratorRoles",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetAppCollaboratorRolesReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GetAppCollaboratorRolesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Rows"
+        ]
+      }
+    },
+    "/inner/v1/rows/attachment/recover": {
+      "post": {
+        "summary": "附件还原",
+        "operationId": "Rows_RecoverAttachment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1RecoverAttachmentReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1RecoverAttachmentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Rows"
+        ]
+      }
+    },
+    "/inner/v1/rows/attachment/recycle": {
+      "post": {
+        "summary": "附件放入回收站",
+        "operationId": "Rows_RecycleAttachment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1RecycleAttachmentReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1RecycleAttachmentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Rows"
+        ]
+      }
+    },
+    "/inner/v1/rows/dataCollaborators": {
+      "post": {
+        "summary": "获取任务的协作人列表",
+        "operationId": "Rows_GetDataCollaborators",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetDataCollaboratorsReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GetDataCollaboratorsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Rows"
+        ]
+      }
+    },
+    "/inner/v1/rows/delete": {
+      "post": {
+        "operationId": "Rows_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeleteRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Rows"
+        ]
+      }
+    },
+    "/inner/v1/rows/exchangeCondition": {
+      "post": {
+        "summary": "有些汇总表的条件需要转换查询数据",
+        "operationId": "Rows_ExchangeSummaryCondition",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ExchangeSummaryConditionReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ExchangeSummaryConditionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Rows"
+        ]
+      }
+    },
+    "/inner/v1/rows/isAppCollaborator": {
+      "post": {
+        "summary": "是否是app的协作人",
+        "operationId": "Rows_CheckIsAppCollaborator",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CheckIsAppCollaboratorReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CheckIsAppCollaboratorRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Rows"
+        ]
+      }
+    },
+    "/inner/v1/rows/list": {
+      "post": {
+        "operationId": "Rows_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ListRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Rows"
+        ]
+      }
+    },
+    "/inner/v1/rows/raw/list": {
+      "post": {
+        "operationId": "Rows_ListRaw",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListRawReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ListRawRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Rows"
+        ]
+      }
+    },
+    "/inner/v1/rows/userAppCollaboratorRoles": {
+      "post": {
+        "summary": "获取用户在App中的协作人角色列表",
+        "operationId": "Rows_GetUserAppCollaboratorRoles",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetUserAppCollaboratorRolesReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GetUserAppCollaboratorRolesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Rows"
+        ]
+      }
+    },
+    "/inner/v1/rows/values/delete": {
+      "post": {
+        "summary": "删除某些keyPath的值",
+        "operationId": "Rows_DeleteValues",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteValuesReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeleteValuesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Rows"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1CheckIsAppCollaboratorReply": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1CheckIsAppCollaboratorRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "userId": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "CheckIsAppCollaborator"
+    },
+    "v1CollaboratorRole": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "roleIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v1Condition": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/v1ConditionType"
+        },
+        "value": {
+          "type": "string"
+        },
+        "column": {
+          "type": "string"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Condition"
+          }
+        }
+      }
+    },
+    "v1ConditionType": {
+      "type": "string",
+      "enum": [
+        "between",
+        "equal",
+        "gt",
+        "gte",
+        "in",
+        "like",
+        "lt",
+        "lte",
+        "not_in",
+        "not_like",
+        "not_null",
+        "is_null",
+        "all_in",
+        "values_in",
+        "and",
+        "or",
+        "un_equal",
+        "raw_sql"
+      ],
+      "default": "between"
+    },
+    "v1DataCollaborators": {
+      "type": "object",
+      "properties": {
+        "dataId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v1DbType": {
+      "type": "string",
+      "enum": [
+        "master",
+        "slave1",
+        "slave2",
+        "slave3"
+      ],
+      "default": "master"
+    },
+    "v1DeleteReply": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1DeleteRequest": {
+      "type": "object",
+      "properties": {
+        "condition": {
+          "$ref": "#/definitions/v1Condition"
+        }
+      }
+    },
+    "v1DeleteValuesReply": {
+      "type": "object"
+    },
+    "v1DeleteValuesRequest": {
+      "type": "object",
+      "properties": {
+        "issueIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "keyPaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v1ExchangeSummaryConditionReply": {
+      "type": "object",
+      "properties": {
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "condition": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ExchangeSummaryConditionRequest": {
+      "type": "object",
+      "properties": {
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "condition": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GetAppCollaboratorRolesReply": {
+      "type": "object",
+      "properties": {
+        "collaboratorRoles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1CollaboratorRole"
+          }
+        }
+      }
+    },
+    "v1GetAppCollaboratorRolesRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "GetAppCollaboratorRoles"
+    },
+    "v1GetDataCollaboratorsReply": {
+      "type": "object",
+      "properties": {
+        "collaborators": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1DataCollaborators"
+          }
+        }
+      }
+    },
+    "v1GetDataCollaboratorsRequest": {
+      "type": "object",
+      "properties": {
+        "dataIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      },
+      "title": "GetDataCollaborators"
+    },
+    "v1GetUserAppCollaboratorRolesReply": {
+      "type": "object",
+      "properties": {
+        "roleIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v1GetUserAppCollaboratorRolesRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "userId": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "GetUserAppCollaboratorRoles"
+    },
+    "v1ListRawReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "v1ListRawRequest": {
+      "type": "object",
+      "properties": {
+        "dbType": {
+          "$ref": "#/definitions/v1DbType"
+        },
+        "filterColumns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "condition": {
+          "$ref": "#/definitions/v1Condition"
+        },
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Order"
+          }
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1ListReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "byte"
+        },
+        "userIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "deptIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "lastUpdateTime": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "relateData": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "v1ListRequest": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        },
+        "dbType": {
+          "$ref": "#/definitions/v1DbType"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "appAuthData": {
+          "type": "string"
+        },
+        "needChangeId": {
+          "type": "boolean"
+        },
+        "needTotal": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1Order": {
+      "type": "object",
+      "properties": {
+        "column": {
+          "type": "string"
+        },
+        "asc": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1RecoverAttachmentReply": {
+      "type": "object"
+    },
+    "v1RecoverAttachmentRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "issueIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "resourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1RecycleAttachmentReply": {
+      "type": "object"
+    },
+    "v1RecycleAttachmentRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "issueIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "resourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    }
+  }
+}

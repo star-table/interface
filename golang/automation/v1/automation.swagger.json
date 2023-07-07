@@ -1,0 +1,2844 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "automation.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Automation"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/executions": {
+      "get": {
+        "summary": "获取执行结果",
+        "operationId": "Automation_GetExecutions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetExecutionsReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "workflowId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Automation"
+        ]
+      }
+    },
+    "/v1/executions/{id}": {
+      "get": {
+        "summary": "获取执行结果",
+        "operationId": "Automation_GetExecution",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetExecutionReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Automation"
+        ]
+      }
+    },
+    "/v1/integrations": {
+      "get": {
+        "summary": "查询集成列表",
+        "operationId": "Automation_GetIntegrations",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetIntegrationsReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Automation"
+        ]
+      },
+      "post": {
+        "summary": "创建/更新集成",
+        "operationId": "Automation_SaveIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SaveIntegrationReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SaveIntegrationReq"
+            }
+          }
+        ],
+        "tags": [
+          "Automation"
+        ]
+      }
+    },
+    "/v1/integrations/filter": {
+      "get": {
+        "summary": "查询集成列表（限制类型）",
+        "operationId": "Automation_GetIntegrationsByType",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetIntegrationsByTypeReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Mysql",
+              "Postgres",
+              "Smtp"
+            ],
+            "default": "Mysql"
+          }
+        ],
+        "tags": [
+          "Automation"
+        ]
+      }
+    },
+    "/v1/integrations/{id}": {
+      "get": {
+        "summary": "查询单个集成",
+        "operationId": "Automation_GetIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetIntegrationReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Automation"
+        ]
+      },
+      "delete": {
+        "summary": "删除集成",
+        "operationId": "Automation_DeleteIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteIntegrationReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Automation"
+        ]
+      }
+    },
+    "/v1/todo/byExecution": {
+      "get": {
+        "summary": "获取任务流程待办列表",
+        "operationId": "Automation_GetTodosByExecution",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetTodosByExecutionReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "issueId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "executionId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "auditFlowId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Automation"
+        ]
+      }
+    },
+    "/v1/todo/filter": {
+      "get": {
+        "summary": "筛选待办列表",
+        "operationId": "Automation_TodoFilter",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1TodoFilterReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "FtWaitingAudit",
+              "FtWaitingFillIn",
+              "FtTriggeredByMe",
+              "FtFinished"
+            ],
+            "default": "FtWaitingAudit"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "workflowName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "triggerUserIds",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "int64"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "Automation"
+        ]
+      }
+    },
+    "/v1/todo/stat": {
+      "get": {
+        "summary": "待办列表统计",
+        "operationId": "Automation_TodoStat",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1TodoStatReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Automation"
+        ]
+      }
+    },
+    "/v1/todo/{id}": {
+      "get": {
+        "summary": "获取单条待办信息",
+        "operationId": "Automation_GetTodo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetTodoReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Automation"
+        ]
+      }
+    },
+    "/v1/webhook/{webhookId}": {
+      "post": {
+        "summary": "Webhook调用",
+        "operationId": "Automation_CallWebhook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CallWebhookReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "webhookId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object"
+                }
+              },
+              "title": "CallWebhook"
+            }
+          }
+        ],
+        "tags": [
+          "Automation"
+        ]
+      }
+    },
+    "/v1/workflows": {
+      "get": {
+        "summary": "查询工作流列表（APP）",
+        "operationId": "Automation_GetWorkflowsByApp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetWorkflowsByAppReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Automation"
+        ]
+      },
+      "post": {
+        "summary": "保存工作流",
+        "operationId": "Automation_SaveWorkflow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SaveWorkflowReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SaveWorkflowReq"
+            }
+          }
+        ],
+        "tags": [
+          "Automation"
+        ]
+      }
+    },
+    "/v1/workflows/meta": {
+      "post": {
+        "summary": "保存工作流概要信息",
+        "operationId": "Automation_SaveWorkflowMeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SaveWorkflowMetaReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SaveWorkflowMetaReq"
+            }
+          }
+        ],
+        "tags": [
+          "Automation"
+        ]
+      }
+    },
+    "/v1/workflows/{id}": {
+      "get": {
+        "summary": "查询单个工作流",
+        "operationId": "Automation_GetWorkflow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetWorkflowReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Automation"
+        ]
+      },
+      "delete": {
+        "summary": "删除工作流",
+        "operationId": "Automation_DeleteWorkflow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteWorkflowReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Automation"
+        ]
+      }
+    },
+    "/v1/workflows/{id}/activate": {
+      "post": {
+        "summary": "激活工作流（启用）",
+        "operationId": "Automation_ActivateWorkflow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ActivateWorkflowReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Automation"
+        ]
+      }
+    },
+    "/v1/workflows/{id}/deactivate": {
+      "post": {
+        "summary": "去激活工作流（关闭）",
+        "operationId": "Automation_DeactivateWorkflow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeactivateWorkflowReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Automation"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "automationv1Value": {
+      "type": "object",
+      "properties": {
+        "displayJson": {
+          "type": "string"
+        },
+        "json": {
+          "type": "string"
+        },
+        "dynamic": {
+          "$ref": "#/definitions/v1DynamicValue"
+        },
+        "expression": {
+          "type": "string"
+        },
+        "system": {
+          "$ref": "#/definitions/v1SystemValue"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "protobufNullValue": {
+      "type": "string",
+      "enum": [
+        "NULL_VALUE"
+      ],
+      "default": "NULL_VALUE",
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\n The JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1ActivateError": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/v1ActivateErrorType"
+        },
+        "node": {
+          "type": "string"
+        },
+        "desc": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "node",
+        "desc"
+      ]
+    },
+    "v1ActivateErrorType": {
+      "type": "string",
+      "enum": [
+        "NodeParamRequired",
+        "NodeParamInvalid"
+      ],
+      "default": "NodeParamRequired",
+      "title": "- NodeParamRequired: Node相关"
+    },
+    "v1ActivateWorkflowReply": {
+      "type": "object",
+      "properties": {
+        "activate_errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ActivateError"
+          }
+        }
+      }
+    },
+    "v1CallWebhookReply": {
+      "type": "object"
+    },
+    "v1Connection": {
+      "type": "object",
+      "properties": {
+        "fromId": {
+          "type": "string"
+        },
+        "fromIndex": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "toId": {
+          "type": "string"
+        },
+        "toIndex": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "fromId",
+        "toId"
+      ]
+    },
+    "v1CronStartType": {
+      "type": "string",
+      "enum": [
+        "At",
+        "Before",
+        "After"
+      ],
+      "default": "At"
+    },
+    "v1CronType": {
+      "type": "string",
+      "enum": [
+        "Days",
+        "Weeks",
+        "Months"
+      ],
+      "default": "Days"
+    },
+    "v1DataEventType": {
+      "type": "string",
+      "enum": [
+        "DataCreatedOrUpdated",
+        "DataCreated",
+        "DataUpdated",
+        "DataDeleted"
+      ],
+      "default": "DataCreatedOrUpdated"
+    },
+    "v1DataFromNode": {
+      "type": "object",
+      "properties": {
+        "node": {
+          "type": "string"
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "node"
+      ]
+    },
+    "v1DbOperation": {
+      "type": "string",
+      "enum": [
+        "Query",
+        "Insert",
+        "Update"
+      ],
+      "default": "Query"
+    },
+    "v1DeactivateWorkflowReply": {
+      "type": "object"
+    },
+    "v1DeleteIntegrationReply": {
+      "type": "object"
+    },
+    "v1DeleteWorkflowReply": {
+      "type": "object"
+    },
+    "v1DynamicValue": {
+      "type": "object",
+      "properties": {
+        "element": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1DynamicValueElement"
+          }
+        }
+      },
+      "required": [
+        "element"
+      ]
+    },
+    "v1DynamicValueElement": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/v1DynamicValueFromNode"
+        }
+      }
+    },
+    "v1DynamicValueFromNode": {
+      "type": "object",
+      "properties": {
+        "node": {
+          "type": "string"
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "keyPath": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "node",
+        "keyPath"
+      ]
+    },
+    "v1EmailFormat": {
+      "type": "string",
+      "enum": [
+        "Text",
+        "Html"
+      ],
+      "default": "Text"
+    },
+    "v1Execution": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "workflowId": {
+          "type": "string"
+        },
+        "succeed": {
+          "type": "boolean"
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "int64"
+        },
+        "stoppedAt": {
+          "type": "string",
+          "format": "int64"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1NodeExecution"
+          }
+        },
+        "workflowNodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Node"
+          }
+        },
+        "finished": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "workflowId",
+        "succeed",
+        "startedAt",
+        "stoppedAt",
+        "nodes",
+        "workflowNodes",
+        "finished",
+        "status"
+      ]
+    },
+    "v1ExecutionMeta": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "workflowId": {
+          "type": "string"
+        },
+        "succeed": {
+          "type": "boolean"
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "int64"
+        },
+        "stoppedAt": {
+          "type": "string",
+          "format": "int64"
+        },
+        "finished": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "workflowId",
+        "succeed",
+        "startedAt",
+        "stoppedAt",
+        "finished",
+        "status"
+      ]
+    },
+    "v1Filter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "condition": {
+          "$ref": "#/definitions/v1FilterCondition"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "v1FilterCondition": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/v1DataFromNode"
+        },
+        "columnId": {
+          "type": "string"
+        },
+        "fieldType": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "props": {
+          "type": "object"
+        },
+        "value": {
+          "$ref": "#/definitions/automationv1Value"
+        },
+        "conds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1FilterCondition"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "v1ForkType": {
+      "type": "string",
+      "enum": [
+        "Comprehensive",
+        "Exclusive"
+      ],
+      "default": "Comprehensive"
+    },
+    "v1FormSetting": {
+      "type": "object",
+      "properties": {
+        "columnId": {
+          "type": "string"
+        },
+        "canRead": {
+          "type": "boolean"
+        },
+        "canWrite": {
+          "type": "boolean"
+        },
+        "required": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "columnId",
+        "canRead",
+        "canWrite",
+        "required"
+      ]
+    },
+    "v1GetExecutionReply": {
+      "type": "object",
+      "properties": {
+        "execution": {
+          "$ref": "#/definitions/v1Execution"
+        }
+      }
+    },
+    "v1GetExecutionsReply": {
+      "type": "object",
+      "properties": {
+        "executions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ExecutionMeta"
+          }
+        },
+        "nextCursor": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GetIntegrationReply": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "$ref": "#/definitions/v1Integration"
+        }
+      }
+    },
+    "v1GetIntegrationsByTypeReply": {
+      "type": "object",
+      "properties": {
+        "integrations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1IntegrationMeta"
+          }
+        }
+      }
+    },
+    "v1GetIntegrationsReply": {
+      "type": "object",
+      "properties": {
+        "integrations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1IntegrationMeta"
+          }
+        }
+      }
+    },
+    "v1GetTodoReply": {
+      "type": "object",
+      "properties": {
+        "todo": {
+          "$ref": "#/definitions/v1Todo"
+        }
+      }
+    },
+    "v1GetTodosByExecutionReply": {
+      "type": "object",
+      "properties": {
+        "todos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Todo"
+          }
+        }
+      }
+    },
+    "v1GetWorkflowReply": {
+      "type": "object",
+      "properties": {
+        "workflow": {
+          "$ref": "#/definitions/v1Workflow"
+        }
+      }
+    },
+    "v1GetWorkflowsByAppReply": {
+      "type": "object",
+      "properties": {
+        "workflows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Workflow"
+          }
+        }
+      }
+    },
+    "v1Integration": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "type": {
+          "$ref": "#/definitions/v1IntegrationType"
+        },
+        "config": {
+          "$ref": "#/definitions/v1IntegrationConfig"
+        },
+        "name": {
+          "type": "string"
+        },
+        "desc": {
+          "type": "string"
+        },
+        "creator": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updater": {
+          "type": "string",
+          "format": "int64"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "int64"
+        },
+        "creatorName": {
+          "type": "string"
+        },
+        "updaterName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "orgId",
+        "type",
+        "config",
+        "name",
+        "desc",
+        "active",
+        "activeVersionId",
+        "versionId",
+        "triggerType",
+        "failedTimes",
+        "creator",
+        "updater",
+        "createdAt",
+        "updatedAt",
+        "creatorName",
+        "updaterName",
+        "nodes",
+        "connections"
+      ]
+    },
+    "v1IntegrationConfig": {
+      "type": "object",
+      "properties": {
+        "smtp": {
+          "$ref": "#/definitions/v1IntegrationConfigSmtp"
+        },
+        "mysql": {
+          "$ref": "#/definitions/v1IntegrationConfigMysql"
+        },
+        "postgres": {
+          "$ref": "#/definitions/v1IntegrationConfigPostgres"
+        }
+      }
+    },
+    "v1IntegrationConfigMysql": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "database": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1IntegrationConfigPostgres": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "database": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1IntegrationConfigSmtp": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ssl": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1IntegrationInput": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/v1IntegrationType"
+        },
+        "config": {
+          "$ref": "#/definitions/v1IntegrationConfig"
+        },
+        "name": {
+          "type": "string"
+        },
+        "desc": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "config",
+        "name",
+        "desc"
+      ]
+    },
+    "v1IntegrationMeta": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/v1IntegrationType"
+        },
+        "name": {
+          "type": "string"
+        },
+        "desc": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "name",
+        "desc"
+      ]
+    },
+    "v1IntegrationType": {
+      "type": "string",
+      "enum": [
+        "Mysql",
+        "Postgres",
+        "Smtp"
+      ],
+      "default": "Mysql"
+    },
+    "v1KeyValue": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/automationv1Value"
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
+    },
+    "v1Node": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/v1NodeType"
+        },
+        "actionAudit": {
+          "$ref": "#/definitions/v1ParameterActionAudit"
+        },
+        "actionCreateData": {
+          "$ref": "#/definitions/v1ParameterActionCreateData"
+        },
+        "actionFillIn": {
+          "$ref": "#/definitions/v1ParameterActionFillIn"
+        },
+        "actionFork": {
+          "$ref": "#/definitions/v1ParameterActionFork"
+        },
+        "actionGroupAuditFlow": {
+          "$ref": "#/definitions/v1ParameterActionGroupAuditFlow"
+        },
+        "actionListData": {
+          "$ref": "#/definitions/v1ParameterActionListData"
+        },
+        "actionMerge": {
+          "$ref": "#/definitions/v1ParameterActionMerge"
+        },
+        "actionUpdateData": {
+          "$ref": "#/definitions/v1ParameterActionUpdateData"
+        },
+        "actionCode": {
+          "$ref": "#/definitions/v1ParameterActionCode"
+        },
+        "triggerCron": {
+          "$ref": "#/definitions/v1ParameterTriggerCron"
+        },
+        "triggerDataEvent": {
+          "$ref": "#/definitions/v1ParameterTriggerDataEvent"
+        },
+        "triggerOrgEvent": {
+          "$ref": "#/definitions/v1ParameterTriggerOrgEvent"
+        },
+        "triggerWebhook": {
+          "$ref": "#/definitions/v1ParameterTriggerWebhook"
+        },
+        "actionFindData": {
+          "$ref": "#/definitions/v1ParameterActionFindData"
+        },
+        "triggerDateColumnCron": {
+          "$ref": "#/definitions/v1ParameterTriggerDateColumnCron"
+        },
+        "triggerUserEvent": {
+          "$ref": "#/definitions/v1ParameterTriggerUserEvent"
+        },
+        "actionMysql": {
+          "$ref": "#/definitions/v1ParameterActionMysql"
+        },
+        "actionPostgres": {
+          "$ref": "#/definitions/v1ParameterActionPostgres"
+        },
+        "actionCopyData": {
+          "$ref": "#/definitions/v1ParameterActionCopyData"
+        },
+        "actionSendEmail": {
+          "$ref": "#/definitions/v1ParameterActionSendEmail"
+        },
+        "actionSendCardFeishu": {
+          "$ref": "#/definitions/v1ParameterActionSendCardFeishu"
+        },
+        "actionSendCardDingTalk": {
+          "$ref": "#/definitions/v1ParameterActionSendCardDingTalk"
+        },
+        "actionSendCardWeCom": {
+          "$ref": "#/definitions/v1ParameterActionSendCardWeCom"
+        },
+        "actionGroupLoop": {
+          "$ref": "#/definitions/v1ParameterActionGroupLoop"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "type"
+      ]
+    },
+    "v1NodeExecution": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "succeed": {
+          "type": "boolean"
+        },
+        "executionTime": {
+          "type": "string",
+          "format": "int64"
+        },
+        "data": {
+          "type": "object"
+        },
+        "previousId": {
+          "type": "string"
+        },
+        "previousRunIdx": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "int64"
+        },
+        "runIdx": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "finished": {
+          "type": "boolean"
+        },
+        "waiting": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "succeed",
+        "executionTime",
+        "data",
+        "previousId",
+        "previousRunIdx",
+        "startTime",
+        "runIdx",
+        "finished",
+        "waiting"
+      ]
+    },
+    "v1NodeType": {
+      "type": "string",
+      "enum": [
+        "TriggerCron",
+        "TriggerDataEvent",
+        "TriggerWebhook",
+        "TriggerOrgEvent",
+        "TriggerDateColumnCron",
+        "TriggerUserEvent",
+        "ActionCreateData",
+        "ActionUpdateData",
+        "ActionListData",
+        "ActionFork",
+        "ActionNoOperation",
+        "ActionMerge",
+        "ActionAudit",
+        "ActionFillIn",
+        "ActionCode",
+        "ActionFindData",
+        "ActionMysql",
+        "ActionPostgres",
+        "ActionCopyData",
+        "ActionSendEmail",
+        "ActionSendCardFeishu",
+        "ActionSendCardDingTalk",
+        "ActionSendCardWeCom",
+        "ActionGroupAuditFlow",
+        "ActionGroupLoop"
+      ],
+      "default": "TriggerCron"
+    },
+    "v1Order": {
+      "type": "object",
+      "properties": {
+        "columnId": {
+          "type": "string"
+        },
+        "asc": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "columnId",
+        "asc"
+      ]
+    },
+    "v1OrgEventType": {
+      "type": "string",
+      "enum": [
+        "OrgInited"
+      ],
+      "default": "OrgInited"
+    },
+    "v1ParameterActionAudit": {
+      "type": "object",
+      "properties": {
+        "operators": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1People"
+          }
+        },
+        "signMode": {
+          "$ref": "#/definitions/v1SignMode"
+        },
+        "formSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1FormSetting"
+          }
+        }
+      },
+      "required": [
+        "operators",
+        "signMode",
+        "formSettings"
+      ]
+    },
+    "v1ParameterActionCode": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/v1StringValue"
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "v1ParameterActionCopyData": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string"
+        },
+        "tableId": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/v1DataFromNode"
+        },
+        "keyValues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1KeyValue"
+          }
+        },
+        "staticCopy": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "appId",
+        "tableId",
+        "source",
+        "keyValues",
+        "staticCopy"
+      ]
+    },
+    "v1ParameterActionCreateData": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string"
+        },
+        "tableId": {
+          "type": "string"
+        },
+        "keyValues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1KeyValue"
+          }
+        }
+      },
+      "required": [
+        "appId",
+        "tableId",
+        "keyValues"
+      ]
+    },
+    "v1ParameterActionFillIn": {
+      "type": "object",
+      "properties": {
+        "operators": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1People"
+          }
+        },
+        "formSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1FormSetting"
+          }
+        }
+      },
+      "required": [
+        "operators",
+        "formSettings"
+      ]
+    },
+    "v1ParameterActionFindData": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string"
+        },
+        "tableId": {
+          "type": "string"
+        },
+        "condition": {
+          "$ref": "#/definitions/v1FilterCondition"
+        },
+        "columnIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Order"
+          }
+        }
+      },
+      "required": [
+        "appId",
+        "tableId",
+        "condition",
+        "columnIds",
+        "orders"
+      ]
+    },
+    "v1ParameterActionFork": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/v1ForkType"
+        },
+        "filters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Filter"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "filters"
+      ]
+    },
+    "v1ParameterActionGroupAuditFlow": {
+      "type": "object",
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Node"
+          }
+        },
+        "connections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Connection"
+          }
+        },
+        "setting": {
+          "$ref": "#/definitions/v1ParameterActionGroupSettingAuditFlow"
+        }
+      },
+      "required": [
+        "nodes",
+        "connections",
+        "setting"
+      ]
+    },
+    "v1ParameterActionGroupLoop": {
+      "type": "object",
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Node"
+          }
+        },
+        "connections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Connection"
+          }
+        },
+        "source": {
+          "$ref": "#/definitions/v1DataFromNode"
+        }
+      },
+      "required": [
+        "nodes",
+        "connections",
+        "source"
+      ]
+    },
+    "v1ParameterActionGroupSettingAuditFlow": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/v1DataFromNode"
+        },
+        "trigger": {
+          "$ref": "#/definitions/automationv1Value"
+        },
+        "allowWithdrawByTrigger": {
+          "type": "boolean"
+        },
+        "allowUrgeByTrigger": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "source",
+        "trigger",
+        "allowWithdrawByTrigger",
+        "allowUrgeByTrigger"
+      ]
+    },
+    "v1ParameterActionListData": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string"
+        },
+        "tableId": {
+          "type": "string"
+        },
+        "condition": {
+          "$ref": "#/definitions/v1FilterCondition"
+        },
+        "columnIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Order"
+          }
+        },
+        "includeChildren": {
+          "type": "boolean"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "appId",
+        "tableId",
+        "condition",
+        "columnIds",
+        "orders",
+        "limit"
+      ]
+    },
+    "v1ParameterActionMerge": {
+      "type": "object",
+      "properties": {
+        "forkNode": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "forkNode"
+      ]
+    },
+    "v1ParameterActionMysql": {
+      "type": "object",
+      "properties": {
+        "integrationId": {
+          "type": "string"
+        },
+        "operation": {
+          "$ref": "#/definitions/v1DbOperation"
+        },
+        "sql": {
+          "$ref": "#/definitions/v1StringValue"
+        }
+      },
+      "required": [
+        "integrationId",
+        "operation",
+        "querySql"
+      ]
+    },
+    "v1ParameterActionPostgres": {
+      "type": "object",
+      "properties": {
+        "integrationId": {
+          "type": "string"
+        },
+        "operation": {
+          "$ref": "#/definitions/v1DbOperation"
+        },
+        "sql": {
+          "$ref": "#/definitions/v1StringValue"
+        }
+      },
+      "required": [
+        "integrationId",
+        "operation",
+        "querySql"
+      ]
+    },
+    "v1ParameterActionSendCardDingTalk": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "$ref": "#/definitions/automationv1Value"
+        },
+        "title": {
+          "$ref": "#/definitions/v1StringValue"
+        },
+        "content": {
+          "$ref": "#/definitions/v1StringValue"
+        }
+      },
+      "required": [
+        "ids",
+        "title",
+        "content"
+      ]
+    },
+    "v1ParameterActionSendCardFeishu": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "$ref": "#/definitions/automationv1Value"
+        },
+        "title": {
+          "$ref": "#/definitions/v1StringValue"
+        },
+        "content": {
+          "$ref": "#/definitions/v1StringValue"
+        }
+      },
+      "required": [
+        "ids",
+        "title",
+        "content"
+      ]
+    },
+    "v1ParameterActionSendCardWeCom": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "$ref": "#/definitions/automationv1Value"
+        },
+        "title": {
+          "$ref": "#/definitions/v1StringValue"
+        },
+        "content": {
+          "$ref": "#/definitions/v1StringValue"
+        }
+      },
+      "required": [
+        "ids",
+        "title",
+        "content"
+      ]
+    },
+    "v1ParameterActionSendEmail": {
+      "type": "object",
+      "properties": {
+        "integrationId": {
+          "type": "string"
+        },
+        "fromName": {
+          "$ref": "#/definitions/v1StringValue"
+        },
+        "fromEmail": {
+          "$ref": "#/definitions/v1StringValue"
+        },
+        "toEmail": {
+          "$ref": "#/definitions/v1StringValue"
+        },
+        "ccEmail": {
+          "$ref": "#/definitions/v1StringValue"
+        },
+        "replyToEmail": {
+          "$ref": "#/definitions/v1StringValue"
+        },
+        "subject": {
+          "$ref": "#/definitions/v1StringValue"
+        },
+        "emailFormat": {
+          "$ref": "#/definitions/v1EmailFormat"
+        },
+        "content": {
+          "$ref": "#/definitions/v1StringValue"
+        }
+      },
+      "required": [
+        "integrationId",
+        "fromName",
+        "fromEmail",
+        "toEmail",
+        "ccEmail",
+        "replyToEmail",
+        "subject",
+        "emailFormat",
+        "content"
+      ]
+    },
+    "v1ParameterActionUpdateData": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/v1DataFromNode"
+        },
+        "keyValues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1KeyValue"
+          }
+        }
+      },
+      "required": [
+        "source",
+        "keyValues"
+      ]
+    },
+    "v1ParameterTodoAudit": {
+      "type": "object",
+      "properties": {
+        "signMode": {
+          "$ref": "#/definitions/v1SignMode"
+        },
+        "formSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1FormSetting"
+          }
+        }
+      },
+      "required": [
+        "signMode",
+        "formSettings"
+      ]
+    },
+    "v1ParameterTodoFillIn": {
+      "type": "object",
+      "properties": {
+        "formSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1FormSetting"
+          }
+        }
+      },
+      "required": [
+        "formSettings"
+      ]
+    },
+    "v1ParameterTriggerCron": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/v1CronType"
+        },
+        "minutes": {
+          "$ref": "#/definitions/v1ParameterTriggerCronMinutes"
+        },
+        "hours": {
+          "$ref": "#/definitions/v1ParameterTriggerCronHours"
+        },
+        "days": {
+          "$ref": "#/definitions/v1ParameterTriggerCronDays"
+        },
+        "weeks": {
+          "$ref": "#/definitions/v1ParameterTriggerCronWeeks"
+        },
+        "months": {
+          "$ref": "#/definitions/v1ParameterTriggerCronMonths"
+        },
+        "noRepeat": {
+          "$ref": "#/definitions/v1ParameterTriggerCronNoRepeat"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "v1ParameterTriggerCronDays": {
+      "type": "object",
+      "properties": {
+        "hour": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minute": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "hour",
+        "minute"
+      ]
+    },
+    "v1ParameterTriggerCronHours": {
+      "type": "object",
+      "properties": {
+        "minute": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "minute"
+      ]
+    },
+    "v1ParameterTriggerCronMinutes": {
+      "type": "object"
+    },
+    "v1ParameterTriggerCronMonths": {
+      "type": "object",
+      "properties": {
+        "dayOfMonth": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "hour": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minute": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "dayOfMonth",
+        "hour",
+        "minute"
+      ]
+    },
+    "v1ParameterTriggerCronNoRepeat": {
+      "type": "object",
+      "properties": {
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "month": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "day": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "hour": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minute": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "year",
+        "month",
+        "day",
+        "hour",
+        "minute"
+      ]
+    },
+    "v1ParameterTriggerCronWeeks": {
+      "type": "object",
+      "properties": {
+        "weekday": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "hour": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minute": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "weekday",
+        "hour",
+        "minute"
+      ]
+    },
+    "v1ParameterTriggerDataEvent": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string"
+        },
+        "tableId": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/v1DataEventType"
+        },
+        "updatedColumnIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filterCondition": {
+          "$ref": "#/definitions/v1FilterCondition"
+        }
+      },
+      "required": [
+        "appId",
+        "tableId",
+        "type"
+      ]
+    },
+    "v1ParameterTriggerDateColumnCron": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string"
+        },
+        "tableId": {
+          "type": "string"
+        },
+        "columnId": {
+          "type": "string"
+        },
+        "startType": {
+          "$ref": "#/definitions/v1CronStartType"
+        },
+        "deltaTime": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "deltaTimeUnit": {
+          "$ref": "#/definitions/v1TimeUnit"
+        },
+        "filterCondition": {
+          "$ref": "#/definitions/v1FilterCondition"
+        }
+      },
+      "required": [
+        "appId",
+        "tableId",
+        "columnId",
+        "startType",
+        "deltaTime",
+        "deltaTimeUnit"
+      ]
+    },
+    "v1ParameterTriggerOrgEvent": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/v1OrgEventType"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "v1ParameterTriggerUserEvent": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/v1UserEventType"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "v1ParameterTriggerWebhook": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "path"
+      ]
+    },
+    "v1People": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/v1PeopleType"
+        },
+        "value": {
+          "$ref": "#/definitions/automationv1Value"
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "v1PeopleType": {
+      "type": "string",
+      "enum": [
+        "User",
+        "Dept"
+      ],
+      "default": "User"
+    },
+    "v1SaveIntegrationReply": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "$ref": "#/definitions/v1IntegrationMeta"
+        }
+      }
+    },
+    "v1SaveIntegrationReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "input": {
+          "$ref": "#/definitions/v1IntegrationInput"
+        }
+      },
+      "title": "SaveIntegration"
+    },
+    "v1SaveWorkflowMetaReply": {
+      "type": "object",
+      "properties": {
+        "workflow": {
+          "$ref": "#/definitions/v1WorkflowMeta"
+        }
+      }
+    },
+    "v1SaveWorkflowMetaReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "desc": {
+          "type": "string"
+        }
+      },
+      "title": "SaveWorkflowMeta"
+    },
+    "v1SaveWorkflowReply": {
+      "type": "object",
+      "properties": {
+        "workflow": {
+          "$ref": "#/definitions/v1Workflow"
+        },
+        "activate_errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ActivateError"
+          }
+        }
+      }
+    },
+    "v1SaveWorkflowReq": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "input": {
+          "$ref": "#/definitions/v1WorkflowInput"
+        },
+        "activate": {
+          "type": "boolean"
+        }
+      },
+      "title": "SaveWorkflow"
+    },
+    "v1SignMode": {
+      "type": "string",
+      "enum": [
+        "Or",
+        "AndAllPass",
+        "AndOnePass"
+      ],
+      "default": "Or"
+    },
+    "v1StringValue": {
+      "type": "object",
+      "properties": {
+        "dynamic": {
+          "$ref": "#/definitions/v1DynamicValue"
+        },
+        "expression": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "json": {
+          "type": "string"
+        }
+      }
+    },
+    "v1SystemValue": {
+      "type": "string",
+      "enum": [
+        "Now"
+      ],
+      "default": "Now"
+    },
+    "v1TimeUnit": {
+      "type": "string",
+      "enum": [
+        "Minute",
+        "Hour",
+        "Day"
+      ],
+      "default": "Minute"
+    },
+    "v1Todo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "appId": {
+          "type": "string"
+        },
+        "tableId": {
+          "type": "string"
+        },
+        "issueId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "workflowId": {
+          "type": "string"
+        },
+        "workflowName": {
+          "type": "string"
+        },
+        "auditFlowName": {
+          "type": "string"
+        },
+        "executionId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "triggerUserId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "allowWithdrawByTrigger": {
+          "type": "boolean"
+        },
+        "allowUrgeByTrigger": {
+          "type": "boolean"
+        },
+        "type": {
+          "$ref": "#/definitions/v1TodoType"
+        },
+        "status": {
+          "$ref": "#/definitions/v1TodoStatus"
+        },
+        "todoAudit": {
+          "$ref": "#/definitions/v1ParameterTodoAudit"
+        },
+        "todoFillIn": {
+          "$ref": "#/definitions/v1ParameterTodoFillIn"
+        },
+        "operators": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/v1TodoResult"
+          }
+        },
+        "creator": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updater": {
+          "type": "string",
+          "format": "int64"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "int64"
+        },
+        "auditFlowId": {
+          "type": "string"
+        },
+        "issueTitle": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "orgId",
+        "appId",
+        "tableId",
+        "issueId",
+        "workflowId",
+        "workflowName",
+        "executionId",
+        "triggerUserId",
+        "allowWithdrawByTrigger",
+        "allowUrgeByTrigger",
+        "type",
+        "status",
+        "operators",
+        "creator",
+        "updater",
+        "createdAt",
+        "updatedAt",
+        "auditFlowId",
+        "issueTitle"
+      ]
+    },
+    "v1TodoFilterReply": {
+      "type": "object",
+      "properties": {
+        "todos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Todo"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1TodoFilterType": {
+      "type": "string",
+      "enum": [
+        "FtWaitingAudit",
+        "FtWaitingFillIn",
+        "FtTriggeredByMe",
+        "FtFinished"
+      ],
+      "default": "FtWaitingAudit"
+    },
+    "v1TodoOp": {
+      "type": "string",
+      "enum": [
+        "OpInit",
+        "OpPass",
+        "OpReject",
+        "OpWithdraw"
+      ],
+      "default": "OpInit"
+    },
+    "v1TodoResult": {
+      "type": "object",
+      "properties": {
+        "op": {
+          "$ref": "#/definitions/v1TodoOp"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "opAt": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "required": [
+        "op",
+        "msg"
+      ]
+    },
+    "v1TodoStat": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/v1TodoFilterType"
+        },
+        "total": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "required": [
+        "type",
+        "total"
+      ]
+    },
+    "v1TodoStatReply": {
+      "type": "object",
+      "properties": {
+        "stats": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1TodoStat"
+          }
+        }
+      }
+    },
+    "v1TodoStatus": {
+      "type": "string",
+      "enum": [
+        "SUnFinished",
+        "SFinishedPassed",
+        "SFinishedRejected",
+        "SWithdrew",
+        "STimeout"
+      ],
+      "default": "SUnFinished"
+    },
+    "v1TodoType": {
+      "type": "string",
+      "enum": [
+        "Audit",
+        "FillIn"
+      ],
+      "default": "Audit"
+    },
+    "v1UserEventType": {
+      "type": "string",
+      "enum": [
+        "UserBindMobile"
+      ],
+      "default": "UserBindMobile"
+    },
+    "v1Workflow": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "appId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "desc": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "activeVersionId": {
+          "type": "string"
+        },
+        "versionId": {
+          "type": "string"
+        },
+        "triggerType": {
+          "$ref": "#/definitions/v1NodeType"
+        },
+        "failedTimes": {
+          "type": "string",
+          "format": "int64"
+        },
+        "creator": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updater": {
+          "type": "string",
+          "format": "int64"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "int64"
+        },
+        "creatorName": {
+          "type": "string"
+        },
+        "updaterName": {
+          "type": "string"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Node"
+          }
+        },
+        "connections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Connection"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "orgId",
+        "appId",
+        "name",
+        "desc",
+        "active",
+        "activeVersionId",
+        "versionId",
+        "triggerType",
+        "failedTimes",
+        "creator",
+        "updater",
+        "createdAt",
+        "updatedAt",
+        "creatorName",
+        "updaterName",
+        "nodes",
+        "connections"
+      ]
+    },
+    "v1WorkflowInput": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "desc": {
+          "type": "string"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Node"
+          }
+        },
+        "connections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Connection"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "desc",
+        "nodes",
+        "connections"
+      ]
+    },
+    "v1WorkflowMeta": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "appId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "desc": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "activeVersionId": {
+          "type": "string"
+        },
+        "versionId": {
+          "type": "string"
+        },
+        "triggerType": {
+          "$ref": "#/definitions/v1NodeType"
+        },
+        "failedTimes": {
+          "type": "string",
+          "format": "int64"
+        },
+        "creator": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updater": {
+          "type": "string",
+          "format": "int64"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "int64"
+        },
+        "creatorName": {
+          "type": "string"
+        },
+        "updaterName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "orgId",
+        "appId",
+        "name",
+        "desc",
+        "active",
+        "activeVersionId",
+        "versionId",
+        "triggerType",
+        "failedTimes",
+        "creator",
+        "updater",
+        "createdAt",
+        "updatedAt",
+        "creatorName",
+        "updaterName"
+      ]
+    }
+  }
+}

@@ -1,0 +1,103 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "go_workflow_model.proto";
+import "validate/validate.proto";
+
+package go_workflow.v1;
+option go_package = "github.com/star-table/interface/golang/go_workflow/v1;v1";
+
+service WorkFlowProcessInstance {
+  // Start 开启一个流程
+  rpc Start(StartRequest) returns (StartReply) {
+    option (google.api.http) = {
+      post: "/v1/goWorkflow/processInstance/start"
+      body: "*"
+    };
+  }
+
+  rpc StartByConditions(StartByConditionsRequest) returns (StartByConditionsReply) {
+    option (google.api.http) = {
+      post: "/v1/goWorkflow/processInstance/startByConditions"
+      body: "*"
+    };
+  }
+
+  rpc QueryProcessInstances(QueryProcessInstancesRequest) returns (QueryProcessInstancesReply) {
+    option (google.api.http) = {
+      post: "/v1/goWorkflow/processInstance/query"
+      body: "*"
+    };
+  }
+
+
+  rpc DeleteProcessInstance(DeleteProcessInstanceRequest) returns (DeleteProcessInstanceReply) {
+    option (google.api.http) = {
+      post: "/v1/goWorkflow/processInstance/delete"
+      body: "*"
+    };
+  }
+}
+
+message StartRequest {
+  int64 userId = 1[(validate.rules).int64 = {gt: 0}];
+  string userName = 2[(validate.rules).string.min_len = 1];
+  int64 processDefineId = 3[(validate.rules).int64 = {gt: 0}];
+  int64 orgId = 4[(validate.rules).int64 = {gt: 0}];
+  string processName = 5;
+  map<string, string> values = 6; // 数据内容
+  int64 dataId = 7; // 数据id
+  map<string, Participant> participants = 8; // 数据里面的审核人，有可能会用到，替换定义里面的值
+}
+
+message StartReply {
+  int64 id = 1;
+}
+
+message StartByConditionsRequest {
+  int64 userId = 1[(validate.rules).int64 = {gt: 0}];
+  string userName = 2[(validate.rules).string.min_len = 1];
+  int64 orgId = 3[(validate.rules).int64 = {gt: 0}];
+  int64 tableId = 4[(validate.rules).int64 = {gt: 0}];
+  string processName = 5;
+  repeated StartData datas = 6; // 注意，一条数据只会匹配第一个审批流，不会开启多个，多个满足条的时候，默认选择匹配到的第一个
+}
+
+message StartData {
+  map<string, string> values = 1; // 数据内容，用于匹配条件以及替换审批条件里面的值
+  int64 dataId = 2; // 数据id
+  map<string, Participant> participants = 3; // 数据里面的参与人，有可能会用到，替换审批定义里面的值
+}
+
+message StartByConditionsReply {
+  repeated StartByConditionsData list = 1;
+}
+
+message StartByConditionsData {
+  int64 id = 1;
+  int64 dataId = 2;
+}
+
+message QueryProcessInstancesRequest {
+  int64 id =1;
+  int64 userId = 2;
+  int64 processDefineId = 3;
+  int64 orgId = 4;
+  string processName = 5;
+  int32 pageSize = 6;
+  int32 pageIndex = 7;
+}
+
+message QueryProcessInstancesReply {
+  repeated ProcessInstance list = 1;
+  int32 total = 2;
+}
+
+message DeleteProcessInstanceRequest {
+  int64 id = 1;
+  int64 orgId = 2;
+}
+
+message DeleteProcessInstanceReply {
+
+}

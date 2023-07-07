@@ -1,0 +1,1422 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/apps/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: Table API
+    description: The greeting service definition.
+    version: 0.0.1
+paths:
+    /inner/v1/column/copy:
+        post:
+            tags:
+                - Table
+            description: 拷贝列
+            operationId: Table_CopyColumn
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CopyColumnRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CopyColumnReply'
+    /inner/v1/column/create:
+        post:
+            tags:
+                - Table
+            description: 创建列
+            operationId: Table_CreateColumn
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateColumnRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateColumnReply'
+    /inner/v1/column/delete:
+        post:
+            tags:
+                - Table
+            description: 删除列
+            operationId: Table_DeleteColumn
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteColumnRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteColumnReply'
+    /inner/v1/column/description/update:
+        post:
+            tags:
+                - Table
+            description: 更新列描述
+            operationId: Table_UpdateColumnDescription
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateColumnDescriptionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateColumnDescriptionReply'
+    /inner/v1/column/update:
+        post:
+            tags:
+                - Table
+            description: 更新列属性
+            operationId: Table_UpdateColumn
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateColumnRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateColumnReply'
+    /inner/v1/org/column/create:
+        post:
+            tags:
+                - Table
+            description: 创建组织字段
+            operationId: Table_CreateOrgColumn
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateOrgColumnRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateOrgColumnReply'
+    /inner/v1/org/column/delete:
+        post:
+            tags:
+                - Table
+            description: 删除组织字段
+            operationId: Table_DeleteOrgColumn
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteOrgColumnRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteOrgColumnReply'
+    /inner/v1/org/columns/init:
+        post:
+            tags:
+                - Table
+            description: 初始化团队字段
+            operationId: Table_InitOrgColumns
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/InitOrgColumnsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/InitOrgColumnsReply'
+    /inner/v1/read/org/columns:
+        post:
+            tags:
+                - Table
+            description: 读取组织字段列表
+            operationId: Table_ReadOrgColumns
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ReadOrgColumnsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ReadOrgColumnsReply'
+    /inner/v1/read/org/tables:
+        post:
+            tags:
+                - Table
+            operationId: Table_ReadOrgTables
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ReadOrgTablesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ReadOrgTablesReply'
+    /inner/v1/read/orgTableSchemas:
+        post:
+            tags:
+                - Table
+            description: 读取组织下面的所有表的某些列
+            operationId: Table_ReadOrgTableSchemas
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ReadOrgTableSchemasRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ReadOrgTableSchemasReply'
+    /inner/v1/read/summeryTableId:
+        post:
+            tags:
+                - Table
+            description: 读取汇总表的tableId
+            operationId: Table_ReadSummeryTableId
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ReadSummeryTableIdRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ReadSummeryTableIdReply'
+    /inner/v1/read/table:
+        post:
+            tags:
+                - Table
+            description: 获取一个表
+            operationId: Table_ReadTable
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ReadTableRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ReadTableReply'
+    /inner/v1/read/tableSchemas:
+        post:
+            tags:
+                - Table
+            description: 获取表头信息
+            operationId: Table_ReadTableSchemas
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ReadTableSchemasRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ReadTableSchemasReply'
+    /inner/v1/read/tableSchemasByAppId:
+        post:
+            tags:
+                - Table
+            description: 根据appId获取表头信息
+            operationId: Table_ReadTableSchemasByAppId
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ReadTableSchemasByAppIdRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ReadTableSchemasByAppIdReply'
+    /inner/v1/read/tables:
+        post:
+            tags:
+                - Table
+            description: 获取一个app的表列表
+            operationId: Table_ReadTables
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ReadTablesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ReadTablesReply'
+    /inner/v1/read/tablesByApps:
+        post:
+            tags:
+                - Table
+            description: 获取多个app的表
+            operationId: Table_ReadTablesByApps
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ReadTablesByAppsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ReadTablesByAppsReply'
+    /inner/v1/row/copy:
+        post:
+            tags:
+                - Table
+            description: 拷贝表数据
+            operationId: Table_CopyRow
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CopyRowRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CopyRowReply'
+    /inner/v1/row/create:
+        post:
+            tags:
+                - Table
+            description: 创建表数据
+            operationId: Table_CreateRows
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateRowsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateRowsReply'
+    /inner/v1/row/delete:
+        post:
+            tags:
+                - Table
+            description: 删除表数据
+            operationId: Table_DeleteRow
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteRowRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteRowReply'
+    /inner/v1/row/move:
+        post:
+            tags:
+                - Table
+            description: 移动表数据
+            operationId: Table_MoveRow
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MoveRowRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MoveRowReply'
+    /inner/v1/row/relation/updateRowBeforeAfter:
+        post:
+            tags:
+                - Table
+            description: 更新任务前后置
+            operationId: Table_UpdateRowBeforeAfter
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateRowBeforeAfterReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateRowBeforeAfterReply'
+    /inner/v1/row/relation/updateRowRelate:
+        post:
+            tags:
+                - Table
+            description: 更新任务关联
+            operationId: Table_UpdateRowRelate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateRowRelateReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateRowRelateReply'
+    /inner/v1/row/{rowId}/beforeAfter:
+        get:
+            tags:
+                - Table
+            description: 获取任务前后置列表
+            operationId: Table_GetBeforeAfterRowList
+            parameters:
+                - name: rowId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int64
+                - name: tableId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int64
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetBeforeAfterRowListReply'
+    /inner/v1/row/{rowId}/relation:
+        get:
+            tags:
+                - Table
+            description: 获取任务关联列表
+            operationId: Table_GetRowRelationList
+            parameters:
+                - name: rowId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int64
+                - name: tableId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int64
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetRelationListReply'
+    /inner/v1/table/copy:
+        post:
+            tags:
+                - Table
+            description: 拷贝表
+            operationId: Table_CopyTables
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CopyTablesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CopyTablesReply'
+    /inner/v1/table/create:
+        post:
+            tags:
+                - Table
+            description: 创建表
+            operationId: Table_CreateTable
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateTableRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateTableReply'
+    /inner/v1/table/createMultiSummery:
+        post:
+            tags:
+                - Table
+            description: 创建多个汇总表
+            operationId: Table_CreateMultiSummeryTable
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateMultiSummeryTableRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateMultiSummeryTableReply'
+    /inner/v1/table/createSummery:
+        post:
+            tags:
+                - Table
+            description: 创建汇总表
+            operationId: Table_CreateSummeryTable
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateSummeryTableRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateSummeryTableReply'
+    /inner/v1/table/delete:
+        post:
+            tags:
+                - Table
+            description: 删除表
+            operationId: Table_DeleteTable
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteTableRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteTableReply'
+    /inner/v1/table/rename:
+        post:
+            tags:
+                - Table
+            description: 表重命名
+            operationId: Table_RenameTable
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/RenameTableRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/RenameTableReply'
+    /inner/v1/table/setAutoSchedule:
+        post:
+            tags:
+                - Table
+            description: 设置自动排期开关
+            operationId: Table_SetAutoSchedule
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/SetAutoScheduleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SetAutoScheduleReply'
+components:
+    schemas:
+        AppTables:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tables:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/TableMeta'
+        Column:
+            type: object
+            properties:
+                name:
+                    type: string
+                label:
+                    type: string
+                aliasTitle:
+                    type: string
+                description:
+                    type: string
+                isSys:
+                    type: boolean
+                isOrg:
+                    type: boolean
+                writable:
+                    type: boolean
+                editable:
+                    type: boolean
+                unique:
+                    type: boolean
+                uniquePreHandler:
+                    type: string
+                sensitiveStrategy:
+                    type: string
+                sensitiveFlag:
+                    type: integer
+                    format: int32
+                field:
+                    $ref: '#/components/schemas/ColumnOption'
+                isSysHiden:
+                    type: boolean
+                summaryFlag:
+                    type: integer
+                    format: int32
+        ColumnOption:
+            type: object
+            properties:
+                type:
+                    type: integer
+                    format: enum
+                customType:
+                    type: string
+                dataType:
+                    type: integer
+                    format: enum
+                props:
+                    type: object
+        CopyColumnReply:
+            type: object
+            properties:
+                createColumnId:
+                    type: string
+        CopyColumnRequest:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                srcColumnId:
+                    type: string
+        CopyRowReply:
+            type: object
+            properties:
+                srcTableId:
+                    type: integer
+                    format: int64
+                srcRowId:
+                    type: integer
+                    format: int64
+                dstTableId:
+                    type: integer
+                    format: int64
+                dstRowId:
+                    type: integer
+                    format: int64
+        CopyRowRequest:
+            type: object
+            properties:
+                srcTableId:
+                    type: integer
+                    format: int64
+                srcRowId:
+                    type: integer
+                    format: int64
+                dstTableId:
+                    type: integer
+                    format: int64
+            description: CopyRow
+        CopyTablesReply:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tables:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/TableSchema'
+                oldToNewTableId:
+                    type: object
+                    additionalProperties:
+                        type: integer
+                        format: int64
+        CopyTablesRequest:
+            type: object
+            properties:
+                srcAppId:
+                    type: integer
+                    format: int64
+                srcTableIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+                dstAppId:
+                    type: integer
+                    format: int64
+                oldToNewPermission:
+                    type: object
+                    additionalProperties:
+                        type: integer
+                        format: int64
+            description: CopyTables
+        CreateColumnReply:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                column:
+                    $ref: '#/components/schemas/Column'
+        CreateColumnRequest:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                column:
+                    $ref: '#/components/schemas/Column'
+                activeViewId:
+                    type: integer
+                    format: int64
+                sourceOrgColumnId:
+                    type: string
+            description: CreateColumn
+        CreateMultiSummeryTableData:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+        CreateMultiSummeryTableReply:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/CreateMultiSummeryTableData'
+        CreateMultiSummeryTableRequest:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/SummeryTableRequest'
+        CreateOrgColumnReply:
+            type: object
+            properties: {}
+        CreateOrgColumnRequest:
+            type: object
+            properties:
+                column:
+                    $ref: '#/components/schemas/Column'
+        CreateRowsReply:
+            type: object
+            properties:
+                tableId:
+                    type: integer
+                    format: int64
+                rows:
+                    type: array
+                    items:
+                        type: object
+        CreateRowsRequest:
+            type: object
+            properties:
+                tableId:
+                    type: integer
+                    format: int64
+                afterRowId:
+                    type: integer
+                    format: int64
+                beforeRowId:
+                    type: integer
+                    format: int64
+                isAsc:
+                    type: boolean
+                isImport:
+                    type: boolean
+                rows:
+                    type: array
+                    items:
+                        type: object
+            description: CreateRows
+        CreateSummeryTableReply:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+        CreateSummeryTableRequest:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                columns:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Column'
+        CreateTableReply:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                table:
+                    $ref: '#/components/schemas/TableSchema'
+        CreateTableRequest:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                appType:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+                basicColumns:
+                    type: array
+                    items:
+                        type: string
+                isNeedStoreTable:
+                    type: boolean
+                isNeedColumn:
+                    type: boolean
+                columns:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Column'
+                notNeedSummeryColumnIds:
+                    type: array
+                    items:
+                        type: string
+                bindSummeryAppId:
+                    type: integer
+                    format: int64
+                summaryFlag:
+                    type: integer
+                    format: int32
+            description: CreateTable
+        DeleteColumnReply:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                columnId:
+                    type: string
+        DeleteColumnRequest:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                columnId:
+                    type: string
+            description: DeleteColumn
+        DeleteOrgColumnReply:
+            type: object
+            properties: {}
+        DeleteOrgColumnRequest:
+            type: object
+            properties:
+                columnId:
+                    type: string
+        DeleteRowReply:
+            type: object
+            properties:
+                tableId:
+                    type: integer
+                    format: int64
+                rowId:
+                    type: integer
+                    format: int64
+        DeleteRowRequest:
+            type: object
+            properties:
+                tableId:
+                    type: integer
+                    format: int64
+                rowId:
+                    type: integer
+                    format: int64
+            description: DeleteRow
+        DeleteTableReply:
+            type: object
+            properties:
+                tableId:
+                    type: integer
+                    format: int64
+        DeleteTableRequest:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+            description: DeleteTable
+        GetBeforeAfterRowListReply:
+            type: object
+            properties:
+                beforeNum:
+                    type: integer
+                    format: int32
+                afterNum:
+                    type: integer
+                    format: int32
+                beforeList:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/RelationRowMeta'
+                afterList:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/RelationRowMeta'
+        GetRelationListReply:
+            type: object
+            properties:
+                total:
+                    type: integer
+                    format: int32
+                relateList:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/RelationRowMeta'
+                    description: 关联列表
+                beRelatedList:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/RelationRowMeta'
+                    description: 被关联列表
+        InitOrgColumnsReply:
+            type: object
+            properties: {}
+        InitOrgColumnsRequest:
+            type: object
+            properties:
+                columns:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Column'
+            description: OrgColumns
+        MoveRowReply:
+            type: object
+            properties:
+                srcTableId:
+                    type: integer
+                    format: int64
+                srcRowId:
+                    type: integer
+                    format: int64
+                dstTableId:
+                    type: integer
+                    format: int64
+                dstParentRowId:
+                    type: integer
+                    format: int64
+                dstBeforeRowId:
+                    type: integer
+                    format: int64
+                dstAfterRowId:
+                    type: integer
+                    format: int64
+        MoveRowRequest:
+            type: object
+            properties:
+                srcTableId:
+                    type: integer
+                    format: int64
+                srcRowId:
+                    type: integer
+                    format: int64
+                dstTableId:
+                    type: integer
+                    format: int64
+                dstParentRowId:
+                    type: integer
+                    format: int64
+                dstBeforeRowId:
+                    type: integer
+                    format: int64
+                dstAfterRowId:
+                    type: integer
+                    format: int64
+            description: MoveRow
+        Owner:
+            type: object
+            properties:
+                ownerId:
+                    type: string
+                ownerName:
+                    type: string
+        ReadOrgColumnsReply:
+            type: object
+            properties:
+                columns:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Column'
+        ReadOrgColumnsRequest:
+            type: object
+            properties: {}
+        ReadOrgTableSchemasReply:
+            type: object
+            properties:
+                tables:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/TableSchema'
+        ReadOrgTableSchemasRequest:
+            type: object
+            properties:
+                columnIds:
+                    type: array
+                    items:
+                        type: string
+        ReadOrgTablesReply:
+            type: object
+            properties:
+                tables:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/TableMeta'
+        ReadOrgTablesRequest:
+            type: object
+            properties: {}
+        ReadSummeryTableIdReply:
+            type: object
+            properties:
+                tableId:
+                    type: integer
+                    format: int64
+                appId:
+                    type: integer
+                    format: int64
+        ReadSummeryTableIdRequest:
+            type: object
+            properties: {}
+        ReadTableReply:
+            type: object
+            properties:
+                table:
+                    $ref: '#/components/schemas/TableMeta'
+        ReadTableRequest:
+            type: object
+            properties:
+                tableId:
+                    type: integer
+                    format: int64
+        ReadTableSchemasByAppIdReply:
+            type: object
+            properties:
+                tables:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/TableSchema'
+        ReadTableSchemasByAppIdRequest:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                columnIds:
+                    type: array
+                    items:
+                        type: string
+                isNeedCommonColumn:
+                    type: boolean
+        ReadTableSchemasReply:
+            type: object
+            properties:
+                tables:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/TableSchema'
+        ReadTableSchemasRequest:
+            type: object
+            properties:
+                tableIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+                columnIds:
+                    type: array
+                    items:
+                        type: string
+                isNeedDescription:
+                    type: boolean
+                isNeedCommonColumn:
+                    type: boolean
+            description: ReadTableSchemas
+        ReadTablesByAppsReply:
+            type: object
+            properties:
+                appsTables:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/AppTables'
+        ReadTablesByAppsRequest:
+            type: object
+            properties:
+                appIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+        ReadTablesReply:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tables:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/TableMeta'
+        ReadTablesRequest:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+            description: ReadTables
+        RelationRowMeta:
+            type: object
+            properties:
+                rowId:
+                    type: integer
+                    format: int64
+                owner:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Owner'
+                tableId:
+                    type: integer
+                    format: int64
+                tableName:
+                    type: string
+                statusId:
+                    type: integer
+                    format: int64
+                statusName:
+                    type: string
+                title:
+                    type: string
+        RenameTableReply:
+            type: object
+            properties:
+                tableId:
+                    type: integer
+                    format: int64
+                name:
+                    type: string
+        RenameTableRequest:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                name:
+                    type: string
+            description: RenameTable
+        SetAutoScheduleReply:
+            type: object
+            properties:
+                tableId:
+                    type: integer
+                    format: int64
+                autoScheduleFlag:
+                    type: integer
+                    format: int32
+        SetAutoScheduleRequest:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                autoScheduleFlag:
+                    type: integer
+                    format: int32
+            description: SetAutoSchedule
+        SummeryTableRequest:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tableType:
+                    type: integer
+                    format: enum
+                columns:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Column'
+        TableMeta:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                name:
+                    type: string
+                autoScheduleFlag:
+                    type: integer
+                    format: int32
+                summaryFlag:
+                    type: integer
+                    format: int32
+        TableSchema:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                name:
+                    type: string
+                columns:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Column'
+                autoScheduleFlag:
+                    type: integer
+                    format: int32
+        UpdateColumnDescriptionReply:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+        UpdateColumnDescriptionRequest:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                columnId:
+                    type: string
+                description:
+                    type: string
+        UpdateColumnReply:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                column:
+                    $ref: '#/components/schemas/Column'
+        UpdateColumnRequest:
+            type: object
+            properties:
+                appId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                column:
+                    $ref: '#/components/schemas/Column'
+            description: UpdateColumn
+        UpdateRowBeforeAfterReply:
+            type: object
+            properties:
+                rowId:
+                    type: integer
+                    format: int64
+        UpdateRowBeforeAfterReq:
+            type: object
+            properties:
+                type:
+                    type: integer
+                    format: enum
+                rowId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                addRelationIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+                delRelationIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+        UpdateRowRelateReply:
+            type: object
+            properties:
+                rowId:
+                    type: integer
+                    format: int64
+        UpdateRowRelateReq:
+            type: object
+            properties:
+                tableId:
+                    type: integer
+                    format: int64
+                rowId:
+                    type: integer
+                    format: int64
+                addRelationIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+                delRelationIds:
+                    type: array
+                    items:
+                        type: integer
+                        format: int64
+tags:
+    - name: Table

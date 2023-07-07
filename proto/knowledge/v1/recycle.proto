@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "document_model.proto";
+//import "protoc-gen-openapiv2/options/annotations.proto";
+
+package knowledge.v1;
+option go_package = "github.com/star-table/interface/golang/knowledge/v1;v1";
+
+service Recycle {
+  // 将文档放回回收站
+  rpc RecycleDocument (RecycleDocumentRequest) returns (RecycleDocumentReply)  {
+    option (google.api.http) = {
+      post: "/v1/document/recycle"
+      body: "*"
+    };
+  }
+
+  // 将文档放回回收站
+  rpc Recover (RecoverRequest) returns (RecoverReply)  {
+    option (google.api.http) = {
+      post: "/v1/recycle/recover"
+      body: "*"
+    };
+  }
+
+  // 回收站列表
+  rpc ListRecycle(ListRecycleRequest) returns (ListRecycleReply)  {
+    option (google.api.http) = {
+      post: "/v1/recycle/list"
+      body: "*"
+    };
+  }
+}
+
+message RecycleDocumentRequest {
+  string documentId = 1;
+}
+
+message RecycleDocumentReply {
+  string documentId = 1;
+}
+
+message RecoverRequest {
+  int64 recycleId = 1;
+}
+
+message RecoverReply {
+  int64 recycleId = 1;
+}
+
+message ListRecycleRequest {
+  string spaceId = 1 [(validate.rules).string.min_len = 1];
+  int32 page = 2[(validate.rules).int32 = {gt: 0}];
+  int32 size = 3[(validate.rules).int32 = {gt: 0}];
+}
+
+message ListRecycleReply {
+  repeated RecycleDetail list = 1;
+}

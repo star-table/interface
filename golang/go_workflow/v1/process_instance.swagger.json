@@ -1,0 +1,433 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "process_instance.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "WorkFlowProcessInstance"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/goWorkflow/processInstance/delete": {
+      "post": {
+        "operationId": "WorkFlowProcessInstance_DeleteProcessInstance",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteProcessInstanceReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeleteProcessInstanceRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkFlowProcessInstance"
+        ]
+      }
+    },
+    "/v1/goWorkflow/processInstance/query": {
+      "post": {
+        "operationId": "WorkFlowProcessInstance_QueryProcessInstances",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1QueryProcessInstancesReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1QueryProcessInstancesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkFlowProcessInstance"
+        ]
+      }
+    },
+    "/v1/goWorkflow/processInstance/start": {
+      "post": {
+        "summary": "Start 开启一个流程",
+        "operationId": "WorkFlowProcessInstance_Start",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1StartReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1StartRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkFlowProcessInstance"
+        ]
+      }
+    },
+    "/v1/goWorkflow/processInstance/startByConditions": {
+      "post": {
+        "operationId": "WorkFlowProcessInstance_StartByConditions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1StartByConditionsReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1StartByConditionsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WorkFlowProcessInstance"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1DeleteProcessInstanceReply": {
+      "type": "object"
+    },
+    "v1DeleteProcessInstanceRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1Participant": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "userIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "departmentIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1ProcessInstance": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "processDefineId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "nodeId": {
+          "type": "string"
+        },
+        "candidate": {
+          "type": "string"
+        },
+        "taskId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "int64"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "int64"
+        },
+        "startUserId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "startUserName": {
+          "type": "string"
+        },
+        "isFinished": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1QueryProcessInstancesReply": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ProcessInstance"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1QueryProcessInstancesRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "userId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "processDefineId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "processName": {
+          "type": "string"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageIndex": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1StartByConditionsData": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "dataId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1StartByConditionsReply": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1StartByConditionsData"
+          }
+        }
+      }
+    },
+    "v1StartByConditionsRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "processName": {
+          "type": "string"
+        },
+        "datas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1StartData"
+          }
+        }
+      }
+    },
+    "v1StartData": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "dataId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "participants": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/v1Participant"
+          }
+        }
+      }
+    },
+    "v1StartReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1StartRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "processDefineId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "processName": {
+          "type": "string"
+        },
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "dataId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "participants": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/v1Participant"
+          }
+        }
+      }
+    }
+  }
+}

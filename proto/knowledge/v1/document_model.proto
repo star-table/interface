@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package knowledge.v1;
+option go_package = "github.com/star-table/interface/golang/knowledge/v1;v1";
+
+message User {
+  int64 userId = 1;
+  string name = 2;
+  string avatar = 3;
+}
+
+message DocumentSimple {
+  string documentId = 1;
+  string title = 2;
+  string parentId = 3;
+}
+
+message DocumentDetail {
+  string documentId = 1;
+  string content = 2;
+  string title = 3;
+  string parentId = 4;
+  int64 createTime = 5;
+  int64 updateTime = 6;
+  User creator = 7;
+  User updater = 8;
+}
+
+message SpaceDetail {
+  string spaceId = 1;
+  string name = 2;
+  string cover = 3;
+  int32 type = 4;
+}
+
+message CommentDetail {
+  int64 commentId = 1;
+  string comment = 2;
+  User mentionUser = 3;
+  User creator = 4;
+  int64 CreateTime = 5;
+  int64 UpdateTime = 6;
+}
+
+message RecycleDetail {
+  int64 recycleId = 1;
+  string title = 2;
+  User creator = 3;
+  int64 createTime = 4;
+  int64 leftDay = 5; // 剩余删除天数
+}

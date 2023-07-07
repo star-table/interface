@@ -1,0 +1,156 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "document_model.proto";
+//import "protoc-gen-openapiv2/options/annotations.proto";
+
+package knowledge.v1;
+option go_package = "github.com/star-table/interface/golang/knowledge/v1;v1";
+
+service UserAction {
+  // 点赞或者取消点赞
+  rpc LikeDocument (LikeDocumentRequest) returns (LikeDocumentReply)  {
+    option (google.api.http) = {
+      post: "/v1/action/document/like"
+      body: "*"
+    };
+  }
+
+  // 点赞用户列表
+  rpc ListDocumentLikeUser (ListDocumentLikeUserRequest) returns (ListDocumentLikeUserReply)  {
+    option (google.api.http) = {
+      post: "/v1/action/document/like/user/list"
+      body: "*"
+    };
+  }
+
+  // 置顶文章
+  rpc TopDocument (TopDocumentRequest) returns (TopDocumentReply)  {
+    option (google.api.http) = {
+      post: "/v1/action/document/top"
+      body: "*"
+    };
+  }
+
+  // 评论文章
+  rpc CommentDocument (CommentDocumentRequest) returns (CommentDocumentReply)  {
+    option (google.api.http) = {
+      post: "/v1/action/document/comment"
+      body: "*"
+    };
+  }
+
+  // 评论文章
+  rpc UpdateCommentStatus (UpdateCommentStatusRequest) returns (UpdateCommentStatusReply)  {
+    option (google.api.http) = {
+      post: "/v1/action/document/comment/status/update"
+      body: "*"
+    };
+  }
+
+  // 删除
+  rpc DeleteComment (DeleteCommentRequest) returns (DeleteCommentReply)  {
+    option (google.api.http) = {
+      post: "/v1/action/comment/delete"
+      body: "*"
+    };
+  }
+
+
+  // 评论列表
+  rpc ListDocumentComment (ListDocumentCommentRequest) returns (ListDocumentCommentReply)  {
+    option (google.api.http) = {
+      post: "/v1/action/document/comment/list"
+      body: "*"
+    };
+  }
+
+  // 收藏空间
+  rpc StarSpace (StarSpaceRequest) returns (StarSpaceReply)  {
+    option (google.api.http) = {
+      post: "/v1/action/space/star"
+      body: "*"
+    };
+  }
+}
+
+message LikeDocumentRequest {
+  string documentId = 1[(validate.rules).string.min_len = 1];
+  bool isLike = 2; // like or unlike
+  string spaceId = 3[(validate.rules).string.min_len = 1];
+}
+
+message LikeDocumentReply {
+  string documentId = 1[(validate.rules).string.min_len = 1];
+  bool isLike = 2;
+}
+
+message ListDocumentLikeUserRequest {
+  string documentId = 1[(validate.rules).string.min_len = 1];
+  string spaceId = 2[(validate.rules).string.min_len = 1];
+}
+
+message ListDocumentLikeUserReply {
+  repeated User list = 1;
+}
+
+message TopDocumentRequest {
+  string documentId = 1[(validate.rules).string.min_len = 1];
+  bool isTop = 2;
+  string spaceId = 3[(validate.rules).string.min_len = 1];
+}
+
+message TopDocumentReply {
+  string documentId = 1;
+  bool isTop = 2;
+}
+
+message StarSpaceRequest {
+  string spaceId = 1[(validate.rules).string.min_len = 1];
+  bool isStar = 2; // like or unlike
+}
+
+message StarSpaceReply {
+  string spaceId = 1[(validate.rules).string.min_len = 1];
+  bool isStar = 2;
+}
+
+message CommentDocumentRequest {
+  string spaceId = 1[(validate.rules).string.min_len = 1];
+  string documentId = 2[(validate.rules).string.min_len = 1];
+  string comment = 3[(validate.rules).string.min_len = 1];
+  string quote = 4; // 引用的内容
+  string renderId = 5; // 内容的id
+  int64 mentionUserId = 6;
+}
+
+message CommentDocumentReply {
+  int64 commentId = 1;
+}
+
+message UpdateCommentStatusRequest {
+  repeated string renderIds = 1;
+  bool isHide = 2;
+}
+
+message UpdateCommentStatusReply {
+  repeated CommentDetail quoteList = 1; // 引用的评论列表
+}
+
+message DeleteCommentRequest {
+  int64 commentId = 1;
+}
+
+message DeleteCommentReply {
+}
+
+message ListDocumentCommentRequest {
+  string documentId = 1[(validate.rules).string.min_len = 1];
+  string spaceId = 2[(validate.rules).string.min_len = 1];
+}
+
+message ListDocumentCommentReply {
+  repeated CommentDetail list = 1; // 底下的评论列表
+  repeated CommentDetail quoteList = 2; // 引用的评论列表
+}

@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+import "validate/validate.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+package automation.v1;
+option go_package = "github.com/star-table/interface/golang/automation/v1;v1";
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+enum IntegrationType {
+  Mysql = 0;
+  Postgres = 1;
+  Smtp = 2;
+}
+
+enum PostgresSslOptions {
+  Allow = 0;
+  Disable = 1;
+  Require = 2;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+message IntegrationConfig {
+  oneof config {
+    IntegrationConfigSmtp smtp = 1;
+    IntegrationConfigMysql mysql = 2;
+    IntegrationConfigPostgres postgres = 3;
+  }
+}
+
+message IntegrationInput {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["type","config","name","desc"]
+    }
+  };
+  IntegrationType type = 1;
+  IntegrationConfig config = 2;
+  string name = 3 [(validate.rules).string = {min_len: 0, max_len: 128}];
+  string desc = 4 [(validate.rules).string = {min_len: 0, max_len: 1024}];
+}
+
+message Integration {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["id","orgId","type","config","name","desc","active","activeVersionId","versionId","triggerType","failedTimes","creator","updater","createdAt","updatedAt","creatorName","updaterName","nodes","connections"]
+    }
+  };
+  string id = 1;
+  int64 orgId = 2 [(validate.rules).int64 = {gt: 0}];
+  IntegrationType type = 3;
+  IntegrationConfig config = 4;
+  string name = 5 [(validate.rules).string = {min_len: 0, max_len: 128}];
+  string desc = 6 [(validate.rules).string = {min_len: 0, max_len: 1024}];
+  int64 creator = 7 [(validate.rules).int64 = {gte: 0}];
+  int64 updater = 8 [(validate.rules).int64 = {gte: 0}];
+  int64 createdAt = 9 [(validate.rules).int64 = {gte: 0}];
+  int64 updatedAt = 10 [(validate.rules).int64 = {gte: 0}];
+  string creatorName = 11;
+  string updaterName = 12;
+}
+
+message IntegrationMeta {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["id","type","name","desc"]
+    }
+  };
+  string id = 1;
+  IntegrationType type = 2;
+  string name = 3 [(validate.rules).string = {min_len: 0, max_len: 128}];
+  string desc = 4 [(validate.rules).string = {min_len: 0, max_len: 1024}];
+}
+
+message IntegrationConfigSmtp {
+  string user = 1 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  string password = 2 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  string host = 3 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  int32 port = 4 [(validate.rules).int32 = {gt: 0}];
+  bool ssl = 5;
+}
+
+message IntegrationConfigMysql {
+  string host = 1 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  string database = 2 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  string user = 3 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  string password = 4 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  int32 port = 5 [(validate.rules).int32 = {gt: 0}];
+}
+
+message IntegrationConfigPostgres {
+  string host = 1 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  string database = 2 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  string user = 3 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  string password = 4 [(validate.rules).string = {min_len: 1, max_len: 128}];
+  int32 port = 5 [(validate.rules).int32 = {gt: 0}];
+}

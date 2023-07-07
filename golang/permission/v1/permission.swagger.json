@@ -1,0 +1,897 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "permission.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Permission"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/permission/api/v1/collaboratorPermission/addCollaboratorUser": {
+      "post": {
+        "operationId": "Permission_addCollaboratorUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CollaboratorUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CollaboratorUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Permission"
+        ]
+      }
+    },
+    "/permission/api/v1/collaboratorPermission/batchMigrateCollaboratorUsersToPermission": {
+      "post": {
+        "summary": "/form/inner/api/v1/apps/%d/values/filter",
+        "operationId": "Permission_batchMigrateCollaboratorUsersToPermission",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1BatchMigrateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Permission"
+        ]
+      }
+    },
+    "/permission/api/v1/collaboratorPermission/batchRemoveCollaboratorUsers": {
+      "post": {
+        "operationId": "Permission_batchRemoveCollaboratorUsers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CollaboratorUsersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CollaboratorUsersRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Permission"
+        ]
+      }
+    },
+    "/permission/api/v1/collaboratorPermission/batchRemoveMemberFieldCollaborators": {
+      "post": {
+        "operationId": "Permission_batchRemoveMemberFieldCollaborators",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1MemberFieldResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1MemberFieldRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Permission"
+        ]
+      }
+    },
+    "/permission/api/v1/collaboratorPermission/changeCollaboratorUser": {
+      "post": {
+        "operationId": "Permission_changeCollaboratorUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CollaboratorUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CollaboratorUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Permission"
+        ]
+      }
+    },
+    "/permission/api/v1/collaboratorPermission/collaboratorUserIdsAndDeptIds": {
+      "post": {
+        "operationId": "Permission_getCollaboratorUserIdsAndDeptIds",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetCollaboratorUserIdsAndDeptIdsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GetCollaboratorUserIdsAndDeptIdsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Permission"
+        ]
+      }
+    },
+    "/permission/api/v1/collaboratorPermission/collaborators": {
+      "post": {
+        "operationId": "Permission_getCollaborators",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetCollaboratorsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GetCollaboratorsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Permission"
+        ]
+      }
+    },
+    "/permission/api/v1/collaboratorPermission/copyColumn": {
+      "post": {
+        "operationId": "Permission_copyCollaboratorsFromColumnToOther",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CopyColumnResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CopyColumnRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Permission"
+        ]
+      }
+    },
+    "/permission/api/v1/collaboratorPermission/getAppIdsByCollaborators": {
+      "post": {
+        "operationId": "Permission_GetAppIdsByCollaborators",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetAppIdsByCollaboratorResp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GetAppIdsByCollaboratorReq"
+            }
+          }
+        ],
+        "tags": [
+          "Permission"
+        ]
+      }
+    },
+    "/permission/api/v1/collaboratorPermission/getDataCollaborators": {
+      "post": {
+        "operationId": "Permission_GetDataCollaborators",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetDataCollaboratorsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GetDataCollaboratorsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Permission"
+        ]
+      }
+    },
+    "/permission/api/v1/collaboratorPermission/getUserCollaboratorRoleIds": {
+      "post": {
+        "operationId": "Permission_getUserCollaboratorRoleIds",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetUserCollaboratorRoleIdsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GetUserCollaboratorRoleIdsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Permission"
+        ]
+      }
+    },
+    "/permission/api/v1/collaboratorPermission/removeCollaboratorUser": {
+      "post": {
+        "operationId": "Permission_removeCollaboratorUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CollaboratorUsersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CollaboratorUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Permission"
+        ]
+      }
+    },
+    "/permission/api/v1/collaboratorPermission/syncCollaboratorUsers": {
+      "post": {
+        "operationId": "Permission_syncCollaboratorUsers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CollaboratorUsersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CollaboratorUsersRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Permission"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1AppPerGroupListItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "hasDelete": {
+          "type": "boolean"
+        },
+        "hasEdit": {
+          "type": "boolean"
+        },
+        "langCode": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "readOnly": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "remake": {
+          "type": "string"
+        }
+      }
+    },
+    "v1BatchMigrateRequest": {
+      "type": "object",
+      "properties": {
+        "orgIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1Collaborator": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "isDelete": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "perGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1AppPerGroupListItem"
+          }
+        },
+        "isSysAdmin": {
+          "type": "boolean"
+        },
+        "isSubAdmin": {
+          "type": "boolean"
+        },
+        "isOwner": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1CollaboratorColumnUser": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "fieldName": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "deptId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1CollaboratorUserRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "fieldName": {
+          "type": "string"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "userId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "deptId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1CollaboratorUserResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1CollaboratorUsersRequest": {
+      "type": "object",
+      "properties": {
+        "users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1CollaboratorColumnUser"
+          }
+        }
+      }
+    },
+    "v1CollaboratorUsersResponse": {
+      "type": "object",
+      "properties": {
+        "ok": {
+          "type": "boolean",
+          "title": "repeated int64 ids = 1;  // collaboratorId"
+        }
+      }
+    },
+    "v1ColumnCollaborators": {
+      "type": "object",
+      "properties": {
+        "columnId": {
+          "type": "string"
+        },
+        "userIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "deptIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1CopyColumnRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sourceFieldName": {
+          "type": "string"
+        },
+        "targetFieldName": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CopyColumnResponse": {
+      "type": "object",
+      "properties": {
+        "ok": {
+          "type": "boolean"
+        },
+        "sourceFieldName": {
+          "type": "string"
+        },
+        "targetFieldName": {
+          "type": "string"
+        }
+      }
+    },
+    "v1DataCollaborators": {
+      "type": "object",
+      "properties": {
+        "issueId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "columnCollaborators": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ColumnCollaborators"
+          }
+        }
+      }
+    },
+    "v1GetAppIdsByCollaboratorReq": {
+      "type": "object",
+      "properties": {
+        "userIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "deptIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1GetAppIdsByCollaboratorResp": {
+      "type": "object",
+      "properties": {
+        "appIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1GetCollaboratorUserIdsAndDeptIdsRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "fieldName": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GetCollaboratorUserIdsAndDeptIdsResponse": {
+      "type": "object",
+      "properties": {
+        "userIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "deptIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1GetCollaboratorsRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "allUser": {
+          "type": "boolean",
+          "title": "string fieldName       = 4;"
+        }
+      }
+    },
+    "v1GetCollaboratorsResponse": {
+      "type": "object",
+      "properties": {
+        "collaborators": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Collaborator"
+          }
+        }
+      }
+    },
+    "v1GetDataCollaboratorsRequest": {
+      "type": "object",
+      "properties": {
+        "issueIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1GetDataCollaboratorsResponse": {
+      "type": "object",
+      "properties": {
+        "dataCollaborators": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1DataCollaborators"
+          }
+        }
+      }
+    },
+    "v1GetUserCollaboratorRoleIdsRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "userId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "deptIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1GetUserCollaboratorRoleIdsResponse": {
+      "type": "object",
+      "properties": {
+        "roleIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1MemberFieldRequest": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "fieldName": {
+          "type": "string"
+        }
+      }
+    },
+    "v1MemberFieldResponse": {
+      "type": "object",
+      "properties": {
+        "ok": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

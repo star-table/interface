@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+//import "google/api/annotations.proto";
+//import "validate/validate.proto";
+
+package msg.v1;
+option go_package = "github.com/star-table/interface/golang/msg/v1;v1";
+
+// The msg service definition.
+service Msg {
+}

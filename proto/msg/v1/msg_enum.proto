@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package msg.v1;
+option go_package = "github.com/star-table/interface/golang/msg/v1;v1";
+
+enum EventCategory {
+  Invalid = 0; 
+
+  // 避免与老协议冲突，从100开始
+  Data = 100;
+  Org = 101;
+  Table = 102;
+  View = 103;
+  PerGroup = 104;
+  App = 105;
+  User = 106;
+  TimingWheel = 107;
+}
+
+enum EventType {		
+  // Data Event
+  DataCreated = 0;                      // 数据创建
+  DataUpdated = 1;                      // 数据更新
+  DataDeleted = 2;                      // 数据删除(进回收站)
+  DataRecoverd = 3;                     // 数据恢复(出回收站)
+  DataMoved = 4;                        // 数据移动
+  DataWorkHourUpdated = 5;              // 工时更新
+
+  // Org Event
+  OrgConfigUpdated = 100;               // 组织配置更新
+  OrgInited = 101;                      // 组织初始化
+
+  // Table Event
+  TableColumnRefresh = 200;             // 表头字段配置刷新(下发列配置)
+  TableColumnDeleted = 201;             // 表头字段删除(下发列id)
+  TableRefresh = 202;                   // 表格配置刷新(创建/更新时下发表格信息)
+  TableDeleted = 203;                   // 表格删除(下发表格id)
+  TableImportFinished = 204;            // 导入数据完成
+  TableApplyTemplateFinished = 205;     // 应用模板完成
+  TableOrgColumnRefresh = 206;          // 组织字段配置刷新
+  TableColumnCopyed = 207;              // 表头字段复制
+
+  // View Event
+  ViewRefresh = 300;                    // 视图配置刷新(创建/更新时下发视图配置)
+  ViewDeleted = 301;                    // 视图删除
+
+  // PerGroup Event
+  PerGroupRefresh = 400;                // 权限组配置刷新(创建/更新时下发权限组配置)
+  PerGroupDeleted = 401;                // 权限组删除
+  PerGroupMemberChanged = 402;          // 权限组成员变更
+
+  // App Event
+  AppRefresh = 500;                     // App信息刷新(创建/更新时下发App信息)
+  AppDeleted = 501;                     // App删除(下发AppId)
+  AppChatCreated = 502;                 // App群聊创建
+
+  // User Event
+  UserBindMobile = 600;                 // 用户绑定手机号(包含换绑)
+
+  // Timing Wheel Event
+  TimingWheelDataColumnTimer = 700;     // 数据日期字段定时事件
+}
+

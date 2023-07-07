@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+package helloworld.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+
+option go_package = "github.com/star-table/interface/golang/helloworld/v1;v1";
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply)  {
+        option (google.api.http) = {
+            get: "/helloworld/{name}"
+        };
+    }
+
+  // Sends a greeting
+  rpc SayHelloAgain (HelloRequest) returns (HelloReply)  {
+        option (google.api.http) = {
+            get: "/helloworld_again/{name}"
+        };
+    }
+
+  // Sends a greeting
+  rpc SayHelloAgainAgain (HelloRequest) returns (HelloReply)  {
+        option (google.api.http) = {
+            get: "/helloworld_again_again/{name}"
+        };
+    }
+
+  // 正向操作
+  rpc TransIn (TransInRequest) returns (TransInReply) {
+        option (google.api.http) = {
+            post: "/helloworld/TransIn"
+            body: "*"
+        };
+    }
+  // 补偿操作
+  rpc TransInCompensate (TransInRequest) returns (TransInReply) {
+        option (google.api.http) = {
+            post: "/helloworld/TransInCompensate"
+            body: "*"
+        };
+    }
+  // 正向操作
+  rpc TransOut (TransOutRequest) returns (TransOutReply) {
+        option (google.api.http) = {
+            post: "/helloworld/TransOut"
+            body: "*"
+        };
+    }
+  // 补偿操作
+  rpc TransOutCompensate (TransOutRequest) returns (TransOutReply) {
+        option (google.api.http) = {
+            post: "/helloworld/TransOutCompensate"
+            body: "*"
+        };
+    }
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+  google.protobuf.Struct value = 2;
+  repeated google.protobuf.Value list_value = 3;
+  google.protobuf.Value my_value = 4;
+  StorageFieldType fieldType = 5;
+  int64 id = 6;
+  repeated int64 ids = 7;
+}
+
+// The response message containing the greetings
+message HelloReply {
+  string message_msg = 1;
+}
+
+enum StorageFieldType {
+  STRING = 0;
+  TEXT = 1;
+  LONG_TEXT = 2;
+  DATE = 3;
+  LONG = 4;
+  INT = 5;
+  FLOAT = 6;
+  DOUBLE = 7;
+  ARRAY = 8;
+}
+
+message TransInRequest {
+}
+
+message TransInReply {
+}
+
+message TransOutRequest {
+}
+
+message TransOutReply {
+}

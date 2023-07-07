@@ -1,0 +1,638 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+import "table_model.proto";
+import "table_model_enum.proto";
+import "validate/validate.proto";
+//import "protoc-gen-openapiv2/options/annotations.proto";
+
+package table.v1;
+option go_package = "github.com/star-table/interface/golang/table/v1;v1";
+
+// The greeting service definition.
+service Table {
+
+  // 创建汇总表
+  rpc CreateSummeryTable (CreateSummeryTableRequest) returns (CreateSummeryTableReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/table/createSummery"
+      body: "*"
+    };
+  }
+
+  // 创建多个汇总表
+  rpc CreateMultiSummeryTable (CreateMultiSummeryTableRequest) returns (CreateMultiSummeryTableReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/table/createMultiSummery"
+      body: "*"
+    };
+  }
+
+  // 创建表
+  rpc CreateTable (CreateTableRequest) returns (CreateTableReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/table/create"
+      body: "*"
+    };
+  }
+
+  // 表重命名
+  rpc RenameTable (RenameTableRequest) returns (RenameTableReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/table/rename"
+      body: "*"
+    };
+  }
+
+  // 拷贝表
+  rpc CopyTables (CopyTablesRequest) returns (CopyTablesReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/table/copy"
+      body: "*"
+    };
+  }
+
+  // 删除表
+  rpc DeleteTable (DeleteTableRequest) returns (DeleteTableReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/table/delete"
+      body: "*"
+    };
+  }
+
+  // 设置自动排期开关
+  rpc SetAutoSchedule (SetAutoScheduleRequest) returns (SetAutoScheduleReply) {
+    option (google.api.http) = {
+      post: "/inner/v1/table/setAutoSchedule"
+      body: "*"
+    };
+  }
+
+  // 获取一个app的表列表
+  rpc ReadTables (ReadTablesRequest) returns (ReadTablesReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/read/tables"
+      body: "*"
+    };
+  }
+
+  // 获取一个表
+  rpc ReadTable (ReadTableRequest) returns (ReadTableReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/read/table"
+      body: "*"
+    };
+  }
+
+  // 获取多个app的表
+  rpc ReadTablesByApps (ReadTablesByAppsRequest) returns (ReadTablesByAppsReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/read/tablesByApps"
+      body: "*"
+    };
+  }
+
+  rpc ReadOrgTables (ReadOrgTablesRequest) returns (ReadOrgTablesReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/read/org/tables"
+      body: "*"
+    };
+  }
+
+  // 获取表头信息
+  rpc ReadTableSchemas (ReadTableSchemasRequest) returns (ReadTableSchemasReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/read/tableSchemas"
+      body: "*"
+    };
+  }
+
+  // 根据appId获取表头信息
+  rpc ReadTableSchemasByAppId (ReadTableSchemasByAppIdRequest) returns (ReadTableSchemasByAppIdReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/read/tableSchemasByAppId"
+      body: "*"
+    };
+  }
+
+  // 读取组织下面的所有表的某些列
+  rpc ReadOrgTableSchemas (ReadOrgTableSchemasRequest) returns (ReadOrgTableSchemasReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/read/orgTableSchemas"
+      body: "*"
+    };
+  }
+
+  // 读取汇总表的tableId
+  rpc ReadSummeryTableId (ReadSummeryTableIdRequest) returns (ReadSummeryTableIdReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/read/summeryTableId"
+      body: "*"
+    };
+  }
+
+  // 初始化团队字段
+  rpc InitOrgColumns (InitOrgColumnsRequest) returns (InitOrgColumnsReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/org/columns/init"
+      body: "*"
+    };
+  }
+
+  // 读取组织字段列表
+  rpc ReadOrgColumns (ReadOrgColumnsRequest) returns (ReadOrgColumnsReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/read/org/columns"
+      body: "*"
+    };
+  }
+
+  // 创建组织字段
+  rpc CreateOrgColumn (CreateOrgColumnRequest) returns (CreateOrgColumnReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/org/column/create"
+      body: "*"
+    };
+  }
+
+  // 删除组织字段
+  rpc DeleteOrgColumn (DeleteOrgColumnRequest) returns (DeleteOrgColumnReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/org/column/delete"
+      body: "*"
+    };
+  }
+
+  // 创建列
+  rpc CreateColumn (CreateColumnRequest) returns (CreateColumnReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/column/create"
+      body: "*"
+    };
+  }
+
+  // 拷贝列
+  rpc CopyColumn (CopyColumnRequest) returns (CopyColumnReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/column/copy"
+      body: "*"
+    };
+  }
+
+  // 更新列属性
+  rpc UpdateColumn (UpdateColumnRequest) returns (UpdateColumnReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/column/update"
+      body: "*"
+    };
+  }
+
+  // 更新列描述
+  rpc UpdateColumnDescription (UpdateColumnDescriptionRequest) returns (UpdateColumnDescriptionReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/column/description/update"
+      body: "*"
+    };
+  }
+
+  // 删除列
+  rpc DeleteColumn (DeleteColumnRequest) returns (DeleteColumnReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/column/delete"
+      body: "*"
+    };
+  }
+
+  // 创建表数据
+  rpc CreateRows (CreateRowsRequest) returns (CreateRowsReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/row/create"
+      body: "*"
+    };
+  }
+
+  // 移动表数据
+  rpc MoveRow (MoveRowRequest) returns (MoveRowReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/row/move"
+      body: "*"
+    };
+  }
+
+  // 拷贝表数据
+  rpc CopyRow (CopyRowRequest) returns (CopyRowReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/row/copy"
+      body: "*"
+    };
+  }
+
+  // 删除表数据
+  rpc DeleteRow (DeleteRowRequest) returns (DeleteRowReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/row/delete"
+      body: "*"
+    };
+  }
+
+  // 更新任务关联
+  rpc UpdateRowRelate (UpdateRowRelateReq) returns (UpdateRowRelateReply) {
+    option (google.api.http) = {
+      post: "/inner/v1/row/relation/updateRowRelate"
+      body: "*"
+    };
+  }
+
+  // 更新任务前后置
+  rpc UpdateRowBeforeAfter (UpdateRowBeforeAfterReq) returns (UpdateRowBeforeAfterReply) {
+    option (google.api.http) = {
+      post: "/inner/v1/row/relation/updateRowBeforeAfter"
+      body: "*"
+    };
+  }
+
+  // 获取任务关联列表
+  rpc GetRowRelationList (GetRelationListReq) returns (GetRelationListReply) {
+    option (google.api.http) = {
+      get: "/inner/v1/row/{rowId}/relation"
+    };
+  }
+
+  // 获取任务前后置列表
+  rpc GetBeforeAfterRowList (GetBeforeAfterRowListReq) returns (GetBeforeAfterRowListReply) {
+    option (google.api.http) = {
+      get: "/inner/v1/row/{rowId}/beforeAfter"
+    };
+  }
+
+  }
+
+message CreateSummeryTableRequest {
+  int64 appId = 1 [(validate.rules).int64 = {gt: 0}];
+  repeated Column columns = 2 [(validate.rules).repeated.min_items = 1];
+}
+
+message CreateSummeryTableReply {
+  int64 appId = 1;
+  int64 tableId = 2;
+}
+
+message CreateMultiSummeryTableRequest {
+  repeated SummeryTableRequest list = 1;
+}
+
+message SummeryTableRequest {
+  int64 appId = 1;
+  TableType tableType = 2;
+  repeated Column columns = 3 [(validate.rules).repeated.min_items = 1];
+}
+
+message CreateMultiSummeryTableReply {
+  repeated CreateMultiSummeryTableData list = 1;
+}
+
+message CreateMultiSummeryTableData {
+  int64 appId = 1;
+  int64 tableId = 2;
+}
+
+// CreateTable
+message CreateTableRequest {
+  int64 appId = 1 [(validate.rules).int64 = {gt: 0}];
+  int32 appType = 2;
+  string name = 3 [(validate.rules).string.min_len = 1];
+  repeated string basicColumns = 4;
+  bool isNeedStoreTable = 5; // 是否需要pg数据表，目前来说，极星都存在汇总表内，所以创建project的时候其实只需要创建表头，不需要数据表
+  bool isNeedColumn = 6; // 是否需要表头，有些app其实不需要表头数据，只是创建了一个表记录，不创建表头数据
+  repeated Column columns = 7; // 如果传了使用这，不传从汇总表合并
+  repeated string notNeedSummeryColumnIds = 8; // 不需要的汇总表字段
+  int64 bindSummeryAppId = 9; // 绑定的汇总表appId
+  int32 summaryFlag = 10 [(validate.rules).int32 = {in: [0,2,3,4]}]; // 汇总类型
+}
+
+message CreateTableReply {
+  int64 appId = 1;
+  TableSchema table = 2;
+}
+
+// RenameTable
+message RenameTableRequest {
+  int64 appId = 1 [(validate.rules).int64 = {gt: 0}];
+  int64 tableId = 2 [(validate.rules).int64 = {gt: 0}];
+  string name = 3 [(validate.rules).string.min_len = 1];
+}
+
+message RenameTableReply {
+  int64 tableId = 1;
+  string name = 2;
+}
+
+// CopyTables
+message CopyTablesRequest {
+  int64 srcAppId = 1 [(validate.rules).int64 = {gt: 0}];
+  repeated int64 srcTableIds = 2;
+  int64 dstAppId = 3 [(validate.rules).int64 = {gt: 0}];
+  map<int64, int64> oldToNewPermission = 4; //权限替换
+}
+
+message CopyTablesReply {
+  int64 appId = 1;
+  repeated TableSchema tables = 2;
+  map<int64, int64> oldToNewTableId = 3;
+}
+
+// DeleteTable
+message DeleteTableRequest {
+  int64 appId = 1 [(validate.rules).int64 = {gt: 0}];
+  int64 tableId = 2 [(validate.rules).int64 = {gt: 0}];
+}
+
+message DeleteTableReply {
+  int64 tableId = 1;
+}
+
+// SetAutoSchedule
+message SetAutoScheduleRequest {
+  int64 appId = 1 [(validate.rules).int64 = {gt: 0}];
+  int64 tableId = 2 [(validate.rules).int64 = {gt: 0}];
+  int32 autoScheduleFlag = 3 [(validate.rules).int32 = {gte: 1, lte: 2}];
+}
+
+message SetAutoScheduleReply {
+  int64 tableId = 1;
+  int32 autoScheduleFlag = 2;
+}
+
+// ReadTables
+message ReadTablesRequest {
+  int64 appId = 1 [(validate.rules).int64 = {gt: 0}];
+}
+
+message ReadTablesReply {
+  int64 appId = 1;
+  repeated TableMeta tables = 2;
+}
+
+message ReadTablesByAppsRequest {
+  repeated int64 appIds = 1 [(validate.rules).repeated.min_items = 1];
+}
+
+message ReadTablesByAppsReply {
+  repeated AppTables appsTables = 1;
+}
+
+// ReadTableSchemas
+message ReadTableSchemasRequest {
+  repeated int64 tableIds = 1 [(validate.rules).repeated.min_items = 1];
+  repeated string columnIds = 2;
+  bool isNeedDescription = 3; // 是否需要描述，默认描述是不取出来的，根据场景传入，而且限制了只有单个表格的时候返回
+  bool isNeedCommonColumn = 4; // 是否需要通用字段
+}
+
+message ReadTableSchemasReply {
+  repeated TableSchema tables = 1;
+}
+
+message ReadTableSchemasByAppIdRequest {
+  int64 appId = 1 [(validate.rules).int64 = {gt: 0}];
+  repeated string columnIds = 2;
+  bool isNeedCommonColumn = 3; // 是否需要通用字段
+}
+
+message ReadTableSchemasByAppIdReply {
+  repeated TableSchema tables = 1;
+}
+
+message ReadSummeryTableIdRequest {
+
+}
+
+message ReadSummeryTableIdReply {
+  int64 tableId = 1;
+  int64 appId = 2;
+}
+
+message ReadTableRequest {
+  int64 tableId = 1 [(validate.rules).int64 = {gt: 0}];
+}
+
+message ReadTableReply {
+  TableMeta table = 1;
+}
+
+message ReadOrgTableSchemasRequest {
+  repeated string columnIds = 1; // 需要获取的列key
+}
+
+message ReadOrgTableSchemasReply {
+  repeated TableSchema tables = 1;
+}
+
+// OrgColumns
+message InitOrgColumnsRequest {
+  repeated Column columns = 1 [(validate.rules).repeated.min_items = 1];
+}
+
+message InitOrgColumnsReply {
+}
+
+message ReadOrgColumnsRequest {
+}
+
+message ReadOrgColumnsReply {
+  repeated Column columns = 1;
+}
+
+message CreateOrgColumnRequest {
+  Column column = 1;
+}
+
+message CreateOrgColumnReply {
+}
+
+message DeleteOrgColumnRequest {
+  string columnId = 1 [(validate.rules).string.min_len = 1];
+}
+
+message DeleteOrgColumnReply {
+}
+
+// CreateColumn
+message CreateColumnRequest {
+  int64 appId = 1 [(validate.rules).int64 = {gt: 0}];
+  int64 tableId = 2 [(validate.rules).int64 = {gt: 0}];
+  Column column = 3 [(validate.rules).message.required = true];
+  int64 activeViewId = 4;
+  string sourceOrgColumnId = 5; // 来源的团队字段的列名，用于记录对应关系
+}
+
+message CreateColumnReply {
+  int64 appId = 1;
+  int64 tableId = 2;
+  Column column = 3;
+}
+
+message CopyColumnRequest {
+  int64 appId = 1 [(validate.rules).int64 = {gt: 0}];
+  int64 tableId = 2 [(validate.rules).int64 = {gt: 0}];
+  string srcColumnId = 3[(validate.rules).string.min_len = 1];
+}
+
+message CopyColumnReply {
+  string createColumnId = 1;
+}
+
+
+// UpdateColumn
+message UpdateColumnRequest {
+  int64 appId = 1 [(validate.rules).int64 = {gt: 0}];
+  int64 tableId = 2 [(validate.rules).int64 = {gt: 0}];
+  Column column = 3 [(validate.rules).message.required = true];
+}
+
+message UpdateColumnReply {
+  int64 appId = 1;
+  int64 tableId = 2;
+  Column column = 3;
+}
+
+message UpdateColumnDescriptionRequest {
+  int64 appId = 1 [(validate.rules).int64 = {gt: 0}];
+  int64 tableId = 2 [(validate.rules).int64 = {gt: 0}];
+  string columnId = 3 [(validate.rules).string.min_len = 1];
+  string description = 4;
+}
+
+message UpdateColumnDescriptionReply {
+  int64 appId = 1;
+  int64 tableId = 2;
+}
+
+// DeleteColumn
+message DeleteColumnRequest {
+  int64 appId = 1 [(validate.rules).int64 = {gt: 0}];
+  int64 tableId = 2 [(validate.rules).int64 = {gt: 0}];
+  string columnId = 3 [(validate.rules).string.min_len = 1];
+}
+
+message DeleteColumnReply {
+  int64 appId = 1;
+  int64 tableId = 2;
+  string columnId = 3;
+}
+
+// CreateRows
+message CreateRowsRequest {
+  int64 tableId = 1;
+  int64 afterRowId = 2;
+  int64 beforeRowId = 3;
+  bool isAsc = 4;
+  bool isImport = 5;
+  repeated google.protobuf.Struct rows = 6;
+}
+
+message CreateRowsReply {
+  int64 tableId = 1;
+  repeated google.protobuf.Struct rows = 2;
+}
+
+// MoveRow
+message MoveRowRequest {
+  int64 srcTableId = 1;
+  int64 srcRowId = 2;
+  int64 dstTableId = 3;
+  int64 dstParentRowId = 4;
+  int64 dstBeforeRowId = 5;
+  int64 dstAfterRowId = 6;
+}
+
+message MoveRowReply {
+  int64 srcTableId = 1;
+  int64 srcRowId = 2;
+  int64 dstTableId = 3;
+  int64 dstParentRowId = 4;
+  int64 dstBeforeRowId = 5;
+  int64 dstAfterRowId = 6;
+}
+
+// CopyRow
+message CopyRowRequest {
+  int64 srcTableId = 1;
+  int64 srcRowId = 2;
+  int64 dstTableId = 3;
+}
+
+message CopyRowReply {
+  int64 srcTableId = 1;
+  int64 srcRowId = 2;
+  int64 dstTableId = 3;
+  int64 dstRowId = 4;
+}
+
+// DeleteRow
+message DeleteRowRequest {
+  int64 tableId = 1;
+  int64 rowId = 2;
+}
+
+message DeleteRowReply {
+  int64 tableId = 1;
+  int64 rowId = 2;
+}
+
+message UpdateRowRelateReq {
+  int64 tableId = 1;
+  int64 rowId = 2;
+  repeated int64 addRelationIds = 3;
+  repeated int64 delRelationIds = 4;
+}
+
+message UpdateRowRelateReply {
+  int64 rowId = 1;
+}
+
+message UpdateRowBeforeAfterReq {
+  BeforeAndAfterType type = 1;
+  int64 rowId = 2;
+  int64 tableId = 3;
+  repeated int64 addRelationIds = 4;
+  repeated int64 delRelationIds = 5;
+}
+
+message UpdateRowBeforeAfterReply {
+  int64 rowId = 1;
+}
+
+message GetRelationListReq {
+  int64 tableId = 1;
+  int64 rowId = 2;
+}
+
+message GetRelationListReply {
+  int32 total = 1;
+  // 关联列表
+  repeated RelationRowMeta relateList = 2;
+  // 被关联列表
+  repeated RelationRowMeta beRelatedList = 3;
+}
+
+message GetBeforeAfterRowListReq {
+  int64 tableId = 1;
+  int64 rowId = 2;
+}
+
+message GetBeforeAfterRowListReply {
+  int32 beforeNum = 1;
+  int32 afterNum = 2;
+  repeated RelationRowMeta beforeList = 3;
+  repeated RelationRowMeta afterList = 4;
+}
+
+message ReadOrgTablesRequest {
+
+}
+
+message ReadOrgTablesReply {
+  repeated TableMeta tables = 1;
+}

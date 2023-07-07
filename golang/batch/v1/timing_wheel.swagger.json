@@ -1,0 +1,190 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "timing_wheel.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "TimingWheel"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/inner/v1/timingwheel": {
+      "post": {
+        "summary": "创建/更新时间轮",
+        "operationId": "TimingWheel_SaveTimingWheel",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SaveTimingWheelReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SaveTimingWheelReq"
+            }
+          }
+        ],
+        "tags": [
+          "TimingWheel"
+        ]
+      }
+    },
+    "/inner/v1/timingwheel/debug": {
+      "get": {
+        "summary": "时间轮Debug",
+        "operationId": "TimingWheel_DebugTimingWheel",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DebugTimingWheelReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "TimingWheel"
+        ]
+      }
+    },
+    "/inner/v1/timingwheel/{id}": {
+      "delete": {
+        "summary": "删除时间轮",
+        "operationId": "TimingWheel_DeleteTimingWheel",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteTimingWheelReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "TimingWheel"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1DebugTimingWheelReply": {
+      "type": "object",
+      "properties": {
+        "info": {
+          "type": "string"
+        }
+      }
+    },
+    "v1DeleteTimingWheelReply": {
+      "type": "object"
+    },
+    "v1SaveTimingWheelReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1SaveTimingWheelReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orgId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "appId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tableId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "columnId": {
+          "type": "string"
+        },
+        "deltaTime": {
+          "type": "string",
+          "format": "int64"
+        },
+        "workflowId": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "SaveTimingWheel"
+    }
+  }
+}

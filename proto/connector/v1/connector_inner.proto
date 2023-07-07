@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+package connector.v1;
+option go_package = "github.com/star-table/interface/golang/conntector/v1;v1";
+
+// The Connector Inner service definition.
+service ConnectorInner {
+  // Sends a greeting
+  rpc SayHello (InnerHelloRequest) returns (InnerHelloReply)  {
+    option (google.api.http) = {
+      get: "/inner/v1/hello/{name}"
+    };
+  }
+}
+
+// The request message containing the user's name.
+message InnerHelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings
+message InnerHelloReply {
+  string msg = 1;
+}
+
+

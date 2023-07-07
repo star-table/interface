@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package batch.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/star-table/interface/golang/batch/v1;v1";
+
+// The TimingWheel service definition.
+service TimingWheel {
+
+  // 创建/更新时间轮
+  rpc SaveTimingWheel (SaveTimingWheelReq) returns (SaveTimingWheelReply)  {
+    option (google.api.http) = {
+      post: "/inner/v1/timingwheel"
+      body: "*"
+    };
+  }
+
+  // 删除时间轮
+  rpc DeleteTimingWheel (DeleteTimingWheelReq) returns (DeleteTimingWheelReply)  {
+    option (google.api.http) = {
+      delete: "/inner/v1/timingwheel/{id}"
+    };
+  }
+
+  // 时间轮Debug
+  rpc DebugTimingWheel (DebugTimingWheelReq) returns (DebugTimingWheelReply)  {
+    option (google.api.http) = {
+      get: "/inner/v1/timingwheel/debug"
+    };
+  }
+}
+
+// SaveTimingWheel
+message SaveTimingWheelReq {
+  int64 id = 1; // for update
+  int64 orgId = 2;
+  int64 appId = 3;
+  int64 tableId = 4;
+  string columnId = 5;
+  int64 deltaTime = 6; // seconds
+  int64 workflowId = 7;
+}
+
+message SaveTimingWheelReply {
+  int64 id = 1;
+}
+
+// DeleteTimingWheel
+message DeleteTimingWheelReq {
+  int64 id = 1;
+}
+
+message DeleteTimingWheelReply {
+}
+
+// DebugTimingWheel
+message DebugTimingWheelReq {
+}
+
+message DebugTimingWheelReply {
+  string info = 1;
+}

@@ -1,0 +1,103 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/apps/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: TimingWheel API
+    description: The TimingWheel service definition.
+    version: 0.0.1
+paths:
+    /inner/v1/timingwheel:
+        post:
+            tags:
+                - TimingWheel
+            description: 创建/更新时间轮
+            operationId: TimingWheel_SaveTimingWheel
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/SaveTimingWheelReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SaveTimingWheelReply'
+    /inner/v1/timingwheel/debug:
+        get:
+            tags:
+                - TimingWheel
+            description: 时间轮Debug
+            operationId: TimingWheel_DebugTimingWheel
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DebugTimingWheelReply'
+    /inner/v1/timingwheel/{id}:
+        delete:
+            tags:
+                - TimingWheel
+            description: 删除时间轮
+            operationId: TimingWheel_DeleteTimingWheel
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int64
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteTimingWheelReply'
+components:
+    schemas:
+        DebugTimingWheelReply:
+            type: object
+            properties:
+                info:
+                    type: string
+        DeleteTimingWheelReply:
+            type: object
+            properties: {}
+        SaveTimingWheelReply:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+        SaveTimingWheelReq:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+                orgId:
+                    type: integer
+                    format: int64
+                appId:
+                    type: integer
+                    format: int64
+                tableId:
+                    type: integer
+                    format: int64
+                columnId:
+                    type: string
+                deltaTime:
+                    type: integer
+                    format: int64
+                workflowId:
+                    type: integer
+                    format: int64
+            description: SaveTimingWheel
+tags:
+    - name: TimingWheel

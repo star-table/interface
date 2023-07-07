@@ -1,0 +1,151 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "automation_model.proto";
+
+package automation.v1;
+option go_package = "github.com/star-table/interface/golang/automation/v1;v1";
+
+// The Automation Inner service definition.
+service AutomationInner {
+
+  // 应用模板（isCreate为true时，为保存模板）
+  rpc ApplyTemplate (ApplyTemplateReq) returns (ApplyTemplateReply) {
+    option (google.api.http) = {
+      post: "/inner/v1/workflows/applyTemplate"
+      body: "*"
+    };
+  }
+
+  // 执行回调
+  rpc HandleWorkflowExecute (HandleWorkflowExecuteReq) returns (HandleWorkflowExecuteReply) {
+    option (google.api.http) = {
+      post: "/inner/v1/workflows/handleExecute"
+      body: "*"
+    };
+  }
+
+  // 执行失败回调
+  rpc HandleWorkflowError (HandleWorkflowErrorReq) returns (HandleWorkflowErrorReply) {
+    option (google.api.http) = {
+      post: "/inner/v1/workflows/handleError"
+      body: "*"
+    };
+  }
+
+  // 重建所有n8n workflow
+  rpc BatchRebuildActive (BatchRebuildActiveReq) returns (BatchRebuildActiveReply) {
+    option (google.api.http) = {
+      get: "/inner/v1/batch/rebuildActive/{orgId}"
+    };
+  }
+
+  // 关闭整个组织工作流开关
+  rpc GlobalSwitchOff (GlobalSwitchOffReq) returns (GlobalSwitchOffReply) {
+    option (google.api.http) = {
+      post: "/inner/v1/global/switch/off"
+      body: "*"
+    };
+  }
+
+  // 创建待办
+  rpc CreateTodo (CreateTodoReq) returns (CreateTodoReply) {
+    option (google.api.http) = {
+      post: "/inner/v1/todo"
+      body: "*"
+    };
+  }
+
+  // 更新待办
+  rpc UpdateTodo (UpdateTodoReq) returns (UpdateTodoReply) {
+    option (google.api.http) = {
+      put: "/inner/v1/todo"
+      body: "*"
+    };
+  }
+
+}
+
+// ApplyTemplate
+message ApplyTemplateReq {
+  bool isCreate = 1; // 是否是保存模板，否则是应用模板
+  NumberMapping orgIdMapping = 2;
+  StringMapping appIdMapping = 3;
+  repeated StringMapping tableIdMappings = 4;
+  repeated StringMapping iterationIdMappings = 5;
+}
+
+message ApplyTemplateReply {
+}
+
+// HandleWorkflowExecute
+message HandleWorkflowExecuteReq {
+  int64 orgId = 1;
+  int64 workflowId = 2;
+  int64 executionId = 3;
+  string triggerResult = 4;
+}
+
+message HandleWorkflowExecuteReply {
+}
+
+// HandleWorkflowError 
+message HandleWorkflowErrorReq {
+  int64 workflowId = 1;
+  int64 executionId = 2;
+}
+
+message HandleWorkflowErrorReply {
+}
+
+// BatchRebuildActive
+message BatchRebuildActiveReq {
+  int64 orgId = 1;
+}
+
+message BatchRebuildActiveReply {
+}
+
+// GlobalSwitchOff
+message GlobalSwitchOffReq {
+}
+
+message GlobalSwitchOffReply {
+}
+
+// CreateTodo
+message CreateTodoReq {
+  TriggerBy triggerBy = 1;
+  int64 orgId = 2 [(validate.rules).int64 = {gt: 0}];
+  string appId = 3 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  string tableId = 4 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  int64 issueId = 5 [(validate.rules).int64 = {gt: 0}];
+  int64 triggerUserId = 6 [(validate.rules).int64 = {gt: 0}];
+  bool allowWithdrawByTrigger = 7;
+  bool allowUrgeByTrigger = 8;
+  TodoType type = 9;
+  repeated PeopleByIds operators = 10;
+  string auditFlowName = 11;
+  string auditFlowId = 12;
+  string issueTitle = 13;
+  oneof parameters {
+    ParameterTodoAudit todoAudit = 14;
+    ParameterTodoFillIn todoFillIn = 15;
+  }
+}
+
+message CreateTodoReply {
+}
+
+// UpdateTodo
+message UpdateTodoReq {
+  string id = 1 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  TodoOp op = 2;
+  string msg = 3;
+  TodoStatus status = 4;
+}
+
+message UpdateTodoReply {
+
+}

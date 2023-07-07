@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "document_model.proto";
+//import "protoc-gen-openapiv2/options/annotations.proto";
+
+package knowledge.v1;
+option go_package = "github.com/star-table/interface/golang/knowledge/v1;v1";
+
+// The greeting service definition.
+service Space {
+  // 获取文档列表
+  rpc CreateSpace (CreateSpaceRequest) returns (CreateSpaceReply)  {
+    option (google.api.http) = {
+      post: "/v1/space/create"
+      body: "*"
+    };
+  }
+  rpc ListSpace (ListSpaceRequest) returns (ListSpaceReply)  {
+    option (google.api.http) = {
+      post: "/v1/space/list"
+      body: "*"
+    };
+  }
+}
+
+message CreateSpaceRequest {
+  string name = 1;
+  int32 type = 2;
+  string cover = 3;
+}
+
+message CreateSpaceReply {
+  string id = 1;
+}
+
+message ListSpaceRequest {
+
+}
+
+message ListSpaceReply {
+  repeated SpaceDetail list = 1;
+  repeated SpaceDetail starList = 2;
+}
